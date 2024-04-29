@@ -1,6 +1,7 @@
 package com.amaap.unusualspends.repository.db;
 
 import com.amaap.unusualspends.domain.model.entity.Customer;
+import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
 import com.amaap.unusualspends.repository.db.impl.InMemoryDatabase;
 
 import java.util.ArrayList;
@@ -10,7 +11,9 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
     List<Customer> customers = new ArrayList<>();
 
     @Override
-    public Customer addCustomer(Customer customer) {
+    public Customer addCustomer(Customer customer) throws CustomerAlreadyExistsException {
+        if (customers.contains(customer))
+            throw new CustomerAlreadyExistsException("Customer Found With Same Details..!");
         customers.add(customer);
         return customer;
     }
