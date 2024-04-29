@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.amaap.unusualspends.domain.model.entity.validator.CustomerIdValidatorTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-04-29T07:37:41" hostname="DESKTOP-GUO1275" time="0.042">
-  <properties/>
-  <testcase name="shouldBeAbleToReturnFalseIfCustomerIdIsInvalid()" classname="com.amaap.unusualspends.domain.model.entity.validator.CustomerIdValidatorTest" time="0.035"/>
-  <testcase name="shouldBeAbleToReturnTrueIfCustomerIdIsValid()" classname="com.amaap.unusualspends.domain.model.entity.validator.CustomerIdValidatorTest" time="0.003"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
