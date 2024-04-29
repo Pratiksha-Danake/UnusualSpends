@@ -1,0 +1,4 @@
+two possibilities :
+customer without credit card ---> Possible
+Credit card without customer ---> Not possible
+>>> set customer to credit card
