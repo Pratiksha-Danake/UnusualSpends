@@ -7,15 +7,17 @@ import java.util.Objects;
 
 public class CreditCard {
     private long id;
+    private Customer customer;
 
-    public CreditCard(long id) {
+    public CreditCard(long id, Customer customer) {
         this.id = id;
+        this.customer = customer;
     }
 
-    public static CreditCard create(long cardId) throws InvalidCreditCardIdException {
+    public static CreditCard create(long cardId, Customer customer) throws InvalidCreditCardIdException {
         if(!CreditCardValidator.isValidId(cardId))
             throw new InvalidCreditCardIdException("Id is not valid");
-        return new CreditCard(cardId);
+        return new CreditCard(cardId, customer);
     }
 
     @Override

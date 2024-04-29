@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.amaap.unusualspends.domain.model.entity.CreditCardTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-04-29T07:58:32" hostname="DESKTOP-GUO1275" time="0.04">
+<testsuite name="com.amaap.unusualspends.domain.model.entity.CreditCardTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-04-29T08:29:57" hostname="DESKTOP-GUO1275" time="0.052">
   <properties/>
-  <testcase name="shouldBeAbleToCreateCreditCardWithId()" classname="com.amaap.unusualspends.domain.model.entity.CreditCardTest" time="0.028"/>
-  <testcase name="shouldThrowInvalidCreditCardIdExceptionIfCreditCardIdIsInvalid()" classname="com.amaap.unusualspends.domain.model.entity.CreditCardTest" time="0.01"/>
+  <testcase name="shouldBeAbleToCreateCreditCardWithId()" classname="com.amaap.unusualspends.domain.model.entity.CreditCardTest" time="0.044"/>
+  <testcase name="shouldThrowInvalidCreditCardIdExceptionIfCreditCardIdIsInvalid()" classname="com.amaap.unusualspends.domain.model.entity.CreditCardTest" time="0.005"/>
   <system-out><![CDATA[]]></system-out>
   <system-err><![CDATA[]]></system-err>
 </testsuite>
