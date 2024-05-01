@@ -1,11 +1,12 @@
 package com.amaap.unusualspends.repository.impl;
 
 import com.amaap.unusualspends.domain.model.entity.Customer;
+import com.amaap.unusualspends.repository.CustomerRepository;
 import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
 import com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabase;
 import com.google.inject.Inject;
 
-public class InMemoryCustomerRepository {
+public class InMemoryCustomerRepository implements CustomerRepository {
     private FakeInMemoryDatabase fakeInMemoryDatabase;
 
     @Inject
