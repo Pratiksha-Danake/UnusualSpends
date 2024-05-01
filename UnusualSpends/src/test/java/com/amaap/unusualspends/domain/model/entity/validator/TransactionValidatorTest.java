@@ -23,4 +23,22 @@ public class TransactionValidatorTest {
         // act && assert
         assertTrue(TransactionValidator.isValidCategory(category));
     }
+
+    @Test
+    void shouldBeAbleToReturnTrueIfAmountSpendOnTransactionIsValid(){
+        // arrange
+        int amountSpend = 100;
+
+        // act && assert
+        assertTrue(TransactionValidator.isValidSpend(amountSpend));
+    }
+
+    @Test
+    void shouldBeAbleToReturnFalseIfAmountSpendOnTransactionIsInvalid(){
+        // arrange
+        int amountSpend = 100;
+
+        // act && assert
+        assertTrue(TransactionValidator.isValidSpend(amountSpend));
+    }
 }
