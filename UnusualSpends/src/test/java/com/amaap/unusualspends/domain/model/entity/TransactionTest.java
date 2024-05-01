@@ -15,10 +15,10 @@ public class TransactionTest {
         long transactionId = 1;
         Category category = Category.BOOKS;
         double amountSpend = 100;
-        LocalDate transactionOnDate = LocalDate.of(2024, Month.MAY,1);
-        Transaction expected = Transaction.create(transactionId,cardId,category,amountSpend,transactionOnDate);
+        LocalDate transactionOnDate = LocalDate.of(2024, Month.MAY, 1);
+        Transaction expected = Transaction.create(transactionId, cardId, category, amountSpend, transactionOnDate);
 
         // act
-        Transaction actual = Transaction.create(transactionId,cardId,category,amountSpend,transactionOnDate);
+        Transaction actual = Transaction.create(transactionId, cardId, category, amountSpend, transactionOnDate);
     }
 }
