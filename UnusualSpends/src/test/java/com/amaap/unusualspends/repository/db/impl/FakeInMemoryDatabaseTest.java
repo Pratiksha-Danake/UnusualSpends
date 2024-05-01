@@ -3,26 +3,42 @@ package com.amaap.unusualspends.repository.db.impl;
 import com.amaap.unusualspends.AppModule;
 import com.amaap.unusualspends.domain.model.entity.CreditCard;
 import com.amaap.unusualspends.domain.model.entity.Customer;
+import com.amaap.unusualspends.domain.model.entity.InvalidTransactionAmount;
+import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategory;
+import com.amaap.unusualspends.domain.model.valueobject.Category;
+import com.amaap.unusualspends.repository.CreditCardRepository;
+import com.amaap.unusualspends.repository.CustomerRepository;
+import com.amaap.unusualspends.repository.db.InMemoryDatabase;
 import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
+import com.amaap.unusualspends.repository.impl.InMemoryCreditCardRepository;
+import com.amaap.unusualspends.repository.impl.InMemoryCustomerRepository;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import java.time.LocalDate;
+import java.time.Month;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class FakeInMemoryDatabaseTest {
-    FakeInMemoryDatabase fakeInMemoryDatabase;
+    CreditCardRepository creditCardRepository;
+    CustomerRepository customerRepository;
+    InMemoryDatabase inMemoryDatabase;
 
     @BeforeAll
     void setUp() {
         Injector injector = Guice.createInjector(new AppModule());
-        fakeInMemoryDatabase = injector.getInstance(FakeInMemoryDatabase.class);
+        creditCardRepository = injector.getInstance(InMemoryCreditCardRepository.class);
+        customerRepository = injector.getInstance(InMemoryCustomerRepository.class);
+        inMemoryDatabase = injector.getInstance(FakeInMemoryDatabase.class);
     }
 
     @Test
@@ -31,7 +47,7 @@ class FakeInMemoryDatabaseTest {
         Customer customerToAdd = Customer.create(2, "Pratiksha Danake", "pratiksha@gmail.com");
 
         // act
-        Customer customerAdded = fakeInMemoryDatabase.addCustomer(customerToAdd);
+        Customer customerAdded = customerRepository.addCustomer(customerToAdd);
 
         // assert
         assertEquals(customerToAdd, customerAdded);
@@ -43,9 +59,9 @@ class FakeInMemoryDatabaseTest {
         Customer customerToAdd = Customer.create(1, "Pratiksha Danake", "pratiksha@gmail.com");
 
         // act && assert
-        fakeInMemoryDatabase.addCustomer(customerToAdd);
+        customerRepository.addCustomer(customerToAdd);
         assertThrows(CustomerAlreadyExistsException.class, () -> {
-            fakeInMemoryDatabase.addCustomer(customerToAdd);
+            customerRepository.addCustomer(customerToAdd);
         });
     }
 
@@ -57,6 +73,26 @@ class FakeInMemoryDatabaseTest {
         CreditCard creditCardToAdd = CreditCard.create(cardId, customer);
 
         // act
-        CreditCard cardAdded = fakeInMemoryDatabase.addCreditCard(creditCardToAdd);
+        CreditCard cardAdded = creditCardRepository.addCreditCard(creditCardToAdd);
+
+        // assert
+        assertEquals(creditCardToAdd, cardAdded);
+    }
+
+    @Test
+    void shouldBeAbleToAddTransactionDetailsToTheDatabase() throws InvalidTransactionCategory, InvalidTransactionAmount {
+        // arrange
+        long cardId = 1;
+        long transactionId = 1;
+        Category category = Category.BOOKS;
+        double amountSpend = 100;
+        LocalDate transactionOnDate = LocalDate.of(2024, Month.MAY, 1);
+
+        // act
+        Transaction transactionToAdd = Transaction.create(transactionId, cardId, category, amountSpend, transactionOnDate);
+        Transaction transactionAdded = inMemoryDatabase.addTransaction(transactionToAdd);
+
+        // assert
+        assertEquals(transactionToAdd, transactionAdded);
     }
 }
