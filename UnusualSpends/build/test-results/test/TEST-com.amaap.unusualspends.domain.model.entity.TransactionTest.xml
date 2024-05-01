@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.amaap.unusualspends.domain.model.entity.TransactionTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-05-01T16:59:43" hostname="DESKTOP-GUO1275" time="0.065">
+  <properties/>
+  <testcase name="shouldBeAbleToCreateTransactionWithDetails()" classname="com.amaap.unusualspends.domain.model.entity.TransactionTest" time="0.031"/>
+  <testcase name="shouldBeAbleToThrowInvalidCategoryExceptionIfTransactionCategoryIsNull()" classname="com.amaap.unusualspends.domain.model.entity.TransactionTest" time="0.01"/>
+  <testcase name="shouldBeAbleToThrowInvalidTransactionAmountExceptionIfTransactionAmountIsInvalid()" classname="com.amaap.unusualspends.domain.model.entity.TransactionTest" time="0.017"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

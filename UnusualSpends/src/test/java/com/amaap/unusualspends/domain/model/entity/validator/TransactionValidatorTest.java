@@ -27,7 +27,7 @@ public class TransactionValidatorTest {
     @Test
     void shouldBeAbleToReturnTrueIfAmountSpendOnTransactionIsValid(){
         // arrange
-        int amountSpend = 100;
+        double amountSpend = 100;
 
         // act && assert
         assertTrue(TransactionValidator.isValidSpend(amountSpend));
@@ -36,7 +36,7 @@ public class TransactionValidatorTest {
     @Test
     void shouldBeAbleToReturnFalseIfAmountSpendOnTransactionIsInvalid(){
         // arrange
-        int amountSpend = 100;
+        double amountSpend = 100;
 
         // act && assert
         assertTrue(TransactionValidator.isValidSpend(amountSpend));

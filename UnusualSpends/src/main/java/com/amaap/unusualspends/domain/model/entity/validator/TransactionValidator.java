@@ -9,9 +9,9 @@ public class TransactionValidator {
         return false;
     }
 
-    public static boolean isValidSpend(int spend) {
-        if (spend >= 0)
-            return true;
-        return false;
+    public static boolean isValidSpend(Double spend) {
+        if (spend <= 0)
+            return false;
+        return true;
     }
 }
