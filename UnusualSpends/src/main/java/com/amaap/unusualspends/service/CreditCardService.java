@@ -15,7 +15,7 @@ public class CreditCardService {
         this.creditCardRepository = creditCardRepository;
     }
 
-    public CreditCard addCreditCardFor(Customer customer) throws InvalidCreditCardIdException {
+    public CreditCard createCreditCardFor(Customer customer) throws InvalidCreditCardIdException {
         creditCardId++;
         CreditCard creditCard = CreditCard.create(creditCardId,customer);
         return creditCardRepository.addCreditCard(creditCard);

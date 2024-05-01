@@ -1,7 +1,8 @@
-package com.amaap.unusualspends.service;
+package com.amaap.unusualspends.controller;
 
 import com.amaap.unusualspends.AppModule;
-import com.amaap.unusualspends.domain.model.entity.CreditCard;
+import com.amaap.unusualspends.controller.dto.HttpStatus;
+import com.amaap.unusualspends.controller.dto.Response;
 import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
@@ -14,25 +15,25 @@ import org.junit.jupiter.api.TestInstance;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class CreditCardServiceTest {
-    CreditCardService creditCardService;
+public class CreditCardControllerTest {
+    CreditCardController creditCardController;
+
     @BeforeAll
     void setUp() {
         Injector injector = Guice.createInjector(new AppModule());
-        creditCardService = injector.getInstance(CreditCardService.class);
+        creditCardController = injector.getInstance(CreditCardController.class);
     }
 
     @Test
-    void shouldBeAbleToAddCreditCardToDatabase() throws InvalidCreditCardIdException, InvalidCustomerException {
+    void shouldBeAbleToReturnResponseAsOKIfAddsCreditCardDetailsSuccessfully() throws InvalidCustomerException, InvalidCreditCardIdException {
         // arrange
         Customer customer = Customer.create(1, "Pratiksha Danake", "pratiksha@gmail.com");
-        long cardId = 1;
-        CreditCard expected = CreditCard.create(cardId, customer);
+        Response expected = new Response(HttpStatus.OK, "Card Created");
 
         // act
-        CreditCard creditCardAdded = creditCardService.createCreditCardFor(customer);
+        Response actual = creditCardController.createCreditCardFor(customer);
 
         // assert
-        assertEquals(expected,creditCardAdded);
+        assertEquals(expected, actual);
     }
 }
