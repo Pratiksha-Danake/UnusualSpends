@@ -1,10 +1,11 @@
-package com.amaap.unusualspends.repository.db;
+package com.amaap.unusualspends.repository.db.impl;
 
 import com.amaap.unusualspends.domain.model.entity.CreditCard;
 import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
 import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
+import com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabase;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

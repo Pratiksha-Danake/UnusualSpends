@@ -14,6 +14,10 @@ public class CreditCard {
         this.customer = customer;
     }
 
+    public long getId() {
+        return id;
+    }
+
     public static CreditCard create(long cardId, Customer customer) throws InvalidCreditCardIdException {
         if(!CreditCardValidator.isValidId(cardId))
             throw new InvalidCreditCardIdException("Id is not valid");

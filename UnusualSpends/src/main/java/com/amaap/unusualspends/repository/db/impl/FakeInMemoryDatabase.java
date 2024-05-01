@@ -1,9 +1,9 @@
-package com.amaap.unusualspends.repository.db;
+package com.amaap.unusualspends.repository.db.impl;
 
 import com.amaap.unusualspends.domain.model.entity.CreditCard;
 import com.amaap.unusualspends.domain.model.entity.Customer;
+import com.amaap.unusualspends.repository.db.InMemoryDatabase;
 import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
-import com.amaap.unusualspends.repository.db.impl.InMemoryDatabase;
 
 import java.util.ArrayList;
 import java.util.List;

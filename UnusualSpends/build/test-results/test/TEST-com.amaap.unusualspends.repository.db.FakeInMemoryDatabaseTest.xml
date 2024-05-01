@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.amaap.unusualspends.repository.db.FakeInMemoryDatabaseTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-04-29T10:32:23" hostname="DESKTOP-GUO1275" time="0.055">
-  <properties/>
-  <testcase name="shouldThrowCustomerAlreadyExistsExceptionIfCustomerWithSameDetailsFoundInDatabase()" classname="com.amaap.unusualspends.repository.db.FakeInMemoryDatabaseTest" time="0.04"/>
-  <testcase name="shouldBeAbleToAddCreditCardIntoDatabase()" classname="com.amaap.unusualspends.repository.db.FakeInMemoryDatabaseTest" time="0.004"/>
-  <testcase name="shouldBeAbleToAddCustomerIntoCustomerTable()" classname="com.amaap.unusualspends.repository.db.FakeInMemoryDatabaseTest" time="0.004"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
