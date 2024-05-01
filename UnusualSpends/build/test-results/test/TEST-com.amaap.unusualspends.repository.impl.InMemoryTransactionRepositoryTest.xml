@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.amaap.unusualspends.repository.impl.InMemoryTransactionRepositoryTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-01T17:45:07" hostname="DESKTOP-GUO1275" time="0.019">
-  <properties/>
-  <testcase name="shouldBeAbleToAddTransactionToDatabase()" classname="com.amaap.unusualspends.repository.impl.InMemoryTransactionRepositoryTest" time="0.019"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>
