@@ -11,6 +11,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CustomerControllerTest {
     private CustomerController customerController;
@@ -30,5 +32,8 @@ public class CustomerControllerTest {
 
         // act
         Response actual = customerController.createCustomer(customerName, email);
+        
+        // assert
+        assertEquals(expected, actual);
     }
 }
