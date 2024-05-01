@@ -3,11 +3,9 @@ package com.amaap.unusualspends.domain.model.entity.validator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class CustomerIdValidatorTest {
     @Test
-    void shouldBeAbleToReturnTrueIfCustomerIdIsValid(){
+    void shouldBeAbleToReturnTrueIfCustomerIdIsValid() {
         // arrange
         int customerId = 1;
 
@@ -16,7 +14,7 @@ class CustomerIdValidatorTest {
     }
 
     @Test
-    void shouldBeAbleToReturnFalseIfCustomerIdIsInvalid(){
+    void shouldBeAbleToReturnFalseIfCustomerIdIsInvalid() {
         // arrange
         int customerId = -1;
 

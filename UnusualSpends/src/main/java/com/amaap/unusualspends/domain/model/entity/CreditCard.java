@@ -6,8 +6,8 @@ import com.amaap.unusualspends.domain.model.entity.validator.CreditCardValidator
 import java.util.Objects;
 
 public class CreditCard {
-    private long id;
-    private Customer customer;
+    private final long id;
+    private final Customer customer;
 
     public CreditCard(long id, Customer customer) {
         this.id = id;
@@ -19,7 +19,7 @@ public class CreditCard {
     }
 
     public static CreditCard create(long cardId, Customer customer) throws InvalidCreditCardIdException {
-        if(!CreditCardValidator.isValidId(cardId))
+        if (!CreditCardValidator.isValidId(cardId))
             throw new InvalidCreditCardIdException("Id is not valid");
         return new CreditCard(cardId, customer);
     }

@@ -3,8 +3,8 @@ package com.amaap.unusualspends.controller.dto;
 import java.util.Objects;
 
 public class Response {
-    private HttpStatus httpStatus;
-    private String msg;
+    private final HttpStatus httpStatus;
+    private final String msg;
 
     public Response(HttpStatus httpStatus, String msg) {
         this.httpStatus = httpStatus;

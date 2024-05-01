@@ -6,5 +6,6 @@ import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsExce
 
 public interface InMemoryDatabase {
     Customer addCustomer(Customer customer) throws CustomerAlreadyExistsException;
+
     CreditCard addCreditCard(CreditCard creditCardToAdd);
 }

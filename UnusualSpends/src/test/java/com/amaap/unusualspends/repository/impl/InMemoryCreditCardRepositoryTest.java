@@ -1,11 +1,10 @@
-package com.amaap.unusualspends.repository.db.impl;
+package com.amaap.unusualspends.repository.impl;
 
 import com.amaap.unusualspends.domain.model.entity.CreditCard;
 import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
-import com.amaap.unusualspends.repository.db.InMemoryDatabase;
-import com.amaap.unusualspends.repository.impl.InMemoryCreditCardRepository;
+import com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabase;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -24,6 +23,6 @@ public class InMemoryCreditCardRepositoryTest {
         CreditCard creditCardAdded = inMemoryCreditCardRepository.addCreditCard(creditCardToAdd);
 
         // assert
-        assertEquals(creditCardToAdd,creditCardAdded);
+        assertEquals(creditCardToAdd, creditCardAdded);
     }
 }

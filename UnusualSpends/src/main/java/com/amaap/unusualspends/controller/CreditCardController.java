@@ -8,7 +8,7 @@ import com.amaap.unusualspends.service.CreditCardService;
 import com.google.inject.Inject;
 
 public class CreditCardController {
-    private CreditCardService creditCardService;
+    private final CreditCardService creditCardService;
 
     @Inject
     public CreditCardController(CreditCardService creditCardService) {

@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CreditCardServiceTest {
     CreditCardService creditCardService;
+
     @BeforeAll
     void setUp() {
         Injector injector = Guice.createInjector(new AppModule());
@@ -33,6 +34,6 @@ public class CreditCardServiceTest {
         CreditCard creditCardAdded = creditCardService.createCreditCardFor(customer);
 
         // assert
-        assertEquals(expected,creditCardAdded);
+        assertEquals(expected, creditCardAdded);
     }
 }

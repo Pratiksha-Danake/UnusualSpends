@@ -7,7 +7,7 @@ import com.amaap.unusualspends.repository.CreditCardRepository;
 import com.google.inject.Inject;
 
 public class CreditCardService {
-    private CreditCardRepository creditCardRepository;
+    private final CreditCardRepository creditCardRepository;
     private long creditCardId = 0;
 
     @Inject
@@ -17,7 +17,7 @@ public class CreditCardService {
 
     public CreditCard createCreditCardFor(Customer customer) throws InvalidCreditCardIdException {
         creditCardId++;
-        CreditCard creditCard = CreditCard.create(creditCardId,customer);
+        CreditCard creditCard = CreditCard.create(creditCardId, customer);
         return creditCardRepository.addCreditCard(creditCard);
     }
 }
