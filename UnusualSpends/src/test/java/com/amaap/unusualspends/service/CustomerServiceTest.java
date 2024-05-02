@@ -25,15 +25,30 @@ public class CustomerServiceTest {
     @Test
     void shouldBeAbleToCreateCustomerToAddItToDatabase() throws InvalidCustomerException, CustomerAlreadyExistsException {
         // arrange
-        int id = 1;
         String customerName = "John Doe";
         String email = "johndoe@gmail.com";
 
         // act
-        Customer customerToAdd = Customer.create(id, customerName, email);
         Customer customerAdded = customerService.createCustomerToAdd(customerName, email);
+        Customer customerToAdd = Customer.create(customerAdded.getId(), customerName, email);
+        System.out.println(customerAdded.getId() + "  " + customerAdded.getEmail() + "  " + customerAdded.getName());
 
         // assert
         assertEquals(customerToAdd, customerAdded);
+    }
+
+    @Test
+    void shouldBeAbleToFindCustomerById() throws InvalidCustomerException, CustomerAlreadyExistsException {
+        // arrange
+        int customerId = 1;
+        String customerName = "Pratiksha Danake";
+        String customerEmail = "pratiksha@gmail.com";
+
+        // act
+        Customer expected = customerService.createCustomerToAdd(customerName, customerEmail);
+        Customer actual = customerService.findCustomerBy(expected.getId());
+
+        // assert
+        assertEquals(expected, actual);
     }
 }

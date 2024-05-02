@@ -32,7 +32,7 @@ public class CustomerControllerTest {
 
         // act
         Response actual = customerController.createCustomer(customerName, email);
-        
+
         // assert
         assertEquals(expected, actual);
     }

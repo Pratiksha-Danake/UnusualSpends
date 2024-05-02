@@ -8,7 +8,6 @@ import com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabase;
 import com.amaap.unusualspends.repository.impl.InMemoryCreditCardRepository;
 import com.amaap.unusualspends.repository.impl.InMemoryCustomerRepository;
 import com.amaap.unusualspends.repository.impl.InMemoryTransactionRepository;
-import com.amaap.unusualspends.service.CustomerService;
 import com.google.inject.AbstractModule;
 
 public class AppModule extends AbstractModule {

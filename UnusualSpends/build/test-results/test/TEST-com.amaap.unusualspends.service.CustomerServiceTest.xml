@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.amaap.unusualspends.service.CustomerServiceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-05-02T02:15:21" hostname="DESKTOP-GUO1275" time="0.059">
+  <properties/>
+  <testcase name="shouldBeAbleToFindCustomerById()" classname="com.amaap.unusualspends.service.CustomerServiceTest" time="0.03"/>
+  <testcase name="shouldBeAbleToCreateCustomerToAddItToDatabase()" classname="com.amaap.unusualspends.service.CustomerServiceTest" time="0.023"/>
+  <system-out><![CDATA[2  johndoe@gmail.com  John Doe
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

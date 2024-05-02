@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class TransactionValidatorTest {
     @Test
-    void shouldBeAbleToReturnTrueIfCategoryIsValid(){
+    void shouldBeAbleToReturnTrueIfCategoryIsValid() {
         // arrange
         Category category = Category.BOOKS;
 
@@ -16,7 +16,7 @@ public class TransactionValidatorTest {
     }
 
     @Test
-    void shouldBeAbleToReturnFalseIfCategoryIsInvalid(){
+    void shouldBeAbleToReturnFalseIfCategoryIsInvalid() {
         // arrange
         Category category = Category.BOOKS;
 
@@ -25,7 +25,7 @@ public class TransactionValidatorTest {
     }
 
     @Test
-    void shouldBeAbleToReturnTrueIfAmountSpendOnTransactionIsValid(){
+    void shouldBeAbleToReturnTrueIfAmountSpendOnTransactionIsValid() {
         // arrange
         double amountSpend = 100;
 
@@ -34,7 +34,7 @@ public class TransactionValidatorTest {
     }
 
     @Test
-    void shouldBeAbleToReturnFalseIfAmountSpendOnTransactionIsInvalid(){
+    void shouldBeAbleToReturnFalseIfAmountSpendOnTransactionIsInvalid() {
         // arrange
         double amountSpend = 100;
 

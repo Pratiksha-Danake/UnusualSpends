@@ -10,7 +10,7 @@ import com.google.inject.Inject;
 import java.time.LocalDate;
 
 public class TransactionService {
-    private TransactionRepository transactionRepository;
+    private final TransactionRepository transactionRepository;
     private int transactionId = 0;
 
     @Inject
@@ -20,7 +20,7 @@ public class TransactionService {
 
     public Transaction createTransaction(long cardId, Category category, double amountSpend, LocalDate transactionDate) throws InvalidTransactionCategory, InvalidTransactionAmount {
         transactionId++;
-        Transaction transactionToAdd = Transaction.create(transactionId,cardId,category,amountSpend,transactionDate);
+        Transaction transactionToAdd = Transaction.create(transactionId, cardId, category, amountSpend, transactionDate);
         return transactionRepository.addTransaction(transactionToAdd);
     }
 }

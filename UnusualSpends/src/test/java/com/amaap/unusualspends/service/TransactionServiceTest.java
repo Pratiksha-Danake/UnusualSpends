@@ -37,7 +37,7 @@ public class TransactionServiceTest {
 
         // act
         Transaction transactionToCreate = Transaction.create(transactionId, cardId, category, amountSpend, transactionDate);
-        Transaction transactionCreated = transactionService.createTransaction(cardId,category,amountSpend,transactionDate);
+        Transaction transactionCreated = transactionService.createTransaction(cardId, category, amountSpend, transactionDate);
 
         // assert
         assertEquals(transactionToCreate, transactionCreated);

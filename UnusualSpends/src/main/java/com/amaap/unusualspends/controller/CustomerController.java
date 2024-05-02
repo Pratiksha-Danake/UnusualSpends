@@ -9,7 +9,7 @@ import com.google.inject.Inject;
 
 public class CustomerController {
 
-    private CustomerService customerService;
+    private final CustomerService customerService;
 
     @Inject
     public CustomerController(CustomerService customerService) {
@@ -17,7 +17,7 @@ public class CustomerController {
     }
 
     public Response createCustomer(String customerName, String email) throws InvalidCustomerException, CustomerAlreadyExistsException {
-        if (customerService.createCustomerToAdd(customerName,email) != null)
+        if (customerService.createCustomerToAdd(customerName, email) != null)
             return new Response(HttpStatus.OK, "Customer Created");
         return new Response(HttpStatus.ERROR_OCCURED, "Error While Creating Customer");
     }

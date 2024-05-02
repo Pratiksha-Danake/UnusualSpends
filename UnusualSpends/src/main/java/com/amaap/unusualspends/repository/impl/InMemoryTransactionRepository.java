@@ -6,7 +6,7 @@ import com.amaap.unusualspends.repository.db.InMemoryDatabase;
 import com.google.inject.Inject;
 
 public class InMemoryTransactionRepository implements TransactionRepository {
-    private InMemoryDatabase inMemoryDatabase;
+    private final InMemoryDatabase inMemoryDatabase;
 
     @Inject
     public InMemoryTransactionRepository(InMemoryDatabase inMemoryDatabase) {

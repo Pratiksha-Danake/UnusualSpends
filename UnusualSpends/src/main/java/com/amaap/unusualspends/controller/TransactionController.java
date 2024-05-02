@@ -11,7 +11,7 @@ import com.google.inject.Inject;
 import java.time.LocalDate;
 
 public class TransactionController {
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
 
     @Inject
     public TransactionController(TransactionService transactionService) {
@@ -20,7 +20,7 @@ public class TransactionController {
 
     public Response createTransaction(long cardId, Category category, double amountSpend, LocalDate transactionDate) throws InvalidTransactionCategory, InvalidTransactionAmount {
         if (transactionService.createTransaction(cardId, category, amountSpend, transactionDate) != null)
-            return new Response(HttpStatus.OK,"Transaction Created");
+            return new Response(HttpStatus.OK, "Transaction Created");
         return new Response(HttpStatus.ERROR_OCCURED, "Error While Creating Transaction");
     }
 }

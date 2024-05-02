@@ -7,7 +7,7 @@ import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsExce
 import com.google.inject.Inject;
 
 public class CustomerService {
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
     private int customerId = 0;
 
     @Inject
@@ -19,5 +19,9 @@ public class CustomerService {
         customerId++;
         Customer customer = Customer.create(customerId, customerName, email);
         return customerRepository.addCustomer(customer);
+    }
+
+    public Customer findCustomerBy(int customerId) {
+        return customerRepository.findCustomerBy(customerId);
     }
 }

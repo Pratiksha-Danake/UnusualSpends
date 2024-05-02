@@ -7,7 +7,7 @@ import com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabase;
 import com.google.inject.Inject;
 
 public class InMemoryCustomerRepository implements CustomerRepository {
-    private FakeInMemoryDatabase fakeInMemoryDatabase;
+    private final FakeInMemoryDatabase fakeInMemoryDatabase;
 
     @Inject
     public InMemoryCustomerRepository(FakeInMemoryDatabase fakeInMemoryDatabase) {

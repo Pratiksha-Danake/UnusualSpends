@@ -5,15 +5,14 @@ import com.amaap.unusualspends.domain.model.entity.validator.TransactionValidato
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 
 import java.time.LocalDate;
-import java.time.Month;
 import java.util.Objects;
 
 public class Transaction {
-    private long id;
-    private long cardId;
-    private Category category;
-    private double amountSpend;
-    private LocalDate transactionDate;
+    private final long id;
+    private final long cardId;
+    private final Category category;
+    private final double amountSpend;
+    private final LocalDate transactionDate;
 
     public Transaction(long id, long cardId, Category category, double amountSpend, LocalDate transactionDate) {
         this.id = id;
@@ -27,7 +26,7 @@ public class Transaction {
         if (!TransactionValidator.isValidCategory(category))
             throw new InvalidTransactionCategory("Category is not valid" + category);
         if (!TransactionValidator.isValidSpend(amountSpend))
-            throw new InvalidTransactionAmount("Invalid amount"+ amountSpend);
+            throw new InvalidTransactionAmount("Invalid amount" + amountSpend);
         return new Transaction(id, cardId, category, amountSpend, transactionDate);
     }
 

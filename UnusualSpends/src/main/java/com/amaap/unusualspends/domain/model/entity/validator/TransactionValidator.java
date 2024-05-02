@@ -4,14 +4,10 @@ import com.amaap.unusualspends.domain.model.valueobject.Category;
 
 public class TransactionValidator {
     public static boolean isValidCategory(Category category) {
-        if (category != null)
-            return true;
-        return false;
+        return category != null;
     }
 
     public static boolean isValidSpend(Double spend) {
-        if (spend <= 0)
-            return false;
-        return true;
+        return spend > 0;
     }
 }
