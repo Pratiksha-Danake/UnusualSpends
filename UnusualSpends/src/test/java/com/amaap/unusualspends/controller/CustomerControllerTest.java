@@ -3,6 +3,7 @@ package com.amaap.unusualspends.controller;
 import com.amaap.unusualspends.AppModule;
 import com.amaap.unusualspends.controller.dto.HttpStatus;
 import com.amaap.unusualspends.controller.dto.Response;
+import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
 import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
 import com.google.inject.Guice;
@@ -32,6 +33,22 @@ public class CustomerControllerTest {
 
         // act
         Response actual = customerController.createCustomer(customerName, email);
+
+        // assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToFindCustomerById() throws InvalidCustomerException, CustomerAlreadyExistsException {
+        // arrange
+        int id = 1;
+        String name = "Pratiksha Danake";
+        String email = "pratiksha@gmail.com";
+        Customer expected = Customer.create(id, name, email);
+
+        // act
+        customerController.createCustomer(name, email);
+        Customer actual = customerController.findCustomerBy(id);
 
         // assert
         assertEquals(expected, actual);

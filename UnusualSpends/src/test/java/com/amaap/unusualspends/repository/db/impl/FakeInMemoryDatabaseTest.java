@@ -24,8 +24,7 @@ import org.junit.jupiter.api.TestInstance;
 import java.time.LocalDate;
 import java.time.Month;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class FakeInMemoryDatabaseTest {
@@ -110,5 +109,21 @@ class FakeInMemoryDatabaseTest {
 
         // assert
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToReturnNullIfCustomerWithGivenIdIsNotPresent() throws InvalidCustomerException, CustomerAlreadyExistsException {
+        // arrange
+        int customerId = 2;
+        String customerName = "Pratiksha Danake";
+        String customerEmail = "pratiksha@gmail.com";
+
+        // act
+        Customer customer = Customer.create(customerId, customerName, customerEmail);
+        inMemoryDatabase.addCustomer(customer);
+        Customer actual = inMemoryDatabase.findCustomerBy(10);
+
+        // assert
+        assertNull(actual);
     }
 }

@@ -40,7 +40,6 @@ public class CustomerServiceTest {
     @Test
     void shouldBeAbleToFindCustomerById() throws InvalidCustomerException, CustomerAlreadyExistsException {
         // arrange
-        int customerId = 1;
         String customerName = "Pratiksha Danake";
         String customerEmail = "pratiksha@gmail.com";
 

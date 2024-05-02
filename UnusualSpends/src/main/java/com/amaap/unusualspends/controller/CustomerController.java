@@ -2,6 +2,7 @@ package com.amaap.unusualspends.controller;
 
 import com.amaap.unusualspends.controller.dto.HttpStatus;
 import com.amaap.unusualspends.controller.dto.Response;
+import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
 import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
 import com.amaap.unusualspends.service.CustomerService;
@@ -20,5 +21,9 @@ public class CustomerController {
         if (customerService.createCustomerToAdd(customerName, email) != null)
             return new Response(HttpStatus.OK, "Customer Created");
         return new Response(HttpStatus.ERROR_OCCURED, "Error While Creating Customer");
+    }
+
+    public Customer findCustomerBy(int id) {
+        return customerService.findCustomerBy(id);
     }
 }
