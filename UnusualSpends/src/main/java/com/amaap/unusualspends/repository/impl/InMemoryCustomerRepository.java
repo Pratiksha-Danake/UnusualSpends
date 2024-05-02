@@ -17,4 +17,9 @@ public class InMemoryCustomerRepository implements CustomerRepository {
     public Customer addCustomer(Customer customer) throws CustomerAlreadyExistsException {
         return fakeInMemoryDatabase.addCustomer(customer);
     }
+
+    @Override
+    public Customer findCustomerBy(int customerId) {
+        return fakeInMemoryDatabase.findCustomerBy(customerId);
+    }
 }

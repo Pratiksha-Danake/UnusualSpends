@@ -36,4 +36,20 @@ public class InMemoryCustomerRepositoryTest {
         // assert
         assertEquals(customerToAdd, customerAdded);
     }
+
+    @Test
+    void shouldBeAbleToFindCustomerById() throws InvalidCustomerException, CustomerAlreadyExistsException {
+        // arrange
+        int customerId = 1;
+        String customerName = "Pratiksha Danake";
+        String customerEmail = "pratiksha@gmail.com";
+
+        // act
+        Customer expected = Customer.create(customerId, customerName, customerEmail);
+        inMemoryCustomerRepository.addCustomer(expected);
+        Customer actual = inMemoryCustomerRepository.findCustomerBy(customerId);
+
+        // assert
+        assertEquals(expected, actual);
+    }
 }

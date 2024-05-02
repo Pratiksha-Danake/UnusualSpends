@@ -104,7 +104,7 @@ class FakeInMemoryDatabaseTest {
         // act
         Customer expected = Customer.create(customerId,customerName,customerEmail);
         inMemoryDatabase.addCustomer(expected);
-        Customer actual = inMemoryDatabase.findCustomerById(customerId);
+        Customer actual = inMemoryDatabase.findCustomerBy(customerId);
 
         // assert
         assertEquals(expected, actual);

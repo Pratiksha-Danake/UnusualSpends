@@ -33,7 +33,7 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
     }
 
     @Override
-    public Customer findCustomerById(int customerId) {
+    public Customer findCustomerBy(int customerId) {
         for(Customer customer : customers)
             if (customer.getId() == customerId)
                 return customer;

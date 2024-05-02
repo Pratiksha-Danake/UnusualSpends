@@ -6,4 +6,6 @@ import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsExce
 public interface CustomerRepository {
 
     Customer addCustomer(Customer customer) throws CustomerAlreadyExistsException;
+
+    Customer findCustomerBy(int customerId);
 }
