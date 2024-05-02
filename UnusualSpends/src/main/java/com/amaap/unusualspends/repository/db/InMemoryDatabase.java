@@ -12,5 +12,6 @@ public interface InMemoryDatabase {
 
     Transaction addTransaction(Transaction transactionToAdd);
 
-//    Transaction addTransaction(Transaction transaction);
+    Customer findCustomerById(int customerId);
+
 }

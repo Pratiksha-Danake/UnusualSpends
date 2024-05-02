@@ -5,9 +5,7 @@ import com.amaap.unusualspends.domain.model.entity.CreditCard;
 import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.domain.model.entity.InvalidTransactionAmount;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
-import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
-import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
-import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategory;
+import com.amaap.unusualspends.domain.model.entity.exception.*;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.repository.CreditCardRepository;
 import com.amaap.unusualspends.repository.CustomerRepository;
@@ -94,5 +92,21 @@ class FakeInMemoryDatabaseTest {
 
         // assert
         assertEquals(transactionToAdd, transactionAdded);
+    }
+
+    @Test
+    void shouldBeAbleToFindCustomerById() throws InvalidCustomerException, CustomerAlreadyExistsException {
+        // arrange
+        int customerId = 1;
+        String customerName = "Pratiksha Danake";
+        String customerEmail = "pratiksha@gmail.com";
+
+        // act
+        Customer expected = Customer.create(customerId,customerName,customerEmail);
+        inMemoryDatabase.addCustomer(expected);
+        Customer actual = inMemoryDatabase.findCustomerById(customerId);
+
+        // assert
+        assertEquals(expected, actual);
     }
 }
