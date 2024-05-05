@@ -7,7 +7,7 @@ import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionC
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TransactionServiceTest {
     TransactionService transactionService;
 
-    @BeforeAll
+    @BeforeEach
     void setUp() {
         Injector injector = Guice.createInjector(new AppModule());
         transactionService = injector.getInstance(TransactionService.class);
@@ -41,5 +41,22 @@ public class TransactionServiceTest {
 
         // assert
         assertEquals(transactionToCreate, transactionCreated);
+    }
+
+    @Test
+    void shouldBeAbleToAddTransactionToDatabase() throws InvalidTransactionCategory, InvalidTransactionAmount {
+        // arrange
+        long id = 1;
+        long transactionId = 1;
+        Category category = Category.BOOKS;
+        double amountSpend = 100;
+        LocalDate transactionDate = LocalDate.of(2024, Month.MAY, 1);
+
+        // act
+        Transaction expected = transactionService.createTransaction(id, category, amountSpend, transactionDate);
+        Transaction actual = transactionService.getTransactionForCreditCard(id);
+
+        // assert
+        assertEquals(expected, actual);
     }
 }

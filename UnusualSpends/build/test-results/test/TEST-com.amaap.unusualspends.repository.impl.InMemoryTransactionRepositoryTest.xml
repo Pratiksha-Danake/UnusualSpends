@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.amaap.unusualspends.repository.impl.InMemoryTransactionRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-05-05T15:15:35" hostname="DESKTOP-GUO1275" time="0.03">
-  <properties/>
-  <testcase name="shouldBeAbleToAddTransactionToDatabase()" classname="com.amaap.unusualspends.repository.impl.InMemoryTransactionRepositoryTest" time="0.024"/>
-  <testcase name="shouldBeAbleToGetTransactionAssociatedWithTheCreditCard()" classname="com.amaap.unusualspends.repository.impl.InMemoryTransactionRepositoryTest" time="0.003"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

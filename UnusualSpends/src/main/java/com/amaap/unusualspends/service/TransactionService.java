@@ -23,4 +23,8 @@ public class TransactionService {
         Transaction transactionToAdd = Transaction.create(transactionId, cardId, category, amountSpend, transactionDate);
         return transactionRepository.addTransaction(transactionToAdd);
     }
+
+    public Transaction getTransactionForCreditCard(long cardId) {
+        return transactionRepository.getTransactionForCreditCard(cardId);
+    }
 }
