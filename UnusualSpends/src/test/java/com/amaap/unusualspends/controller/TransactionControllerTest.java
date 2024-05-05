@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -47,18 +48,18 @@ public class TransactionControllerTest {
     @Test
     void shouldBeAbleToAddTransactionToDatabase() throws InvalidTransactionCategory, InvalidTransactionAmount {
         // arrange
-        long transactionId = 1;
         long cardId = 1;
-        Category category = Category.BOOKS;
-        double amountSpend = 100;
-        LocalDate transactionDate = LocalDate.of(2024, Month.MAY, 1);
-        Transaction expected = Transaction.create(transactionId,cardId,category,amountSpend,transactionDate);
+        LocalDate transactionOnDate = LocalDate.of(2024, Month.MAY, 1);
+        Transaction transaction1 = Transaction.create(1, 1, Category.BOOKS, 100, transactionOnDate);
+        Transaction transaction2 = Transaction.create(2, 1, Category.GROCERY, 120, transactionOnDate);
+        List<Transaction> expectedList = List.of(transaction1, transaction2);
 
         // act
-        transactionController.createTransaction(cardId, category, amountSpend, transactionDate);
-        Transaction actual = transactionController.getTransactionForCreditCard(cardId);
+        transactionController.createTransaction(1, Category.BOOKS, 100, transactionOnDate);
+        transactionController.createTransaction(1, Category.GROCERY, 120, transactionOnDate);
+        List<Transaction> actualList = transactionController.getTransactionForCreditCard(cardId);
 
         // assert
-        assertEquals(expected, actual);
+        assertEquals(expectedList, actualList);
     }
 }

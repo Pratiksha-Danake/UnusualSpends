@@ -5,6 +5,8 @@ import com.amaap.unusualspends.repository.TransactionRepository;
 import com.amaap.unusualspends.repository.db.InMemoryDatabase;
 import com.google.inject.Inject;
 
+import java.util.List;
+
 public class InMemoryTransactionRepository implements TransactionRepository {
     private final InMemoryDatabase inMemoryDatabase;
 
@@ -19,7 +21,7 @@ public class InMemoryTransactionRepository implements TransactionRepository {
     }
 
     @Override
-    public Transaction getTransactionForCreditCard(long cardId) {
+    public List<Transaction> getTransactionForCreditCard(long cardId) {
         return inMemoryDatabase.getTransactionBy(cardId);
     }
 }

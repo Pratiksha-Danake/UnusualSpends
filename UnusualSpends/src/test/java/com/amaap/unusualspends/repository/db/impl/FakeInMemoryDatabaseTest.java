@@ -23,6 +23,7 @@ import org.junit.jupiter.api.TestInstance;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -148,7 +149,6 @@ class FakeInMemoryDatabaseTest {
         long id = 2;
 
         // act
-
         CreditCard creditCard = inMemoryDatabase.getCreditCardBy(id);
 
         // assert
@@ -156,21 +156,21 @@ class FakeInMemoryDatabaseTest {
     }
 
     @Test
-    void shouldBeAbleToGetTransactionForGivenCreditCard() throws InvalidTransactionCategory, InvalidTransactionAmount {
+    void shouldBeAbleToGetAllTransactionsForGivenCreditCard() throws InvalidTransactionCategory, InvalidTransactionAmount {
         // arrange
         long cardId = 1;
-        long id = 1;
-        Category category = Category.BOOKS;
-        double amountSpend = 100;
         LocalDate transactionOnDate = LocalDate.of(2024, Month.MAY, 1);
+        Transaction transaction1 = Transaction.create(1, 1, Category.BOOKS, 100, transactionOnDate);
+        Transaction transaction2 = Transaction.create(2, 1, Category.GROCERY, 120, transactionOnDate);
+        List<Transaction> expectedList = List.of(transaction1, transaction2);
 
         // act
-        Transaction expected = Transaction.create(id, cardId, category, amountSpend, transactionOnDate);
-        inMemoryDatabase.addTransaction(expected);
-        Transaction actual = inMemoryDatabase.getTransactionBy(cardId);
+        inMemoryDatabase.addTransaction(transaction1);
+        inMemoryDatabase.addTransaction(transaction2);
+        List<Transaction> actualList = inMemoryDatabase.getTransactionBy(cardId);
 
         // assert
-        assertEquals(expected, actual);
+        assertEquals(expectedList, actualList);
     }
 
     @Test
@@ -179,9 +179,9 @@ class FakeInMemoryDatabaseTest {
         long cardId = 1;
 
         // act
-        Transaction transaction = inMemoryDatabase.getTransactionBy(cardId);
+        List<Transaction> transactions = inMemoryDatabase.getTransactionBy(cardId);
 
         // assert
-        assertNull(transaction);
+        assertNull(transactions);
     }
 }

@@ -10,6 +10,7 @@ import com.amaap.unusualspends.service.TransactionService;
 import com.google.inject.Inject;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class TransactionController {
     private final TransactionService transactionService;
@@ -25,7 +26,7 @@ public class TransactionController {
         return new Response(HttpStatus.ERROR_OCCURED, "Error While Creating Transaction");
     }
 
-    public Transaction getTransactionForCreditCard(long id) {
+    public List<Transaction> getTransactionForCreditCard(long id) {
         return transactionService.getTransactionForCreditCard(id);
     }
 }

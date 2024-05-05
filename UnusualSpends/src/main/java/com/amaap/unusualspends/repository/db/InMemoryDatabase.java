@@ -5,6 +5,8 @@ import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
 
+import java.util.List;
+
 public interface InMemoryDatabase {
     Customer addCustomer(Customer customer) throws CustomerAlreadyExistsException;
 
@@ -16,5 +18,5 @@ public interface InMemoryDatabase {
 
     CreditCard getCreditCardBy(long id);
 
-    Transaction getTransactionBy(long id);
+    List<Transaction> getTransactionBy(long id);
 }

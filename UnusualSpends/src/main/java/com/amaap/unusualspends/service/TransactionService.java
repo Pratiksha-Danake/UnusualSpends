@@ -8,6 +8,7 @@ import com.amaap.unusualspends.repository.TransactionRepository;
 import com.google.inject.Inject;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class TransactionService {
     private final TransactionRepository transactionRepository;
@@ -24,7 +25,7 @@ public class TransactionService {
         return transactionRepository.addTransaction(transactionToAdd);
     }
 
-    public Transaction getTransactionForCreditCard(long cardId) {
+    public List<Transaction> getTransactionForCreditCard(long cardId) {
         return transactionRepository.getTransactionForCreditCard(cardId);
     }
 }

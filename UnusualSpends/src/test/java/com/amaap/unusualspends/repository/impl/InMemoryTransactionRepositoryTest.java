@@ -8,18 +8,19 @@ import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.repository.TransactionRepository;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import java.time.LocalDate;
 import java.time.Month;
+import java.util.List;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class InMemoryTransactionRepositoryTest {
     TransactionRepository transactionRepository;
 
-    @BeforeAll
+    @BeforeEach
     void setUp() {
         Injector injector = Guice.createInjector(new AppModule());
         transactionRepository = injector.getInstance(InMemoryTransactionRepository.class);
@@ -43,15 +44,17 @@ public class InMemoryTransactionRepositoryTest {
     void shouldBeAbleToGetTransactionAssociatedWithTheCreditCard() throws InvalidTransactionCategory, InvalidTransactionAmount {
         // arrange
         long cardId = 1;
-        long transactionId = 1;
-        Category category = Category.BOOKS;
-        double amountSpend = 100;
         LocalDate transactionOnDate = LocalDate.of(2024, Month.MAY, 1);
+        Transaction transaction1 = Transaction.create(1, 1, Category.BOOKS, 100, transactionOnDate);
+        Transaction transaction2 = Transaction.create(2, 1, Category.GROCERY, 120, transactionOnDate);
+        List<Transaction> expectedList = List.of(transaction1, transaction2);
 
         // act
-        Transaction transaction = Transaction.create(transactionId, cardId, category, amountSpend, transactionOnDate);
-        Transaction expected = transactionRepository.addTransaction(transaction);
-        Transaction actual = transactionRepository.getTransactionForCreditCard(cardId);
-    }
+        transactionRepository.addTransaction(transaction1);
+        transactionRepository.addTransaction(transaction2);
+        List<Transaction> actualList = transactionRepository.getTransactionForCreditCard(cardId);
 
+        // assert
+        assertEquals(expectedList, actualList);
+    }
 }
