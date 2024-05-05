@@ -27,6 +27,6 @@ public class TransactionController {
     }
 
     public List<Transaction> getTransactionForCreditCard(long id) {
-        return transactionService.getTransactionForCreditCard(id);
+        return transactionService.getAllTransactions();
     }
 }

@@ -38,6 +38,10 @@ public class Transaction {
         return cardId;
     }
 
+    public LocalDate getTransactionDate() {
+        return transactionDate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

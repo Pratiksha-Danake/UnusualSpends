@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.amaap.unusualspends.service.TransactionServiceTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-05-05T17:59:27" hostname="DESKTOP-GUO1275" time="0.448">
+  <properties/>
+  <testcase name="shouldBeAbleToAddTransactionToDatabase()" classname="com.amaap.unusualspends.service.TransactionServiceTest" time="0.417"/>
+  <testcase name="shouldBeAbleToFilterTransactionByMonth()" classname="com.amaap.unusualspends.service.TransactionServiceTest" time="0.015"/>
+  <testcase name="shouldBeAbleToCreateTransactionToAddItToTheDatabase()" classname="com.amaap.unusualspends.service.TransactionServiceTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

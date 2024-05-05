@@ -21,7 +21,7 @@ public class InMemoryTransactionRepository implements TransactionRepository {
     }
 
     @Override
-    public List<Transaction> getTransactionForCreditCard(long cardId) {
-        return inMemoryDatabase.getTransactionBy(cardId);
+    public List<Transaction> getAllTransactions() {
+        return inMemoryDatabase.getAllTransactions();
     }
 }

@@ -53,9 +53,10 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
     }
 
     @Override
-    public List<Transaction> getTransactionBy(long id) {
+    public List<Transaction> getAllTransactions() {
         if (transactions.isEmpty())
             return null;
         return transactions;
     }
+
 }

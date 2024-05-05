@@ -7,5 +7,5 @@ import java.util.List;
 public interface TransactionRepository {
     Transaction addTransaction(Transaction transactionToAdd);
 
-    List<Transaction> getTransactionForCreditCard(long cardId);
+    List<Transaction> getAllTransactions();
 }

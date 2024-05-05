@@ -8,7 +8,9 @@ import com.amaap.unusualspends.repository.TransactionRepository;
 import com.google.inject.Inject;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TransactionService {
     private final TransactionRepository transactionRepository;
@@ -25,7 +27,12 @@ public class TransactionService {
         return transactionRepository.addTransaction(transactionToAdd);
     }
 
-    public List<Transaction> getTransactionForCreditCard(long cardId) {
-        return transactionRepository.getTransactionForCreditCard(cardId);
+    public List<Transaction> getAllTransactions() {
+        return transactionRepository.getAllTransactions();
+    }
+
+    public List<Transaction> getTransactionsByMonth(Month month) {
+        List<Transaction> transactions = getAllTransactions();
+        return transactions.stream().filter(transaction -> transaction.getTransactionDate().getMonth().equals(month)).collect(Collectors.toList());
     }
 }

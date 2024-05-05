@@ -158,7 +158,6 @@ class FakeInMemoryDatabaseTest {
     @Test
     void shouldBeAbleToGetAllTransactionsForGivenCreditCard() throws InvalidTransactionCategory, InvalidTransactionAmount {
         // arrange
-        long cardId = 1;
         LocalDate transactionOnDate = LocalDate.of(2024, Month.MAY, 1);
         Transaction transaction1 = Transaction.create(1, 1, Category.BOOKS, 100, transactionOnDate);
         Transaction transaction2 = Transaction.create(2, 1, Category.GROCERY, 120, transactionOnDate);
@@ -167,7 +166,7 @@ class FakeInMemoryDatabaseTest {
         // act
         inMemoryDatabase.addTransaction(transaction1);
         inMemoryDatabase.addTransaction(transaction2);
-        List<Transaction> actualList = inMemoryDatabase.getTransactionBy(cardId);
+        List<Transaction> actualList = inMemoryDatabase.getAllTransactions();
 
         // assert
         assertEquals(expectedList, actualList);
@@ -175,11 +174,8 @@ class FakeInMemoryDatabaseTest {
 
     @Test
     void shouldBeAbleToReturnNullIfThereIsNoAnyTransactionAssociatedWithTheCreditCard() {
-        // arrange
-        long cardId = 1;
-
-        // act
-        List<Transaction> transactions = inMemoryDatabase.getTransactionBy(cardId);
+        // arrange && act
+        List<Transaction> transactions = inMemoryDatabase.getAllTransactions();
 
         // assert
         assertNull(transactions);

@@ -52,7 +52,7 @@ public class InMemoryTransactionRepositoryTest {
         // act
         transactionRepository.addTransaction(transaction1);
         transactionRepository.addTransaction(transaction2);
-        List<Transaction> actualList = transactionRepository.getTransactionForCreditCard(cardId);
+        List<Transaction> actualList = transactionRepository.getAllTransactions();
 
         // assert
         assertEquals(expectedList, actualList);

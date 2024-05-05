@@ -17,6 +17,6 @@ public interface InMemoryDatabase {
     Customer findCustomerBy(int customerId);
 
     CreditCard getCreditCardBy(long id);
-
-    List<Transaction> getTransactionBy(long id);
+    
+    List<Transaction> getAllTransactions();
 }
