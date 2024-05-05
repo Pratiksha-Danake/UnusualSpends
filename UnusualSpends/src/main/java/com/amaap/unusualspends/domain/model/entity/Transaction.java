@@ -30,6 +30,10 @@ public class Transaction {
         return new Transaction(id, cardId, category, amountSpend, transactionDate);
     }
 
+    public long getId() {
+        return id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

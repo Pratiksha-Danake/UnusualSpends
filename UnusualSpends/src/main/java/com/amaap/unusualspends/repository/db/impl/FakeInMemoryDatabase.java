@@ -51,4 +51,12 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
                 return card;
         return null;
     }
+
+    @Override
+    public Transaction getTransactionBy(long id) {
+        for (Transaction transaction : transactions)
+            if (transaction.getId() == id)
+                return transaction;
+        return null;
+    }
 }
