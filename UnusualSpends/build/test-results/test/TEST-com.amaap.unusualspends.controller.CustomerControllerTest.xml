@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.amaap.unusualspends.controller.CustomerControllerTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-05-05T13:11:14" hostname="DESKTOP-GUO1275" time="0.331">
-  <properties/>
-  <testcase name="shouldBeAbleToReturnResponseAsOKIfCreatesCustomerSuccessfully()" classname="com.amaap.unusualspends.controller.CustomerControllerTest" time="0.317"/>
-  <testcase name="shouldBeAbleToFindCustomerById()" classname="com.amaap.unusualspends.controller.CustomerControllerTest" time="0.011"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

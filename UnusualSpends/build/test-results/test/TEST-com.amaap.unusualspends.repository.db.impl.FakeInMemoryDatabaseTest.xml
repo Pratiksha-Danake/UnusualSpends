@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2024-05-05T14:23:52" hostname="DESKTOP-GUO1275" time="0.317">
+  <properties/>
+  <testcase name="shouldThrowCustomerAlreadyExistsExceptionIfCustomerWithSameDetailsFoundInDatabase()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.269"/>
+  <testcase name="shouldBeAbleToAddCreditCardIntoDatabase()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.013"/>
+  <testcase name="shouldBeAbleToFindCustomerById()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.005"/>
+  <testcase name="shouldBeAbleToGetCreditCardById()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.005"/>
+  <testcase name="shouldBeAbleToReturnNullIfCustomerWithGivenIdIsNotPresent()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.005"/>
+  <testcase name="shouldBeAbleToAddCustomerIntoCustomerTable()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.004"/>
+  <testcase name="shouldBeAbleToAddTransactionDetailsToTheDatabase()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.008"/>
+  <system-out><![CDATA[ID = 1
+ID = 1
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

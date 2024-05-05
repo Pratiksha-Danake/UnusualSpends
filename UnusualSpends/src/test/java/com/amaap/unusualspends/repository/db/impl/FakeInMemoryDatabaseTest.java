@@ -17,7 +17,7 @@ import com.amaap.unusualspends.repository.impl.InMemoryCreditCardRepository;
 import com.amaap.unusualspends.repository.impl.InMemoryCustomerRepository;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
@@ -32,7 +32,7 @@ class FakeInMemoryDatabaseTest {
     CustomerRepository customerRepository;
     InMemoryDatabase inMemoryDatabase;
 
-    @BeforeAll
+    @BeforeEach
     void setUp() {
         Injector injector = Guice.createInjector(new AppModule());
         creditCardRepository = injector.getInstance(InMemoryCreditCardRepository.class);
@@ -125,5 +125,20 @@ class FakeInMemoryDatabaseTest {
 
         // assert
         assertNull(actual);
+    }
+
+    @Test
+    void shouldBeAbleToGetCreditCardById() throws InvalidCustomerException, InvalidCreditCardIdException {
+        // arrange
+        Customer customer = Customer.create(1, "Pratiksha Danake", "pratiksha@gmail.com");
+        long id = 1;
+
+        // act
+        CreditCard expectedCreditCard = CreditCard.create(1, customer);
+        inMemoryDatabase.addCreditCard(expectedCreditCard);
+        CreditCard actualCreditCard = inMemoryDatabase.getCreditCardBy(id);
+
+        // assert
+        assertEquals(expectedCreditCard, actualCreditCard);
     }
 }

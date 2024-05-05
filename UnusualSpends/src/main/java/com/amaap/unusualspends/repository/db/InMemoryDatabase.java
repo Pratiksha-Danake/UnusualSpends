@@ -13,4 +13,6 @@ public interface InMemoryDatabase {
     Transaction addTransaction(Transaction transactionToAdd);
 
     Customer findCustomerBy(int customerId);
+
+    CreditCard getCreditCardBy(long id);
 }

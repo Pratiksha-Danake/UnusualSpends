@@ -25,6 +25,9 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
 
     public CreditCard addCreditCard(CreditCard creditCardToAdd) {
         cards.add(creditCardToAdd);
+        for (CreditCard card : cards) {
+            System.out.println("ID = " + card.getId());
+        }
         return creditCardToAdd;
     }
 
@@ -38,6 +41,14 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
         for (Customer customer : customers)
             if (customer.getId() == customerId)
                 return customer;
+        return null;
+    }
+
+    @Override
+    public CreditCard getCreditCardBy(long id) {
+        for (CreditCard card : cards)
+            if (card.getId() == id)
+                return card;
         return null;
     }
 }

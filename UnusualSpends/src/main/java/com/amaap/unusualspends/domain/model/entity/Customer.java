@@ -10,9 +10,9 @@ import com.amaap.unusualspends.domain.model.entity.validator.CustomerNameValidat
 import java.util.Objects;
 
 public class Customer {
-    private int id;
-    private String name;
-    private String email;
+    private final int id;
+    private final String name;
+    private final String email;
 
     private Customer(int customerId, String customerName, String customerEmail) {
         this.id = customerId;
