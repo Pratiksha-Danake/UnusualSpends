@@ -4,24 +4,24 @@ import com.amaap.unusualspends.AppModule;
 import com.amaap.unusualspends.controller.dto.HttpStatus;
 import com.amaap.unusualspends.controller.dto.Response;
 import com.amaap.unusualspends.domain.model.entity.InvalidTransactionAmount;
+import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategory;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import java.time.LocalDate;
 import java.time.Month;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+
 public class TransactionControllerTest {
     TransactionController transactionController;
 
-    @BeforeAll
+    @BeforeEach
     void setUp() {
         Injector injector = Guice.createInjector(new AppModule());
         transactionController = injector.getInstance(TransactionController.class);
@@ -39,6 +39,24 @@ public class TransactionControllerTest {
 
         // act
         Response actual = transactionController.createTransaction(cardId, category, amountSpend, transactionDate);
+
+        // assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToAddTransactionToDatabase() throws InvalidTransactionCategory, InvalidTransactionAmount {
+        // arrange
+        long transactionId = 1;
+        long cardId = 1;
+        Category category = Category.BOOKS;
+        double amountSpend = 100;
+        LocalDate transactionDate = LocalDate.of(2024, Month.MAY, 1);
+        Transaction expected = Transaction.create(transactionId,cardId,category,amountSpend,transactionDate);
+
+        // act
+        transactionController.createTransaction(cardId, category, amountSpend, transactionDate);
+        Transaction actual = transactionController.getTransactionForCreditCard(cardId);
 
         // assert
         assertEquals(expected, actual);
