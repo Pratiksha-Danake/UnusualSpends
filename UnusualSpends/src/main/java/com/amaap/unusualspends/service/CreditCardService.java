@@ -20,4 +20,8 @@ public class CreditCardService {
         CreditCard creditCard = CreditCard.create(creditCardId, customer);
         return creditCardRepository.addCreditCard(creditCard);
     }
+
+    public CreditCard getCreditCardBy(long id) {
+        return creditCardRepository.getCreditCardBy(id);
+    }
 }

@@ -36,4 +36,19 @@ public class CreditCardServiceTest {
         // assert
         assertEquals(expected, creditCardAdded);
     }
+
+    @Test
+    void shouldBeAbleToGetCreditCardById() throws InvalidCustomerException, InvalidCreditCardIdException {
+        // arrange
+        Customer customer = Customer.create(1, "Pratiksha Danake", "pratiksha@gmail.com");
+        long id = 1;
+
+        // act
+        CreditCard expectedCreditCard = CreditCard.create(1, customer);
+        creditCardService.createCreditCardFor(customer);
+        CreditCard actualCreditCard = creditCardService.getCreditCardBy(id);
+
+        // assert
+        assertEquals(expectedCreditCard, actualCreditCard);
+    }
 }
