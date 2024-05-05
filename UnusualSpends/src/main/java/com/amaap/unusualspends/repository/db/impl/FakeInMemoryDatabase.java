@@ -22,6 +22,7 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
         return customer;
     }
 
+
     public CreditCard addCreditCard(CreditCard creditCardToAdd) {
         cards.add(creditCardToAdd);
         return creditCardToAdd;

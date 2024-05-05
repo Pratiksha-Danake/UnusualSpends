@@ -8,17 +8,15 @@ import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerExce
 import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CustomerControllerTest {
     private CustomerController customerController;
 
-    @BeforeAll
+    @BeforeEach
     void setUp() {
         Injector injector = Guice.createInjector(new AppModule());
         customerController = injector.getInstance(CustomerController.class);
@@ -47,6 +45,7 @@ public class CustomerControllerTest {
         Customer expected = Customer.create(id, name, email);
 
         // act
+        customerController.createCustomer(name, email);
         customerController.createCustomer(name, email);
         Customer actual = customerController.findCustomerBy(id);
 

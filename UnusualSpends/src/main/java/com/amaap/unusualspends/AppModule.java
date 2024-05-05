@@ -16,6 +16,6 @@ public class AppModule extends AbstractModule {
         bind(CreditCardRepository.class).to(InMemoryCreditCardRepository.class);
         bind(CustomerRepository.class).to(InMemoryCustomerRepository.class);
         bind(TransactionRepository.class).to(InMemoryTransactionRepository.class);
-        bind(InMemoryDatabase.class).to(FakeInMemoryDatabase.class).asEagerSingleton();
+        bind(InMemoryDatabase.class).to(FakeInMemoryDatabase.class);
     }
 }
