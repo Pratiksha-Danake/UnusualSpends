@@ -25,4 +25,19 @@ public class InMemoryCreditCardRepositoryTest {
         // assert
         assertEquals(creditCardToAdd, creditCardAdded);
     }
+
+    @Test
+    void shouldBeAbleToGetCreditCardById() throws InvalidCustomerException, InvalidCreditCardIdException {
+        // arrange
+        Customer customer = Customer.create(1, "Pratiksha Danake", "pratiksha@gmail.com");
+        long id = 1;
+
+        // act
+        CreditCard expectedCreditCard = CreditCard.create(1, customer);
+        inMemoryCreditCardRepository.addCreditCard(expectedCreditCard);
+        CreditCard actualCreditCard = inMemoryCreditCardRepository.getCreditCardBy(id);
+
+        // assert
+        assertEquals(expectedCreditCard, actualCreditCard);
+    }
 }

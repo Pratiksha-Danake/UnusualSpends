@@ -16,4 +16,9 @@ public class InMemoryCreditCardRepository implements CreditCardRepository {
     public CreditCard addCreditCard(CreditCard creditCardToAdd) {
         return inMemoryDatabase.addCreditCard(creditCardToAdd);
     }
+
+    @Override
+    public CreditCard getCreditCardBy(long id) {
+        return inMemoryDatabase.getCreditCardBy(id);
+    }
 }

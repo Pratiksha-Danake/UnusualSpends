@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.amaap.unusualspends.repository.impl.InMemoryCreditCardRepositoryTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-05-05T14:31:16" hostname="DESKTOP-GUO1275" time="0.058">
+  <properties/>
+  <testcase name="shouldBeAbleToGetCreditCardById()" classname="com.amaap.unusualspends.repository.impl.InMemoryCreditCardRepositoryTest" time="0.048"/>
+  <testcase name="shouldBeAbleToAddCreditCardIntoTheDatabase()" classname="com.amaap.unusualspends.repository.impl.InMemoryCreditCardRepositoryTest" time="0.003"/>
+  <system-out><![CDATA[ID = 1
+ID = 1
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

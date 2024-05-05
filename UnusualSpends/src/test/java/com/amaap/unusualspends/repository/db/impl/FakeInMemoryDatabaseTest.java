@@ -141,4 +141,17 @@ class FakeInMemoryDatabaseTest {
         // assert
         assertEquals(expectedCreditCard, actualCreditCard);
     }
+
+    @Test
+    void shouldBeAbleToReturnNullIfCreditCardForGivenIdIsNotPresent() throws InvalidCustomerException, InvalidCreditCardIdException {
+        // arrange
+        long id = 2;
+
+        // act
+
+        CreditCard creditCard = inMemoryDatabase.getCreditCardBy(id);
+
+        // assert
+        assertNull(creditCard);
+    }
 }
