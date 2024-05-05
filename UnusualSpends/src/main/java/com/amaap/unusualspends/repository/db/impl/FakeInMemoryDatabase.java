@@ -55,7 +55,7 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
     @Override
     public Transaction getTransactionBy(long id) {
         for (Transaction transaction : transactions)
-            if (transaction.getId() == id)
+            if (transaction.getCardId() == id)
                 return transaction;
         return null;
     }

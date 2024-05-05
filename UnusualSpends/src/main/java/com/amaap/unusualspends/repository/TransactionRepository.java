@@ -5,4 +5,5 @@ import com.amaap.unusualspends.domain.model.entity.Transaction;
 public interface TransactionRepository {
     Transaction addTransaction(Transaction transactionToAdd);
 
+    Transaction getTransactionForCreditCard(long cardId);
 }

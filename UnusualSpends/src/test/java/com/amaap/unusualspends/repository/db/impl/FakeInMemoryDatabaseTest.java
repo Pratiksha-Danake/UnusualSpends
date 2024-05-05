@@ -156,7 +156,7 @@ class FakeInMemoryDatabaseTest {
     }
 
     @Test
-    void shouldBeAbleToGetTransactionById() throws InvalidTransactionCategory, InvalidTransactionAmount {
+    void shouldBeAbleToGetTransactionForGivenCreditCard() throws InvalidTransactionCategory, InvalidTransactionAmount {
         // arrange
         long cardId = 1;
         long id = 1;
@@ -167,9 +167,21 @@ class FakeInMemoryDatabaseTest {
         // act
         Transaction expected = Transaction.create(id, cardId, category, amountSpend, transactionOnDate);
         inMemoryDatabase.addTransaction(expected);
-        Transaction actual = inMemoryDatabase.getTransactionBy(id);
+        Transaction actual = inMemoryDatabase.getTransactionBy(cardId);
 
         // assert
         assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToReturnNullIfThereIsNoAnyTransactionAssociatedWithTheCreditCard() {
+        // arrange
+        long cardId = 1;
+
+        // act
+        Transaction transaction = inMemoryDatabase.getTransactionBy(cardId);
+
+        // assert
+        assertNull(transaction);
     }
 }

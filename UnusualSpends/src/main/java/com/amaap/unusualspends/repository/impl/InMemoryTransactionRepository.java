@@ -17,4 +17,9 @@ public class InMemoryTransactionRepository implements TransactionRepository {
     public Transaction addTransaction(Transaction transaction) {
         return inMemoryDatabase.addTransaction(transaction);
     }
+
+    @Override
+    public Transaction getTransactionForCreditCard(long cardId) {
+        return inMemoryDatabase.getTransactionBy(cardId);
+    }
 }

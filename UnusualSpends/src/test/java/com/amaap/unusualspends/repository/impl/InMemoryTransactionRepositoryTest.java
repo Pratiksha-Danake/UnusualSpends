@@ -38,4 +38,20 @@ public class InMemoryTransactionRepositoryTest {
         Transaction transactionToAdd = Transaction.create(transactionId, cardId, category, amountSpend, transactionOnDate);
         Transaction added = transactionRepository.addTransaction(transactionToAdd);
     }
+
+    @Test
+    void shouldBeAbleToGetTransactionAssociatedWithTheCreditCard() throws InvalidTransactionCategory, InvalidTransactionAmount {
+        // arrange
+        long cardId = 1;
+        long transactionId = 1;
+        Category category = Category.BOOKS;
+        double amountSpend = 100;
+        LocalDate transactionOnDate = LocalDate.of(2024, Month.MAY, 1);
+
+        // act
+        Transaction transaction = Transaction.create(transactionId, cardId, category, amountSpend, transactionOnDate);
+        Transaction expected = transactionRepository.addTransaction(transaction);
+        Transaction actual = transactionRepository.getTransactionForCreditCard(cardId);
+    }
+
 }
