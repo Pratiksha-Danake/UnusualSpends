@@ -15,7 +15,6 @@ public class InMemoryCustomerRepository implements CustomerRepository {
     }
 
     public Customer addCustomer(Customer customer) throws CustomerAlreadyExistsException {
-        System.out.println("customer repo");
         return fakeInMemoryDatabase.addCustomer(customer);
     }
 

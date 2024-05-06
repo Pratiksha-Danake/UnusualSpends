@@ -17,7 +17,6 @@ public class CreditCardCompanyService {
     private SpendAnalyzer spendAnalyzer;
     private EmailComposer emailComposer;
     private EmailSender emailSender;
-
     private CreditCardService creditCardService;
 
     @Inject
@@ -36,7 +35,6 @@ public class CreditCardCompanyService {
         try {
             for (Map.Entry<Long, List<SpendsDto>> entry : spendRecord.entrySet()) {
                 long cardId = entry.getKey();
-                System.out.println("card id = "+cardId);
                 CreditCard creditCard = creditCardService.getCreditCardBy(cardId);
                 String email = creditCard.getCustomer().getEmail();
                 String name = creditCard.getCustomer().getName();

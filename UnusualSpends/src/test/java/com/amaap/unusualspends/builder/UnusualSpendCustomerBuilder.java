@@ -2,7 +2,6 @@ package com.amaap.unusualspends.builder;
 
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.domain.service.dto.SpendsDto;
-import com.amaap.unusualspends.domain.service.dto.UnusualSpendCustomer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 public class UnusualSpendCustomerBuilder {
-    static List<UnusualSpendCustomer> unusualSpendCustomers = new ArrayList<>();
-
     public static Map<Long, List<SpendsDto>> getUnusualSpendCustomers() {
         Long cardId = Long.valueOf(1);
         Map<Long, List<SpendsDto>> unusualSpendCustomers = new HashMap<>();

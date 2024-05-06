@@ -1,5 +1,7 @@
 package com.amaap.unusualspends.controller;
 
+import com.amaap.unusualspends.controller.dto.HttpStatus;
+import com.amaap.unusualspends.controller.dto.Response;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.service.dto.SpendsDto;
 import com.amaap.unusualspends.service.CreditCardCompanyService;
@@ -16,11 +18,13 @@ public class CreditCardCompanyController {
         this.creditCardCompanyService = creditCardCompanyService;
     }
 
-    public  Map<Long, List<SpendsDto>> analyzeSpend(List<Transaction> currentMonthTransactions, List<Transaction> previousMonthTransactions, double thresholdPercentage) {
-        return creditCardCompanyService.analyzeSpend(currentMonthTransactions,previousMonthTransactions,thresholdPercentage);
+    public Map<Long, List<SpendsDto>> analyzeSpend(List<Transaction> currentMonthTransactions, List<Transaction> previousMonthTransactions, double thresholdPercentage) {
+        return creditCardCompanyService.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
     }
 
-    public boolean sendEmail(Map<Long, List<SpendsDto>> spendRecord) {
-        return creditCardCompanyService.sendEmail(spendRecord);
+    public Response sendEmail(Map<Long, List<SpendsDto>> spendRecord) {
+        if (creditCardCompanyService.sendEmail(spendRecord))
+            return new Response(HttpStatus.OK,"Email Sent");
+        return new Response(HttpStatus.ERROR_OCCURED,"Error While Sending Email");
     }
 }

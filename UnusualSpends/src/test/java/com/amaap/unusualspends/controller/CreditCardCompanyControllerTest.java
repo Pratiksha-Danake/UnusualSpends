@@ -3,6 +3,8 @@ package com.amaap.unusualspends.controller;
 import com.amaap.unusualspends.AppModule;
 import com.amaap.unusualspends.builder.CreditCardBuilder;
 import com.amaap.unusualspends.builder.UnusualSpendCustomerBuilder;
+import com.amaap.unusualspends.controller.dto.HttpStatus;
+import com.amaap.unusualspends.controller.dto.Response;
 import com.amaap.unusualspends.domain.model.entity.CreditCard;
 import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.domain.model.entity.InvalidTransactionAmount;
@@ -13,7 +15,6 @@ import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionC
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.domain.service.dto.SpendsDto;
 import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
-import com.amaap.unusualspends.service.CreditCardCompanyService;
 import com.amaap.unusualspends.service.CreditCardService;
 import com.amaap.unusualspends.service.CustomerService;
 import com.amaap.unusualspends.service.TransactionService;
@@ -28,7 +29,6 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class CreditCardCompanyControllerTest {
     TransactionService transactionService;
@@ -39,7 +39,7 @@ public class CreditCardCompanyControllerTest {
     CreditCardCompanyController creditCardCompanyController;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         Injector injector = Guice.createInjector(new AppModule());
         transactionService = injector.getInstance(TransactionService.class);
         customerService = injector.getInstance(CustomerService.class);
@@ -83,6 +83,7 @@ public class CreditCardCompanyControllerTest {
         Month prevMonth = currentMonth.minus(1);
         int currentYear = LocalDate.now().getYear();
         int prevYear = currentMonth == Month.JANUARY ? currentYear - 1 : currentYear;
+        Response expected = new Response(HttpStatus.OK, "Email Sent");
 
         // act
         Customer customer = customerService.createCustomerToAdd("Pratiksha Danake", "pratikshadanake2001@gmial.com");
@@ -97,9 +98,9 @@ public class CreditCardCompanyControllerTest {
         List<Transaction> previousMonthTransactions = transactionService.getTransactionsByMonth(prevMonth);
 
         Map<Long, List<SpendsDto>> spendRecord = creditCardCompanyController.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
-        boolean isSent = creditCardCompanyController.sendEmail(spendRecord);
+        Response actual = creditCardCompanyController.sendEmail(spendRecord);
 
         // assert
-        assertTrue(isSent);
+        assertEquals(expected,actual);
     }
 }
