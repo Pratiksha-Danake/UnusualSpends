@@ -7,7 +7,7 @@ import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionAmountException;
-import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategory;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategoryException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.domain.service.dto.SpendsDto;
 import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) throws InvalidCustomerException, CustomerAlreadyExistsException, InvalidCreditCardIdException, InvalidTransactionCategory, InvalidTransactionAmountException {
+    public static void main(String[] args) throws InvalidCustomerException, CustomerAlreadyExistsException, InvalidCreditCardIdException, InvalidTransactionCategoryException, InvalidTransactionAmountException {
         Injector injector = Guice.createInjector(new AppModule());
         CustomerService customerService = injector.getInstance(CustomerService.class);
         CreditCardService creditCardService = injector.getInstance(CreditCardService.class);
@@ -36,7 +36,6 @@ public class Main {
         int currentYear = LocalDate.now().getYear();
         int prevYear = currentMonth == Month.JANUARY ? currentYear - 1 : currentYear;
 
-        // act
         Customer customer = customerService.createCustomerToAdd("Pratiksha Danake", "pratikshadanake2001@gmail.com");
         creditCardService.createCreditCardFor(customer);
         transactionService.createTransaction(1, Category.GROCERIES, 400, LocalDate.of(currentYear, currentMonth, 10));

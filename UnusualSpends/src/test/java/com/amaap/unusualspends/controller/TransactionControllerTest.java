@@ -5,7 +5,7 @@ import com.amaap.unusualspends.controller.dto.HttpStatus;
 import com.amaap.unusualspends.controller.dto.Response;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionAmountException;
-import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategory;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategoryException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -29,7 +29,7 @@ public class TransactionControllerTest {
     }
 
     @Test
-    void shouldBeAbleToReturnResponseAsOKIfCreatesTransactionSuccessfully() throws InvalidTransactionCategory, InvalidTransactionAmountException {
+    void shouldBeAbleToReturnResponseAsOKIfCreatesTransactionSuccessfully() throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
         // arrange
         int transactionId = 1;
         long cardId = 1;
@@ -46,7 +46,7 @@ public class TransactionControllerTest {
     }
 
     @Test
-    void shouldBeAbleToAddTransactionToDatabase() throws InvalidTransactionCategory, InvalidTransactionAmountException {
+    void shouldBeAbleToAddTransactionToDatabase() throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
         // arrange
         long cardId = 1;
         LocalDate transactionOnDate = LocalDate.of(2024, Month.MAY, 1);
@@ -64,7 +64,7 @@ public class TransactionControllerTest {
     }
 
     @Test
-    void shouldBeAbleToFilterTransactionByMonth() throws InvalidTransactionCategory, InvalidTransactionAmountException {
+    void shouldBeAbleToFilterTransactionByMonth() throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
         // arrange
         long cardId = 1;
         Transaction transaction1 = Transaction.create(1, 1, Category.BOOKS, 100, LocalDate.of(2024, Month.MAY, 1));

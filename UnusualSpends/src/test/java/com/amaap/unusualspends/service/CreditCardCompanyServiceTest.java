@@ -9,7 +9,7 @@ import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionAmountException;
-import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategory;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategoryException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.domain.service.dto.SpendsDto;
 import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
@@ -42,7 +42,7 @@ public class CreditCardCompanyServiceTest {
     }
 
     @Test
-    void shouldBeAbleToFindUnusualSpendFromGivenTransactionData() throws InvalidCreditCardIdException, InvalidCustomerException, InvalidTransactionCategory, InvalidTransactionAmountException {
+    void shouldBeAbleToFindUnusualSpendFromGivenTransactionData() throws InvalidCreditCardIdException, InvalidCustomerException, InvalidTransactionCategoryException, InvalidTransactionAmountException {
         // arrange
         Map<Long, List<SpendsDto>> expectedCustomers = UnusualSpendCustomerBuilder.getUnusualSpendCustomers();
         double thresholdPercentage = 20;
@@ -70,7 +70,7 @@ public class CreditCardCompanyServiceTest {
     }
 
     @Test
-    void shouldBeAbleToSendEmailRegardingUnusualSpendInCurrentMonth() throws InvalidCustomerException, CustomerAlreadyExistsException, InvalidCreditCardIdException, InvalidTransactionCategory, InvalidTransactionAmountException {
+    void shouldBeAbleToSendEmailRegardingUnusualSpendInCurrentMonth() throws InvalidCustomerException, CustomerAlreadyExistsException, InvalidCreditCardIdException, InvalidTransactionCategoryException, InvalidTransactionAmountException {
         // arrange
         double thresholdPercentage = 20;
         Month currentMonth = LocalDate.now().getMonth();

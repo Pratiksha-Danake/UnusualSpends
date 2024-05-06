@@ -1,7 +1,7 @@
 package com.amaap.unusualspends.domain.model.entity;
 
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionAmountException;
-import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategory;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategoryException;
 import com.amaap.unusualspends.domain.model.entity.validator.TransactionValidator;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 
@@ -23,9 +23,9 @@ public class Transaction {
         this.transactionDate = transactionDate;
     }
 
-    public static Transaction create(long id, long cardId, Category category, double amountSpend, LocalDate transactionDate) throws InvalidTransactionCategory, InvalidTransactionAmountException {
+    public static Transaction create(long id, long cardId, Category category, double amountSpend, LocalDate transactionDate) throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
         if (!TransactionValidator.isValidCategory(category))
-            throw new InvalidTransactionCategory("Category is not valid" + category);
+            throw new InvalidTransactionCategoryException("Category is not valid" + category);
         if (!TransactionValidator.isValidSpend(amountSpend))
             throw new InvalidTransactionAmountException("Invalid amount" + amountSpend);
         return new Transaction(id, cardId, category, amountSpend, transactionDate);

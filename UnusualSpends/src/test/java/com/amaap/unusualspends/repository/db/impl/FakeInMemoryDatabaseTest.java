@@ -7,7 +7,7 @@ import com.amaap.unusualspends.domain.model.entity.InvalidTransactionAmountExcep
 import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
-import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategory;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategoryException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.repository.CreditCardRepository;
 import com.amaap.unusualspends.repository.CustomerRepository;
@@ -78,7 +78,7 @@ class FakeInMemoryDatabaseTest {
     }
 
     @Test
-    void shouldBeAbleToAddTransactionDetailsToTheDatabase() throws InvalidTransactionCategory, InvalidTransactionAmountException {
+    void shouldBeAbleToAddTransactionDetailsToTheDatabase() throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
         // arrange
         long cardId = 1;
         long transactionId = 1;
@@ -154,7 +154,7 @@ class FakeInMemoryDatabaseTest {
     }
 
     @Test
-    void shouldBeAbleToGetAllTransactionsForGivenCreditCard() throws InvalidTransactionCategory, InvalidTransactionAmountException {
+    void shouldBeAbleToGetAllTransactionsForGivenCreditCard() throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
         // arrange
         LocalDate transactionOnDate = LocalDate.of(2024, Month.MAY, 1);
         Transaction transaction1 = Transaction.create(1, 1, Category.BOOKS, 100, transactionOnDate);

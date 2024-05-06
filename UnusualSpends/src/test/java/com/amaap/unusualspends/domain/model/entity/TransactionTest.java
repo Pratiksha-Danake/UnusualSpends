@@ -1,6 +1,6 @@
 package com.amaap.unusualspends.domain.model.entity;
 
-import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategory;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategoryException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class TransactionTest {
 
     @Test
-    void shouldBeAbleToCreateTransactionWithDetails() throws InvalidTransactionCategory, InvalidTransactionAmountException {
+    void shouldBeAbleToCreateTransactionWithDetails() throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
         // arrange
         long cardId = 1;
         long transactionId = 1;
@@ -30,7 +30,7 @@ public class TransactionTest {
     }
 
     @Test
-    void shouldBeAbleToThrowInvalidCategoryExceptionIfTransactionCategoryIsNull() throws InvalidTransactionCategory {
+    void shouldBeAbleToThrowInvalidCategoryExceptionIfTransactionCategoryIsNull() throws InvalidTransactionCategoryException {
         // arrange
         long cardId = 1;
         long transactionId = 1;
@@ -39,13 +39,13 @@ public class TransactionTest {
         LocalDate transactionDate = LocalDate.of(2024, Month.MAY, 1);
 
         // act && assert
-        assertThrows(InvalidTransactionCategory.class, () -> {
+        assertThrows(InvalidTransactionCategoryException.class, () -> {
             Transaction.create(cardId, transactionId, category, amountSpend, transactionDate);
         });
     }
 
     @Test
-    void shouldBeAbleToThrowInvalidTransactionAmountExceptionExceptionIfTransactionAmountIsInvalid() throws InvalidTransactionCategory {
+    void shouldBeAbleToThrowInvalidTransactionAmountExceptionExceptionIfTransactionAmountIsInvalid() throws InvalidTransactionCategoryException {
         // arrange
         long cardId = 1;
         long transactionId = 1;

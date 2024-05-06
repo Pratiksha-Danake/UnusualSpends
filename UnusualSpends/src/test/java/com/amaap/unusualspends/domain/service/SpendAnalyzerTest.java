@@ -4,11 +4,11 @@ import com.amaap.unusualspends.AppModule;
 import com.amaap.unusualspends.builder.CreditCardBuilder;
 import com.amaap.unusualspends.builder.UnusualSpendCustomerBuilder;
 import com.amaap.unusualspends.domain.model.entity.CreditCard;
-import com.amaap.unusualspends.domain.model.entity.InvalidTransactionAmountException;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
-import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategory;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionAmountException;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategoryException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.domain.service.dto.SpendsDto;
 import com.amaap.unusualspends.service.CreditCardService;
@@ -39,7 +39,7 @@ public class SpendAnalyzerTest {
     }
 
     @Test
-    void shouldBeAbleToFindUnusualSpendFromTransactionsData() throws InvalidTransactionCategory, InvalidTransactionAmountException, InvalidCustomerException, InvalidCreditCardIdException {
+    void shouldBeAbleToFindUnusualSpendFromTransactionsData() throws InvalidTransactionCategoryException, InvalidTransactionAmountException, InvalidCustomerException, InvalidCreditCardIdException {
         // arrange
         Map<Long, List<SpendsDto>> expectedCustomers = UnusualSpendCustomerBuilder.getUnusualSpendCustomers();
         double thresholdPercentage = 20;

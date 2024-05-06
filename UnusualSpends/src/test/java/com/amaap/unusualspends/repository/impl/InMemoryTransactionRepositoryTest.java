@@ -3,7 +3,7 @@ package com.amaap.unusualspends.repository.impl;
 import com.amaap.unusualspends.AppModule;
 import com.amaap.unusualspends.domain.model.entity.InvalidTransactionAmountException;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
-import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategory;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategoryException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.repository.TransactionRepository;
 import com.google.inject.Guice;
@@ -27,7 +27,7 @@ public class InMemoryTransactionRepositoryTest {
     }
 
     @Test
-    void shouldBeAbleToAddTransactionToDatabase() throws InvalidTransactionCategory, InvalidTransactionAmountException {
+    void shouldBeAbleToAddTransactionToDatabase() throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
         // arrange
         long cardId = 1;
         long transactionId = 1;
@@ -41,7 +41,7 @@ public class InMemoryTransactionRepositoryTest {
     }
 
     @Test
-    void shouldBeAbleToGetTransactionAssociatedWithTheCreditCard() throws InvalidTransactionCategory, InvalidTransactionAmountException {
+    void shouldBeAbleToGetTransactionAssociatedWithTheCreditCard() throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
         // arrange
         long cardId = 1;
         LocalDate transactionOnDate = LocalDate.of(2024, Month.MAY, 1);
