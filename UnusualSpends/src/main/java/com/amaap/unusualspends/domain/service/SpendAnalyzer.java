@@ -10,13 +10,12 @@ import java.util.List;
 import java.util.Map;
 
 public class SpendAnalyzer {
-
+    Map<Long, List<SpendsDto>> spendRecords = new HashMap<>();
     public Map<Long, List<SpendsDto>> analyzeSpend(List<Transaction> currentMonthTransactions,
                                                    List<Transaction> previousMonthTransactions,
                                                    double thresholdPercentage) {
 
         double criteria = 1 + (thresholdPercentage / 100);
-        Map<Long, List<SpendsDto>> spendRecords = new HashMap<>();
         for (Transaction currentTransaction : currentMonthTransactions) {
             for (Transaction previousTransaction : previousMonthTransactions) {
                 if (currentTransaction.getCategory() == previousTransaction.getCategory() &&
