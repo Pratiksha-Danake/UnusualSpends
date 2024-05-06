@@ -19,7 +19,6 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -27,7 +26,6 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class FakeInMemoryDatabaseTest {
     CreditCardRepository creditCardRepository;
     CustomerRepository customerRepository;

@@ -5,18 +5,20 @@ import com.amaap.unusualspends.domain.service.dto.SpendsDto;
 import com.amaap.unusualspends.domain.service.dto.UnusualSpendCustomer;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class UnusualSpendCustomerBuilder {
     static List<UnusualSpendCustomer> unusualSpendCustomers = new ArrayList<>();
 
-    public static List<UnusualSpendCustomer> getUnusualSpendCustomers() {
-        UnusualSpendCustomer customer1 = new UnusualSpendCustomer(1, new SpendsDto(Category.GROCERIES, 300, 100));
-        UnusualSpendCustomer customer2 = new UnusualSpendCustomer(1, new SpendsDto(Category.TRAVEL, 400, 200));
-        unusualSpendCustomers.add(customer1);
-        unusualSpendCustomers.add(customer2);
+    public static Map<Long, List<SpendsDto>> getUnusualSpendCustomers() {
+        Long cardId = Long.valueOf(1);
+        Map<Long, List<SpendsDto>> unusualSpendCustomers = new HashMap<>();
+        List<SpendsDto> spendDtos = new ArrayList<>();
+        spendDtos.add(new SpendsDto(Category.GROCERIES, 300, 100));
+        spendDtos.add(new SpendsDto(Category.TRAVEL, 400, 200));
+        unusualSpendCustomers.put(cardId,spendDtos);
         return unusualSpendCustomers;
     }
 }
-//        Credit Card = 1     Category = GROCERIES     UsualAmount = 300.0    UnusualAmount = 100.0
-//        Credit Card = 1     Category = TRAVEL   UsualAmount = 400.0 UnusualAmount = 200.0

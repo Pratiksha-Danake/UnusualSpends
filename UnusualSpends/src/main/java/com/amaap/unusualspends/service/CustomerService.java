@@ -16,6 +16,7 @@ public class CustomerService {
     }
 
     public Customer createCustomerToAdd(String customerName, String email) throws InvalidCustomerException, CustomerAlreadyExistsException {
+        System.out.println("in customer service");
         customerId++;
         Customer customer = Customer.create(customerId, customerName, email);
 

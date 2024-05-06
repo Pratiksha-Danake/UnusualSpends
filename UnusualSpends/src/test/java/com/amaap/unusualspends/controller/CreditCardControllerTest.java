@@ -9,17 +9,15 @@ import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardId
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class CreditCardControllerTest {
     CreditCardController creditCardController;
 
-    @BeforeAll
+    @BeforeEach
     void setUp() {
         Injector injector = Guice.createInjector(new AppModule());
         creditCardController = injector.getInstance(CreditCardController.class);

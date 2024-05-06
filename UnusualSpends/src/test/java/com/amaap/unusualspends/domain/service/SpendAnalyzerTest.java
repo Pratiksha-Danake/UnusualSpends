@@ -10,7 +10,7 @@ import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardId
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategory;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
-import com.amaap.unusualspends.domain.service.dto.UnusualSpendCustomer;
+import com.amaap.unusualspends.domain.service.dto.SpendsDto;
 import com.amaap.unusualspends.service.CreditCardService;
 import com.amaap.unusualspends.service.TransactionService;
 import com.google.inject.Guice;
@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -40,7 +41,7 @@ public class SpendAnalyzerTest {
     @Test
     void shouldBeAbleToFindUnusualSpendFromTransactionsData() throws InvalidTransactionCategory, InvalidTransactionAmount, InvalidCustomerException, InvalidCreditCardIdException {
         // arrange
-        List<UnusualSpendCustomer> expectedCustomers = UnusualSpendCustomerBuilder.getUnusualSpendCustomers();
+        Map<Long, List<SpendsDto>> expectedCustomers = UnusualSpendCustomerBuilder.getUnusualSpendCustomers();
         double thresholdPercentage = 20;
 
         Month currentMonth = LocalDate.now().getMonth();
@@ -58,7 +59,7 @@ public class SpendAnalyzerTest {
 
         List<Transaction> currentMonthTransactions = transactionService.getTransactionsByMonth(currentMonth);
         List<Transaction> previousMonthTransactions = transactionService.getTransactionsByMonth(prevMonth);
-        List<UnusualSpendCustomer> actualCustomers = spendAnalyzer.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
+        Map<Long, List<SpendsDto>> actualCustomers = spendAnalyzer.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
 
         // assert
         assertEquals(expectedCustomers, actualCustomers);

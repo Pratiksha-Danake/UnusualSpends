@@ -1,4 +1,4 @@
-package com.amaap.unusualspends.service;
+package com.amaap.unusualspends.controller;
 
 import com.amaap.unusualspends.AppModule;
 import com.amaap.unusualspends.builder.CreditCardBuilder;
@@ -13,6 +13,10 @@ import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionC
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.domain.service.dto.SpendsDto;
 import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
+import com.amaap.unusualspends.service.CreditCardCompanyService;
+import com.amaap.unusualspends.service.CreditCardService;
+import com.amaap.unusualspends.service.CustomerService;
+import com.amaap.unusualspends.service.TransactionService;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,19 +30,21 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class CreditCardCompanyServiceTest {
-    CustomerService customerService;
-    CreditCardService creditCardService;
+public class CreditCardCompanyControllerTest {
     TransactionService transactionService;
-    CreditCardCompanyService creditCardCompanyService;
+    CustomerService customerService;
+
+    CreditCardService creditCardService;
+
+    CreditCardCompanyController creditCardCompanyController;
 
     @BeforeEach
-    void setUp() {
+    void setUp(){
         Injector injector = Guice.createInjector(new AppModule());
-        creditCardService = injector.getInstance(CreditCardService.class);
         transactionService = injector.getInstance(TransactionService.class);
-        creditCardCompanyService = injector.getInstance(CreditCardCompanyService.class);
         customerService = injector.getInstance(CustomerService.class);
+        creditCardService = injector.getInstance(CreditCardService.class);
+        creditCardCompanyController = injector.getInstance(CreditCardCompanyController.class);
     }
 
     @Test
@@ -63,7 +69,7 @@ public class CreditCardCompanyServiceTest {
 
         List<Transaction> currentMonthTransactions = transactionService.getTransactionsByMonth(currentMonth);
         List<Transaction> previousMonthTransactions = transactionService.getTransactionsByMonth(prevMonth);
-        Map<Long, List<SpendsDto>> actualCustomers = creditCardCompanyService.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
+        Map<Long, List<SpendsDto>> actualCustomers = creditCardCompanyController.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
 
         // assert
         assertEquals(expectedCustomers, actualCustomers);
@@ -90,8 +96,8 @@ public class CreditCardCompanyServiceTest {
         List<Transaction> currentMonthTransactions = transactionService.getTransactionsByMonth(currentMonth);
         List<Transaction> previousMonthTransactions = transactionService.getTransactionsByMonth(prevMonth);
 
-        Map<Long, List<SpendsDto>> spendRecord = creditCardCompanyService.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
-        boolean isSent = creditCardCompanyService.sendEmail(spendRecord);
+        Map<Long, List<SpendsDto>> spendRecord = creditCardCompanyController.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
+        boolean isSent = creditCardCompanyController.sendEmail(spendRecord);
 
         // assert
         assertTrue(isSent);

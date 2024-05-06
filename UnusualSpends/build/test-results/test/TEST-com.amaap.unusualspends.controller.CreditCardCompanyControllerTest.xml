@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.amaap.unusualspends.controller.CreditCardCompanyControllerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-06T10:15:31" hostname="DESKTOP-GUO1275" time="6.114">
+  <properties/>
+  <testcase name="shouldBeAbleToSendEmailRegardingUnusualSpendInCurrentMonth()" classname="com.amaap.unusualspends.controller.CreditCardCompanyControllerTest" time="6.114"/>
+  <system-out><![CDATA[in customer service
+customer repo
+in customer add db
+in cc service
+cc repo
+cc add db 
+ID = 1 pratikshadanake2001@gmial.com
+card id = 1
+Total Unusual spending of 700.0 detected!
+Your usual spending of last month was 300.0 
+ hello Pratiksha Danake!
+ We have detected unusually high spending on your card in these categories:
+  * You spent 400.0 on GROCERIES
+ * You spent 600.0 on TRAVEL
+Thanks,
+
+The Credit Card Company
+
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

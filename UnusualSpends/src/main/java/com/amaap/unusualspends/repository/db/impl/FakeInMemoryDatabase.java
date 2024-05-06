@@ -25,9 +25,6 @@ public class FakeInMemoryDatabase implements InMemoryDatabase {
 
     public CreditCard addCreditCard(CreditCard creditCardToAdd) {
         cards.add(creditCardToAdd);
-        for (CreditCard card : cards) {
-            System.out.println("ID = " + card.getId());
-        }
         return creditCardToAdd;
     }
 
