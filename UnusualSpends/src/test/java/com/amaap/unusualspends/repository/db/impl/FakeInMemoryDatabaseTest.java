@@ -160,7 +160,7 @@ class FakeInMemoryDatabaseTest {
         // arrange
         LocalDate transactionOnDate = LocalDate.of(2024, Month.MAY, 1);
         Transaction transaction1 = Transaction.create(1, 1, Category.BOOKS, 100, transactionOnDate);
-        Transaction transaction2 = Transaction.create(2, 1, Category.GROCERY, 120, transactionOnDate);
+        Transaction transaction2 = Transaction.create(2, 1, Category.GROCERIES, 120, transactionOnDate);
         List<Transaction> expectedList = List.of(transaction1, transaction2);
 
         // act

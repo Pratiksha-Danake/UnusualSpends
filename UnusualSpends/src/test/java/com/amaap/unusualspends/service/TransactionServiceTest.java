@@ -50,12 +50,12 @@ public class TransactionServiceTest {
         long cardId = 1;
         LocalDate transactionOnDate = LocalDate.of(2024, Month.MAY, 1);
         Transaction transaction1 = Transaction.create(1, 1, Category.BOOKS, 100, transactionOnDate);
-        Transaction transaction2 = Transaction.create(2, 1, Category.GROCERY, 120, transactionOnDate);
+        Transaction transaction2 = Transaction.create(2, 1, Category.GROCERIES, 120, transactionOnDate);
         List<Transaction> expectedList = List.of(transaction1, transaction2);
 
         // act
         transactionService.createTransaction(1, Category.BOOKS, 100, transactionOnDate);
-        transactionService.createTransaction(1, Category.GROCERY, 120, transactionOnDate);
+        transactionService.createTransaction(1, Category.GROCERIES, 120, transactionOnDate);
         List<Transaction> actualList = transactionService.getAllTransactions();
 
         // assert
@@ -71,7 +71,7 @@ public class TransactionServiceTest {
 
         // act
         transactionService.createTransaction(1, Category.BOOKS, 100, LocalDate.of(2024, Month.MAY, 1));
-        transactionService.createTransaction(1, Category.GROCERY, 120, LocalDate.of(2024, Month.APRIL, 1));
+        transactionService.createTransaction(1, Category.GROCERIES, 120, LocalDate.of(2024, Month.APRIL, 1));
         List<Transaction> actualList = transactionService.getTransactionsByMonth(Month.MAY);
 
         // assert

@@ -38,6 +38,14 @@ public class Transaction {
         return cardId;
     }
 
+    public Category getCategory() {
+        return category;
+    }
+
+    public double getAmountSpend() {
+        return amountSpend;
+    }
+
     public LocalDate getTransactionDate() {
         return transactionDate;
     }
