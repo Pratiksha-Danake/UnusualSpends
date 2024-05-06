@@ -15,7 +15,7 @@ public class UnusualSpendCustomerBuilder {
         List<SpendsDto> spendDtos = new ArrayList<>();
         spendDtos.add(new SpendsDto(Category.GROCERIES, 300, 100));
         spendDtos.add(new SpendsDto(Category.TRAVEL, 400, 200));
-        unusualSpendCustomers.put(cardId,spendDtos);
+        unusualSpendCustomers.put(cardId, spendDtos);
         return unusualSpendCustomers;
     }
 }

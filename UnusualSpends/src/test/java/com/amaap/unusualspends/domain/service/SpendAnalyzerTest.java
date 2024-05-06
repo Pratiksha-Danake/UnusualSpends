@@ -4,7 +4,7 @@ import com.amaap.unusualspends.AppModule;
 import com.amaap.unusualspends.builder.CreditCardBuilder;
 import com.amaap.unusualspends.builder.UnusualSpendCustomerBuilder;
 import com.amaap.unusualspends.domain.model.entity.CreditCard;
-import com.amaap.unusualspends.domain.model.entity.InvalidTransactionAmount;
+import com.amaap.unusualspends.domain.model.entity.InvalidTransactionAmountException;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
@@ -39,7 +39,7 @@ public class SpendAnalyzerTest {
     }
 
     @Test
-    void shouldBeAbleToFindUnusualSpendFromTransactionsData() throws InvalidTransactionCategory, InvalidTransactionAmount, InvalidCustomerException, InvalidCreditCardIdException {
+    void shouldBeAbleToFindUnusualSpendFromTransactionsData() throws InvalidTransactionCategory, InvalidTransactionAmountException, InvalidCustomerException, InvalidCreditCardIdException {
         // arrange
         Map<Long, List<SpendsDto>> expectedCustomers = UnusualSpendCustomerBuilder.getUnusualSpendCustomers();
         double thresholdPercentage = 20;

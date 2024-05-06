@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CreditCardCompanyController {
-    private CreditCardCompanyService creditCardCompanyService;
+    private final CreditCardCompanyService creditCardCompanyService;
 
     @Inject
     public CreditCardCompanyController(CreditCardCompanyService creditCardCompanyService) {
@@ -24,7 +24,7 @@ public class CreditCardCompanyController {
 
     public Response sendEmail(Map<Long, List<SpendsDto>> spendRecord) {
         if (creditCardCompanyService.sendEmail(spendRecord))
-            return new Response(HttpStatus.OK,"Email Sent");
-        return new Response(HttpStatus.ERROR_OCCURED,"Error While Sending Email");
+            return new Response(HttpStatus.OK, "Email Sent");
+        return new Response(HttpStatus.ERROR_OCCURED, "Error While Sending Email");
     }
 }

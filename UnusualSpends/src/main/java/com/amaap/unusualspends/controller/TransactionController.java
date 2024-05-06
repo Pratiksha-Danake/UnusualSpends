@@ -2,8 +2,8 @@ package com.amaap.unusualspends.controller;
 
 import com.amaap.unusualspends.controller.dto.HttpStatus;
 import com.amaap.unusualspends.controller.dto.Response;
-import com.amaap.unusualspends.domain.model.entity.InvalidTransactionAmount;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionAmountException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategory;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.service.TransactionService;
@@ -22,7 +22,7 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    public Response createTransaction(long cardId, Category category, double amountSpend, LocalDate transactionDate) throws InvalidTransactionCategory, InvalidTransactionAmount {
+    public Response createTransaction(long cardId, Category category, double amountSpend, LocalDate transactionDate) throws InvalidTransactionCategory, InvalidTransactionAmountException {
         if (transactionService.createTransaction(cardId, category, amountSpend, transactionDate) != null)
             return new Response(HttpStatus.OK, "Transaction Created");
         return new Response(HttpStatus.ERROR_OCCURED, "Error While Creating Transaction");

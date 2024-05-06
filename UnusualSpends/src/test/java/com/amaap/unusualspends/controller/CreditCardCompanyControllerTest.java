@@ -7,10 +7,10 @@ import com.amaap.unusualspends.controller.dto.HttpStatus;
 import com.amaap.unusualspends.controller.dto.Response;
 import com.amaap.unusualspends.domain.model.entity.CreditCard;
 import com.amaap.unusualspends.domain.model.entity.Customer;
-import com.amaap.unusualspends.domain.model.entity.InvalidTransactionAmount;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionAmountException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategory;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.domain.service.dto.SpendsDto;
@@ -48,7 +48,7 @@ public class CreditCardCompanyControllerTest {
     }
 
     @Test
-    void shouldBeAbleToFindUnusualSpendFromGivenTransactionData() throws InvalidCreditCardIdException, InvalidCustomerException, InvalidTransactionCategory, InvalidTransactionAmount {
+    void shouldBeAbleToFindUnusualSpendFromGivenTransactionData() throws InvalidCreditCardIdException, InvalidCustomerException, InvalidTransactionCategory {
         // arrange
         Map<Long, List<SpendsDto>> expectedCustomers = UnusualSpendCustomerBuilder.getUnusualSpendCustomers();
         double thresholdPercentage = 20;
@@ -76,7 +76,7 @@ public class CreditCardCompanyControllerTest {
     }
 
     @Test
-    void shouldBeAbleToSendEmailRegardingUnusualSpendInCurrentMonth() throws InvalidCustomerException, CustomerAlreadyExistsException, InvalidCreditCardIdException, InvalidTransactionCategory, InvalidTransactionAmount {
+    void shouldBeAbleToSendEmailRegardingUnusualSpendInCurrentMonth() throws InvalidCustomerException, CustomerAlreadyExistsException, InvalidCreditCardIdException, InvalidTransactionCategory, InvalidTransactionAmountException {
         // arrange
         double thresholdPercentage = 20;
         Month currentMonth = LocalDate.now().getMonth();
@@ -101,6 +101,6 @@ public class CreditCardCompanyControllerTest {
         Response actual = creditCardCompanyController.sendEmail(spendRecord);
 
         // assert
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 }

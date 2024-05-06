@@ -10,7 +10,7 @@ public class EmailComposer {
         double totalUnusualSpend = 0;
         double totalUsualSpend = 0;
         for (SpendsDto spend : record) {
-            body.append(" * You spent " + (spend.getUnusualAmountSpend()+spend.getUsualAmountSpend()) + " on " + spend.getCategory() + "\n");
+            body.append(" * You spent " + (spend.getUnusualAmountSpend() + spend.getUsualAmountSpend()) + " on " + spend.getCategory() + "\n");
             totalUsualSpend += spend.getUnusualAmountSpend();
             totalUnusualSpend += spend.getUsualAmountSpend();
         }

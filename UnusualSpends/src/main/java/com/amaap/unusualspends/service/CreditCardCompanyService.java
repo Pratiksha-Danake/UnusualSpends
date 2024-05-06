@@ -14,10 +14,10 @@ import java.util.List;
 import java.util.Map;
 
 public class CreditCardCompanyService {
-    private SpendAnalyzer spendAnalyzer;
-    private EmailComposer emailComposer;
-    private EmailSender emailSender;
-    private CreditCardService creditCardService;
+    private final SpendAnalyzer spendAnalyzer;
+    private final EmailComposer emailComposer;
+    private final EmailSender emailSender;
+    private final CreditCardService creditCardService;
 
     @Inject
     public CreditCardCompanyService(SpendAnalyzer spendAnalyzer, EmailComposer emailComposer, EmailSender emailSender, CreditCardService creditCardService) {

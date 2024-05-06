@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class TransactionTest {
 
     @Test
-    void shouldBeAbleToCreateTransactionWithDetails() throws InvalidTransactionCategory, InvalidTransactionAmount {
+    void shouldBeAbleToCreateTransactionWithDetails() throws InvalidTransactionCategory, InvalidTransactionAmountException {
         // arrange
         long cardId = 1;
         long transactionId = 1;
@@ -45,7 +45,7 @@ public class TransactionTest {
     }
 
     @Test
-    void shouldBeAbleToThrowInvalidTransactionAmountExceptionIfTransactionAmountIsInvalid() throws InvalidTransactionCategory {
+    void shouldBeAbleToThrowInvalidTransactionAmountExceptionExceptionIfTransactionAmountIsInvalid() throws InvalidTransactionCategory {
         // arrange
         long cardId = 1;
         long transactionId = 1;
@@ -54,7 +54,7 @@ public class TransactionTest {
         LocalDate transactionDate = LocalDate.of(2024, Month.MAY, 1);
 
         // act && assert
-        assertThrows(InvalidTransactionAmount.class, () -> {
+        assertThrows(InvalidTransactionAmountException.class, () -> {
             Transaction.create(cardId, transactionId, category, amountSpend, transactionDate);
         });
     }

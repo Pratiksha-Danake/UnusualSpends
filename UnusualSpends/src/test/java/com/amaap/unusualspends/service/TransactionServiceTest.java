@@ -1,7 +1,7 @@
 package com.amaap.unusualspends.service;
 
 import com.amaap.unusualspends.AppModule;
-import com.amaap.unusualspends.domain.model.entity.InvalidTransactionAmount;
+import com.amaap.unusualspends.domain.model.entity.InvalidTransactionAmountException;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategory;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
@@ -28,7 +28,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    void shouldBeAbleToCreateTransactionToAddItToTheDatabase() throws InvalidTransactionCategory, InvalidTransactionAmount {
+    void shouldBeAbleToCreateTransactionToAddItToTheDatabase() throws InvalidTransactionCategory, InvalidTransactionAmountException {
         // arrange
         int transactionId = 1;
         long cardId = 1;
@@ -45,7 +45,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    void shouldBeAbleToAddTransactionToDatabase() throws InvalidTransactionCategory, InvalidTransactionAmount {
+    void shouldBeAbleToAddTransactionToDatabase() throws InvalidTransactionCategory, InvalidTransactionAmountException {
         // arrange
         long cardId = 1;
         LocalDate transactionOnDate = LocalDate.of(2024, Month.MAY, 1);
@@ -63,7 +63,7 @@ public class TransactionServiceTest {
     }
 
     @Test
-    void shouldBeAbleToFilterTransactionByMonth() throws InvalidTransactionCategory, InvalidTransactionAmount {
+    void shouldBeAbleToFilterTransactionByMonth() throws InvalidTransactionCategory, InvalidTransactionAmountException {
         // arrange
         long cardId = 1;
         Transaction transaction1 = Transaction.create(1, 1, Category.BOOKS, 100, LocalDate.of(2024, Month.MAY, 1));

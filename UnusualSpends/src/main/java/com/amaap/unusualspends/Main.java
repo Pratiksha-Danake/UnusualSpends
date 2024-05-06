@@ -3,10 +3,10 @@ package com.amaap.unusualspends;
 import com.amaap.unusualspends.controller.CreditCardCompanyController;
 import com.amaap.unusualspends.controller.dto.Response;
 import com.amaap.unusualspends.domain.model.entity.Customer;
-import com.amaap.unusualspends.domain.model.entity.InvalidTransactionAmount;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionAmountException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategory;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.domain.service.dto.SpendsDto;
@@ -23,7 +23,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) throws InvalidCustomerException, CustomerAlreadyExistsException, InvalidCreditCardIdException, InvalidTransactionCategory, InvalidTransactionAmount {
+    public static void main(String[] args) throws InvalidCustomerException, CustomerAlreadyExistsException, InvalidCreditCardIdException, InvalidTransactionCategory, InvalidTransactionAmountException {
         Injector injector = Guice.createInjector(new AppModule());
         CustomerService customerService = injector.getInstance(CustomerService.class);
         CreditCardService creditCardService = injector.getInstance(CreditCardService.class);
