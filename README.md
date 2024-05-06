@@ -103,19 +103,19 @@ The Credit Card Company
 
 ### Package: com.amaap.unusualspends.domain.model.entity.exception
 
-### InvalidCreditCardIdException
+#### InvalidCreditCardIdException
 
-### InvalidCustomerEmailException
+#### InvalidCustomerEmailException
 
-### InvalidCustomerException
+#### InvalidCustomerException
 
-### InvalidCustomerIdException
+#### InvalidCustomerIdException
 
-### InvalidTransactionAmountException
+#### InvalidTransactionAmountException
 
-### InvalidTransactionCategoryException
+#### InvalidTransactionCategoryException
 
-### com.amaap.unusualspends.domain.model.valueobject
+#### com.amaap.unusualspends.domain.model.valueobject
 
 ### Category Enum
 
