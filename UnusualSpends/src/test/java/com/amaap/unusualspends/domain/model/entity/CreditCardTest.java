@@ -13,7 +13,7 @@ public class CreditCardTest {
         // arrange
         long cardId = 1;
         Customer customer = Customer.create(1, "Pratiksha Danake", "sita@gmail.com");
-        CreditCard expected = new CreditCard(cardId, customer);
+        CreditCard expected = CreditCard.create(cardId, customer);
 
         // act
         CreditCard actual = CreditCard.create(cardId, customer);

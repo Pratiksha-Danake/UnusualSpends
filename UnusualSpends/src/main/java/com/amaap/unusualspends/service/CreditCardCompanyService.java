@@ -5,7 +5,7 @@ import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerEmailException;
 import com.amaap.unusualspends.domain.service.EmailSender;
 import com.amaap.unusualspends.domain.service.SpendAnalyzer;
-import com.amaap.unusualspends.domain.service.dto.SpendsDto;
+import com.amaap.unusualspends.domain.service.dto.SpendDto;
 import com.amaap.unusualspends.domain.service.exception.InvalidEmailBodyException;
 import com.amaap.unusualspends.domain.service.exception.InvalidEmailSubjectException;
 import com.google.inject.Inject;
@@ -27,19 +27,19 @@ public class CreditCardCompanyService {
         this.creditCardService = creditCardService;
     }
 
-    public Map<Long, List<SpendsDto>> analyzeSpend(List<Transaction> currentMonthTransactions, List<Transaction> previousMonthTransactions, double thresholdPercentage) {
+    public Map<Long, List<SpendDto>> analyzeSpend(List<Transaction> currentMonthTransactions, List<Transaction> previousMonthTransactions, double thresholdPercentage) {
         return spendAnalyzer.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
     }
 
-    public boolean sendEmail(Map<Long, List<SpendsDto>> spendRecord) {
+    public boolean sendEmail(Map<Long, List<SpendDto>> spendRecord) {
         try {
-            for (Map.Entry<Long, List<SpendsDto>> entry : spendRecord.entrySet()) {
+            for (Map.Entry<Long, List<SpendDto>> entry : spendRecord.entrySet()) {
                 long cardId = entry.getKey();
                 CreditCard creditCard = creditCardService.getCreditCardBy(cardId);
                 String email = creditCard.getCustomer().getEmail();
                 String name = creditCard.getCustomer().getName();
                 String subject = "Regarding unusual spend for current month";
-                List<SpendsDto> unusualSpendRecords = entry.getValue();
+                List<SpendDto> unusualSpendRecords = entry.getValue();
                 String body = emailComposer.composeEmail(name, unusualSpendRecords);
                 System.out.println(body);
                 emailSender.sendEmail(subject, body, email);

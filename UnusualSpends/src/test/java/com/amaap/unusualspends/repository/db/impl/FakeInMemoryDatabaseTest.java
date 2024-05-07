@@ -3,10 +3,10 @@ package com.amaap.unusualspends.repository.db.impl;
 import com.amaap.unusualspends.AppModule;
 import com.amaap.unusualspends.domain.model.entity.CreditCard;
 import com.amaap.unusualspends.domain.model.entity.Customer;
-import com.amaap.unusualspends.domain.model.entity.InvalidTransactionAmountException;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionAmountException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategoryException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.repository.CreditCardRepository;
@@ -142,7 +142,7 @@ class FakeInMemoryDatabaseTest {
     }
 
     @Test
-    void shouldBeAbleToReturnNullIfCreditCardForGivenIdIsNotPresent() throws InvalidCustomerException, InvalidCreditCardIdException {
+    void shouldBeAbleToReturnNullIfCreditCardForGivenIdIsNotPresent() {
         // arrange
         long id = 2;
 

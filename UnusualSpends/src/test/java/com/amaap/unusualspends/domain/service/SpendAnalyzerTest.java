@@ -10,7 +10,7 @@ import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerExce
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionAmountException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategoryException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
-import com.amaap.unusualspends.domain.service.dto.SpendsDto;
+import com.amaap.unusualspends.domain.service.dto.SpendDto;
 import com.amaap.unusualspends.service.CreditCardService;
 import com.amaap.unusualspends.service.TransactionService;
 import com.google.inject.Guice;
@@ -41,7 +41,7 @@ public class SpendAnalyzerTest {
     @Test
     void shouldBeAbleToFindUnusualSpendFromTransactionsData() throws InvalidTransactionCategoryException, InvalidTransactionAmountException, InvalidCustomerException, InvalidCreditCardIdException {
         // arrange
-        Map<Long, List<SpendsDto>> expectedCustomers = UnusualSpendCustomerBuilder.getUnusualSpendCustomers();
+        Map<Long, List<SpendDto>> expectedCustomers = UnusualSpendCustomerBuilder.getUnusualSpendCustomers();
         double thresholdPercentage = 20;
 
         Month currentMonth = LocalDate.now().getMonth();
@@ -59,7 +59,7 @@ public class SpendAnalyzerTest {
 
         List<Transaction> currentMonthTransactions = transactionService.getTransactionsByMonth(currentMonth);
         List<Transaction> previousMonthTransactions = transactionService.getTransactionsByMonth(prevMonth);
-        Map<Long, List<SpendsDto>> actualCustomers = spendAnalyzer.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
+        Map<Long, List<SpendDto>> actualCustomers = spendAnalyzer.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
 
         // assert
         assertEquals(expectedCustomers, actualCustomers);

@@ -4,12 +4,12 @@ import com.amaap.unusualspends.domain.model.valueobject.Category;
 
 import java.util.Objects;
 
-public class SpendsDto {
+public class SpendDto {
     Category category;
     double unusualAmountSpend;
     double usualAmountSpend;
 
-    public SpendsDto(Category category, double usualAmountSpend, double UnusualAmountSpend) {
+    public SpendDto(Category category, double usualAmountSpend, double UnusualAmountSpend) {
         this.category = category;
         this.usualAmountSpend = usualAmountSpend;
         this.unusualAmountSpend = UnusualAmountSpend;
@@ -31,7 +31,7 @@ public class SpendsDto {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        SpendsDto spendsDto = (SpendsDto) o;
+        SpendDto spendsDto = (SpendDto) o;
         return Double.compare(spendsDto.unusualAmountSpend, unusualAmountSpend) == 0 && Double.compare(spendsDto.usualAmountSpend, usualAmountSpend) == 0 && category == spendsDto.category;
     }
 

@@ -9,7 +9,7 @@ public class CreditCard {
     private final long id;
     private final Customer customer;
 
-    public CreditCard(long id, Customer customer) {
+    private CreditCard(long id, Customer customer) {
         this.id = id;
         this.customer = customer;
     }

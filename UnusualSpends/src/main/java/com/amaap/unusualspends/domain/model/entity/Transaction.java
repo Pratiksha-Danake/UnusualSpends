@@ -15,7 +15,7 @@ public class Transaction {
     private final double amountSpend;
     private final LocalDate transactionDate;
 
-    public Transaction(long id, long cardId, Category category, double amountSpend, LocalDate transactionDate) {
+    private Transaction(long id, long cardId, Category category, double amountSpend, LocalDate transactionDate) {
         this.id = id;
         this.cardId = cardId;
         this.category = category;

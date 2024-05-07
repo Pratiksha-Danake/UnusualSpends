@@ -14,10 +14,10 @@ public class Customer {
     private final String name;
     private final String email;
 
-    private Customer(int customerId, String customerName, String customerEmail) {
-        this.id = customerId;
-        this.name = customerName;
-        this.email = customerEmail;
+    private Customer(int id, String name, String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
     }
 
     public static Customer create(int customerId, String customerName, String email) throws InvalidCustomerNameException, InvalidCustomerIdException, InvalidCustomerEmailException {

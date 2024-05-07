@@ -11,7 +11,7 @@ import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerExce
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionAmountException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategoryException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
-import com.amaap.unusualspends.domain.service.dto.SpendsDto;
+import com.amaap.unusualspends.domain.service.dto.SpendDto;
 import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -44,7 +44,7 @@ public class CreditCardCompanyServiceTest {
     @Test
     void shouldBeAbleToFindUnusualSpendFromGivenTransactionData() throws InvalidCreditCardIdException, InvalidCustomerException, InvalidTransactionCategoryException, InvalidTransactionAmountException {
         // arrange
-        Map<Long, List<SpendsDto>> expectedCustomers = UnusualSpendCustomerBuilder.getUnusualSpendCustomers();
+        Map<Long, List<SpendDto>> expectedCustomers = UnusualSpendCustomerBuilder.getUnusualSpendCustomers();
         double thresholdPercentage = 20;
 
         Month currentMonth = LocalDate.now().getMonth();
@@ -63,7 +63,7 @@ public class CreditCardCompanyServiceTest {
 
         List<Transaction> currentMonthTransactions = transactionService.getTransactionsByMonth(currentMonth);
         List<Transaction> previousMonthTransactions = transactionService.getTransactionsByMonth(prevMonth);
-        Map<Long, List<SpendsDto>> actualCustomers = creditCardCompanyService.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
+        Map<Long, List<SpendDto>> actualCustomers = creditCardCompanyService.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
 
         // assert
         assertEquals(expectedCustomers, actualCustomers);
@@ -90,7 +90,7 @@ public class CreditCardCompanyServiceTest {
         List<Transaction> currentMonthTransactions = transactionService.getTransactionsByMonth(currentMonth);
         List<Transaction> previousMonthTransactions = transactionService.getTransactionsByMonth(prevMonth);
 
-        Map<Long, List<SpendsDto>> spendRecord = creditCardCompanyService.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
+        Map<Long, List<SpendDto>> spendRecord = creditCardCompanyService.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
         boolean isSent = creditCardCompanyService.sendEmail(spendRecord);
 
         // assert

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>TransactionService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UnusualSpend</a> &gt; <a href="index.source.html" class="el_package">com.amaap.unusualspends.service</a> &gt; <span class="el_source">TransactionService.java</span></div><h1>TransactionService.java</h1><pre class="source lang-java linenums">package com.amaap.unusualspends.service;
+
+import com.amaap.unusualspends.domain.model.entity.Transaction;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionAmountException;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategoryException;
+import com.amaap.unusualspends.domain.model.valueobject.Category;
+import com.amaap.unusualspends.repository.TransactionRepository;
+import com.google.inject.Inject;
+
+import java.time.LocalDate;
+import java.time.Month;
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class TransactionService {
+    private final TransactionRepository transactionRepository;
+<span class="fc" id="L17">    private int transactionId = 0;</span>
+
+    @Inject
+<span class="fc" id="L20">    public TransactionService(TransactionRepository transactionRepository) {</span>
+<span class="fc" id="L21">        this.transactionRepository = transactionRepository;</span>
+<span class="fc" id="L22">    }</span>
+
+    public Transaction createTransaction(long cardId, Category category, double amountSpend, LocalDate transactionDate) throws InvalidTransactionAmountException, InvalidTransactionCategoryException {
+<span class="fc" id="L25">        transactionId++;</span>
+<span class="fc" id="L26">        Transaction transactionToAdd = Transaction.create(transactionId, cardId, category, amountSpend, transactionDate);</span>
+<span class="fc" id="L27">        return transactionRepository.addTransaction(transactionToAdd);</span>
+    }
+
+    public List&lt;Transaction&gt; getAllTransactions() {
+<span class="fc" id="L31">        return transactionRepository.getAllTransactions();</span>
+    }
+
+    public List&lt;Transaction&gt; getTransactionsByMonth(Month month) {
+<span class="fc" id="L35">        List&lt;Transaction&gt; transactions = getAllTransactions();</span>
+<span class="fc" id="L36">        return transactions.stream().filter(transaction -&gt; transaction.getTransactionDate().getMonth().equals(month)).collect(Collectors.toList());</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,5 +1,6 @@
 package com.amaap.unusualspends.domain.model.entity;
 
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionAmountException;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategoryException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import org.junit.jupiter.api.Test;
@@ -30,7 +31,7 @@ public class TransactionTest {
     }
 
     @Test
-    void shouldBeAbleToThrowInvalidCategoryExceptionIfTransactionCategoryIsNull() throws InvalidTransactionCategoryException {
+    void shouldBeAbleToThrowInvalidCategoryExceptionIfTransactionCategoryIsNull() {
         // arrange
         long cardId = 1;
         long transactionId = 1;
@@ -45,7 +46,7 @@ public class TransactionTest {
     }
 
     @Test
-    void shouldBeAbleToThrowInvalidTransactionAmountExceptionExceptionIfTransactionAmountIsInvalid() throws InvalidTransactionCategoryException {
+    void shouldBeAbleToThrowInvalidTransactionAmountExceptionExceptionIfTransactionAmountIsInvalid() {
         // arrange
         long cardId = 1;
         long transactionId = 1;

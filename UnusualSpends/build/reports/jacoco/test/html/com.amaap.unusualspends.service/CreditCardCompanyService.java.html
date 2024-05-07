@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CreditCardCompanyService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UnusualSpend</a> &gt; <a href="index.source.html" class="el_package">com.amaap.unusualspends.service</a> &gt; <span class="el_source">CreditCardCompanyService.java</span></div><h1>CreditCardCompanyService.java</h1><pre class="source lang-java linenums">package com.amaap.unusualspends.service;
+
+import com.amaap.unusualspends.domain.model.entity.CreditCard;
+import com.amaap.unusualspends.domain.model.entity.Transaction;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerEmailException;
+import com.amaap.unusualspends.domain.service.EmailSender;
+import com.amaap.unusualspends.domain.service.SpendAnalyzer;
+import com.amaap.unusualspends.domain.service.dto.SpendDto;
+import com.amaap.unusualspends.domain.service.exception.InvalidEmailBodyException;
+import com.amaap.unusualspends.domain.service.exception.InvalidEmailSubjectException;
+import com.google.inject.Inject;
+
+import java.util.List;
+import java.util.Map;
+
+public class CreditCardCompanyService {
+    private final SpendAnalyzer spendAnalyzer;
+    private final EmailComposer emailComposer;
+    private final EmailSender emailSender;
+    private final CreditCardService creditCardService;
+
+    @Inject
+<span class="fc" id="L23">    public CreditCardCompanyService(SpendAnalyzer spendAnalyzer, EmailComposer emailComposer, EmailSender emailSender, CreditCardService creditCardService) {</span>
+<span class="fc" id="L24">        this.spendAnalyzer = spendAnalyzer;</span>
+<span class="fc" id="L25">        this.emailComposer = emailComposer;</span>
+<span class="fc" id="L26">        this.emailSender = emailSender;</span>
+<span class="fc" id="L27">        this.creditCardService = creditCardService;</span>
+<span class="fc" id="L28">    }</span>
+
+    public Map&lt;Long, List&lt;SpendDto&gt;&gt; analyzeSpend(List&lt;Transaction&gt; currentMonthTransactions, List&lt;Transaction&gt; previousMonthTransactions, double thresholdPercentage) {
+<span class="fc" id="L31">        return spendAnalyzer.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);</span>
+    }
+
+    public boolean sendEmail(Map&lt;Long, List&lt;SpendDto&gt;&gt; spendRecord) {
+        try {
+<span class="fc bfc" id="L36" title="All 2 branches covered.">            for (Map.Entry&lt;Long, List&lt;SpendDto&gt;&gt; entry : spendRecord.entrySet()) {</span>
+<span class="fc" id="L37">                long cardId = entry.getKey();</span>
+<span class="fc" id="L38">                CreditCard creditCard = creditCardService.getCreditCardBy(cardId);</span>
+<span class="fc" id="L39">                String email = creditCard.getCustomer().getEmail();</span>
+<span class="fc" id="L40">                String name = creditCard.getCustomer().getName();</span>
+<span class="fc" id="L41">                String subject = &quot;Regarding unusual spend for current month&quot;;</span>
+<span class="fc" id="L42">                List&lt;SpendDto&gt; unusualSpendRecords = entry.getValue();</span>
+<span class="fc" id="L43">                String body = emailComposer.composeEmail(name, unusualSpendRecords);</span>
+<span class="fc" id="L44">                System.out.println(body);</span>
+<span class="fc" id="L45">                emailSender.sendEmail(subject, body, email);</span>
+<span class="fc" id="L46">            }</span>
+<span class="nc" id="L47">        } catch (InvalidCustomerEmailException | InvalidEmailBodyException | InvalidEmailSubjectException e) {</span>
+<span class="nc" id="L48">            return false;</span>
+<span class="fc" id="L49">        }</span>
+<span class="fc" id="L50">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
