@@ -1,10 +1,10 @@
-package com.amaap.unusualspends.service;
+package com.amaap.unusualspends.domain.service;
 
 import com.amaap.unusualspends.domain.service.dto.SpendDto;
 
 import java.util.List;
 
-public class EmailComposer {
+public class EmailAlertComposer {
     public String composeEmail(String name, List<SpendDto> record) {
         StringBuilder body = new StringBuilder(" \n hello " + name + "!\n We have detected unusually high spending on your card in these categories:\n ");
         double totalUnusualSpend = 0;

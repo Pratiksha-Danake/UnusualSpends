@@ -22,10 +22,17 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    public Response createTransaction(long cardId, Category category, double amountSpend, LocalDate transactionDate) throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
-        if (transactionService.createTransaction(cardId, category, amountSpend, transactionDate) != null)
-            return new Response(HttpStatus.OK, "Transaction Created");
-        return new Response(HttpStatus.ERROR_OCCURED, "Error While Creating Transaction");
+    public Response createTransaction(long cardId, Category category, double amountSpend, LocalDate transactionDate) {
+        Response responseToSend = null;
+        try {
+            if (transactionService.createTransaction(cardId, category, amountSpend, transactionDate) != null)
+                responseToSend = new Response(HttpStatus.OK, "Transaction Created");
+        } catch (InvalidTransactionAmountException e) {
+            responseToSend = new Response(HttpStatus.BAD_REQUEST, "Invalid Transaction Amount");
+        } catch (InvalidTransactionCategoryException e) {
+            responseToSend = new Response(HttpStatus.BAD_REQUEST, "Invalid Transaction Category");
+        }
+        return responseToSend;
     }
 
     public List<Transaction> getAllTransactions() {

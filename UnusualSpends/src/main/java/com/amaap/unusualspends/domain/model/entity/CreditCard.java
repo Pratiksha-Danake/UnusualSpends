@@ -1,7 +1,7 @@
 package com.amaap.unusualspends.domain.model.entity;
 
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCreditCardIdException;
-import com.amaap.unusualspends.domain.model.entity.validator.CreditCardValidator;
+import com.amaap.unusualspends.domain.model.entity.validator.CreditCardIdValidator;
 
 import java.util.Objects;
 
@@ -23,7 +23,7 @@ public class CreditCard {
     }
 
     public static CreditCard create(long cardId, Customer customer) throws InvalidCreditCardIdException {
-        if (!CreditCardValidator.isValidId(cardId))
+        if (!CreditCardIdValidator.isValidId(cardId))
             throw new InvalidCreditCardIdException("Id is not valid");
         return new CreditCard(cardId, customer);
     }

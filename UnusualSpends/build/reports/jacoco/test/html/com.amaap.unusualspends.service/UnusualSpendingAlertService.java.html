@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UnusualSpendingAlertService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UnusualSpend</a> &gt; <a href="index.source.html" class="el_package">com.amaap.unusualspends.service</a> &gt; <span class="el_source">UnusualSpendingAlertService.java</span></div><h1>UnusualSpendingAlertService.java</h1><pre class="source lang-java linenums">package com.amaap.unusualspends.service;
+
+import com.amaap.unusualspends.domain.model.entity.CreditCard;
+import com.amaap.unusualspends.domain.model.entity.Customer;
+import com.amaap.unusualspends.domain.model.entity.Transaction;
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerEmailException;
+import com.amaap.unusualspends.domain.service.CategoryWiseSpendAnalyzer;
+import com.amaap.unusualspends.domain.service.EmailAlertComposer;
+import com.amaap.unusualspends.domain.service.dto.SpendDto;
+import com.amaap.unusualspends.domain.service.exception.InvalidEmailBodyException;
+import com.amaap.unusualspends.domain.service.exception.InvalidEmailSubjectException;
+import com.google.inject.Inject;
+
+import java.util.List;
+import java.util.Map;
+
+public class UnusualSpendingAlertService {
+    private final CategoryWiseSpendAnalyzer categoryWiseSpendAnalyzer;
+    private final EmailAlertComposer emailAlertComposer;
+    private final EmailAlertSender emailAlertSender;
+    private final CreditCardService creditCardService;
+
+    @Inject
+<span class="fc" id="L24">    public UnusualSpendingAlertService(CategoryWiseSpendAnalyzer categoryWiseSpendAnalyzer, EmailAlertComposer emailAlertComposer, EmailAlertSender emailAlertSender, CreditCardService creditCardService) {</span>
+<span class="fc" id="L25">        this.categoryWiseSpendAnalyzer = categoryWiseSpendAnalyzer;</span>
+<span class="fc" id="L26">        this.emailAlertComposer = emailAlertComposer;</span>
+<span class="fc" id="L27">        this.emailAlertSender = emailAlertSender;</span>
+<span class="fc" id="L28">        this.creditCardService = creditCardService;</span>
+<span class="fc" id="L29">    }</span>
+
+    public Map&lt;Long, List&lt;SpendDto&gt;&gt; analyzeSpend(List&lt;Transaction&gt; currentMonthTransactions, List&lt;Transaction&gt; previousMonthTransactions, double thresholdPercentage) {
+<span class="fc" id="L32">        return categoryWiseSpendAnalyzer.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);</span>
+    }
+
+    public boolean sendEmail(Map&lt;Long, List&lt;SpendDto&gt;&gt; spendRecord) {
+<span class="fc bfc" id="L36" title="All 2 branches covered.">            for (Map.Entry&lt;Long, List&lt;SpendDto&gt;&gt; entry : spendRecord.entrySet()) {</span>
+<span class="fc" id="L37">                long cardId = entry.getKey();</span>
+<span class="fc" id="L38">                CreditCard creditCard = creditCardService.getCreditCardBy(cardId);</span>
+<span class="fc" id="L39">                Customer customer = creditCard.getCustomer();</span>
+<span class="fc" id="L40">                String email = customer.getEmail();</span>
+<span class="fc" id="L41">                String name = customer.getName();</span>
+<span class="fc" id="L42">                String subject = &quot;Regarding unusual spend for current month&quot;;</span>
+<span class="fc" id="L43">                List&lt;SpendDto&gt; unusualSpendRecords = entry.getValue();</span>
+<span class="fc" id="L44">                String body = emailAlertComposer.composeEmail(name, unusualSpendRecords);</span>
+                try {
+<span class="fc" id="L46">                    emailAlertSender.sendEmailToCustomer(subject, body, email);</span>
+<span class="nc" id="L47">                } catch (InvalidCustomerEmailException | InvalidEmailBodyException | InvalidEmailSubjectException e) {</span>
+<span class="nc" id="L48">                    return false;</span>
+<span class="fc" id="L49">                }</span>
+<span class="fc" id="L50">            }</span>
+<span class="fc" id="L51">        return true;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

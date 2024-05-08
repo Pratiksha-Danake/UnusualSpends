@@ -1,4 +1,4 @@
-package com.amaap.unusualspends.domain.service;
+package com.amaap.unusualspends.service;
 
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerEmailException;
 import com.amaap.unusualspends.domain.service.exception.InvalidEmailBodyException;
@@ -13,14 +13,16 @@ import javax.mail.internet.MimeMessage;
 import java.util.Properties;
 
 import static com.amaap.unusualspends.domain.model.entity.validator.CustomerEmailIdValidator.isValidEmail;
+import static com.amaap.unusualspends.domain.service.validator.EmailBodyValidator.isValidEmailBody;
+import static com.amaap.unusualspends.domain.service.validator.EmailSubjectValidator.isValidEmailSubject;
 
-public class EmailSender {
-    public void sendEmail(String subject, String body, String email) throws InvalidCustomerEmailException, InvalidEmailBodyException, InvalidEmailSubjectException {
+public class EmailAlertSender {
+    public void sendEmailToCustomer(String subject, String body, String email) throws InvalidCustomerEmailException, InvalidEmailBodyException, InvalidEmailSubjectException {
         if (!isValidEmail(email))
             throw new InvalidCustomerEmailException(email);
-        if (body == null || body.isEmpty())
+        if (!isValidEmailBody(body))
             throw new InvalidEmailBodyException("Email body should not be empty..!");
-        if (subject == null || subject.isEmpty())
+        if (!isValidEmailSubject(subject))
             throw new InvalidEmailSubjectException("Email without subject..!");
 
         String fromEmail = "danakepratiksha1020@gmail.com";

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>EmailAlertSender.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UnusualSpend</a> &gt; <a href="index.source.html" class="el_package">com.amaap.unusualspends.service</a> &gt; <span class="el_source">EmailAlertSender.java</span></div><h1>EmailAlertSender.java</h1><pre class="source lang-java linenums">package com.amaap.unusualspends.service;
+
+import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerEmailException;
+import com.amaap.unusualspends.domain.service.exception.InvalidEmailBodyException;
+import com.amaap.unusualspends.domain.service.exception.InvalidEmailSubjectException;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import java.util.Properties;
+
+import static com.amaap.unusualspends.domain.model.entity.validator.CustomerEmailIdValidator.isValidEmail;
+import static com.amaap.unusualspends.domain.service.validator.EmailBodyValidator.isValidEmailBody;
+import static com.amaap.unusualspends.domain.service.validator.EmailSubjectValidator.isValidEmailSubject;
+
+<span class="fc" id="L19">public class EmailAlertSender {</span>
+    public void sendEmailToCustomer(String subject, String body, String email) throws InvalidCustomerEmailException, InvalidEmailBodyException, InvalidEmailSubjectException {
+<span class="pc bpc" id="L21" title="1 of 2 branches missed.">        if (!isValidEmail(email))</span>
+<span class="nc" id="L22">            throw new InvalidCustomerEmailException(email);</span>
+<span class="fc bfc" id="L23" title="All 2 branches covered.">        if (!isValidEmailBody(body))</span>
+<span class="fc" id="L24">            throw new InvalidEmailBodyException(&quot;Email body should not be empty..!&quot;);</span>
+<span class="fc bfc" id="L25" title="All 2 branches covered.">        if (!isValidEmailSubject(subject))</span>
+<span class="fc" id="L26">            throw new InvalidEmailSubjectException(&quot;Email without subject..!&quot;);</span>
+
+<span class="fc" id="L28">        String fromEmail = &quot;danakepratiksha1020@gmail.com&quot;;</span>
+
+<span class="fc" id="L30">        String toEmail = email;</span>
+<span class="fc" id="L31">        String password = &quot;jdca jiof oufs exwz&quot;;</span>
+<span class="fc" id="L32">        Properties properties = new Properties();</span>
+<span class="fc" id="L33">        properties.put(&quot;mail.smtp.auth&quot;, &quot;true&quot;);</span>
+<span class="fc" id="L34">        properties.put(&quot;mail.smtp.starttls.enable&quot;, &quot;true&quot;);</span>
+<span class="fc" id="L35">        properties.put(&quot;mail.smtp.host&quot;, &quot;smtp.gmail.com&quot;);</span>
+<span class="fc" id="L36">        properties.put(&quot;mail.smtp.port&quot;, &quot;587&quot;);</span>
+
+
+<span class="fc" id="L39">        Session session = Session.getInstance(properties, new javax.mail.Authenticator() {</span>
+            protected javax.mail.PasswordAuthentication getPasswordAuthentication() {
+<span class="fc" id="L41">                return new javax.mail.PasswordAuthentication(fromEmail, password);</span>
+            }
+        });
+
+        try {
+<span class="fc" id="L46">            Message message = new MimeMessage(session);</span>
+
+<span class="fc" id="L48">            message.setFrom(new InternetAddress(fromEmail));</span>
+<span class="fc" id="L49">            message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(toEmail));</span>
+
+<span class="fc" id="L51">            message.setSubject(subject);</span>
+<span class="fc" id="L52">            message.setText(body);</span>
+
+<span class="fc" id="L54">            Transport.send(message);</span>
+
+<span class="nc" id="L56">        } catch (MessagingException e) {</span>
+<span class="nc" id="L57">            System.err.println(&quot;Error sending email: &quot; + e.getMessage());</span>
+<span class="fc" id="L58">        }</span>
+<span class="fc" id="L59">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

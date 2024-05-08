@@ -13,8 +13,8 @@ public class UnusualSpendCustomerBuilder {
         Long cardId = Long.valueOf(1);
         Map<Long, List<SpendDto>> unusualSpendCustomers = new HashMap<>();
         List<SpendDto> spendDtos = new ArrayList<>();
-        spendDtos.add(new SpendDto(Category.GROCERIES, 300, 100));
-        spendDtos.add(new SpendDto(Category.TRAVEL, 400, 200));
+        spendDtos.add(new SpendDto(Category.SHOPPING, 200, 300));
+        spendDtos.add(new SpendDto(Category.TRAVEL, 500, 400));
         unusualSpendCustomers.put(cardId, spendDtos);
         return unusualSpendCustomers;
     }

@@ -29,14 +29,45 @@ public class TransactionControllerTest {
     }
 
     @Test
-    void shouldBeAbleToReturnResponseAsOKIfCreatesTransactionSuccessfully() throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
+    void shouldBeAbleToReturnResponseAsOKIfCreatesTransactionSuccessfully() {
         // arrange
-        int transactionId = 1;
         long cardId = 1;
-        Category category = Category.BOOKS;
+        Category category = Category.SHOPPING;
         double amountSpend = 100;
         LocalDate transactionDate = LocalDate.of(2024, Month.MAY, 1);
         Response expected = new Response(HttpStatus.OK, "Transaction Created");
+
+        // act
+        Response actual = transactionController.createTransaction(cardId, category, amountSpend, transactionDate);
+
+        // assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToReturnResponseAsBadRequestIfTransactionAmountIsNotValid() throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
+        // arrange
+        long cardId = 1;
+        Category category = Category.SHOPPING;
+        double amountSpend = -1000;
+        LocalDate transactionDate = LocalDate.of(2024, Month.MAY, 1);
+        Response expected = new Response(HttpStatus.BAD_REQUEST, "Invalid Transaction Amount");
+
+        // act
+        Response actual = transactionController.createTransaction(cardId, category, amountSpend, transactionDate);
+
+        // assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToReturnResponseAsBadRequestIfTransactionCategoryIsNotValid() throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
+        // arrange
+        long cardId = 1;
+        Category category = null;
+        double amountSpend = 1000;
+        LocalDate transactionDate = LocalDate.of(2024, Month.MAY, 1);
+        Response expected = new Response(HttpStatus.BAD_REQUEST, "Invalid Transaction Category");
 
         // act
         Response actual = transactionController.createTransaction(cardId, category, amountSpend, transactionDate);
@@ -50,13 +81,13 @@ public class TransactionControllerTest {
         // arrange
         long cardId = 1;
         LocalDate transactionOnDate = LocalDate.of(2024, Month.MAY, 1);
-        Transaction transaction1 = Transaction.create(1, 1, Category.BOOKS, 100, transactionOnDate);
-        Transaction transaction2 = Transaction.create(2, 1, Category.GROCERIES, 120, transactionOnDate);
+        Transaction transaction1 = Transaction.create(1, 1, Category.SHOPPING, 100, transactionOnDate);
+        Transaction transaction2 = Transaction.create(2, 1, Category.BOOKS, 120, transactionOnDate);
         List<Transaction> expectedList = List.of(transaction1, transaction2);
 
         // act
-        transactionController.createTransaction(1, Category.BOOKS, 100, transactionOnDate);
-        transactionController.createTransaction(1, Category.GROCERIES, 120, transactionOnDate);
+        transactionController.createTransaction(1, Category.SHOPPING, 100, transactionOnDate);
+        transactionController.createTransaction(1, Category.BOOKS, 120, transactionOnDate);
         List<Transaction> actualList = transactionController.getAllTransactions();
 
         // assert
@@ -67,12 +98,12 @@ public class TransactionControllerTest {
     void shouldBeAbleToFilterTransactionByMonth() throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
         // arrange
         long cardId = 1;
-        Transaction transaction1 = Transaction.create(1, 1, Category.BOOKS, 100, LocalDate.of(2024, Month.MAY, 1));
+        Transaction transaction1 = Transaction.create(1, 1, Category.BOOKS, 100, LocalDate.of(2024, Month.MAY, 24));
         List<Transaction> expectedList = List.of(transaction1);
 
         // act
-        transactionController.createTransaction(1, Category.BOOKS, 100, LocalDate.of(2024, Month.MAY, 1));
-        transactionController.createTransaction(1, Category.GROCERIES, 120, LocalDate.of(2024, Month.APRIL, 1));
+        transactionController.createTransaction(1, Category.BOOKS, 100, LocalDate.of(2024, Month.MAY, 24));
+        transactionController.createTransaction(1, Category.GROCERIES, 120, LocalDate.of(2024, Month.APRIL, 24));
         List<Transaction> actualList = transactionController.getTransactionsByMonth(Month.MAY);
 
         // assert

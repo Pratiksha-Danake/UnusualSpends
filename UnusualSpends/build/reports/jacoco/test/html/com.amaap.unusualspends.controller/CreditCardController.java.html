@@ -16,14 +16,19 @@ public class CreditCardController {
 <span class="fc" id="L16">        this.creditCardService = creditCardService;</span>
 <span class="fc" id="L17">    }</span>
 
-    public Response createCreditCardFor(Customer customer) throws InvalidCreditCardIdException {
-<span class="pc bpc" id="L20" title="1 of 2 branches missed.">        if (creditCardService.createCreditCardFor(customer) != null)</span>
-<span class="fc" id="L21">            return new Response(HttpStatus.OK, &quot;Card Created&quot;);</span>
-<span class="nc" id="L22">        return new Response(HttpStatus.ERROR_OCCURED, &quot;Error while creating card for customer&quot;);</span>
+    public Response createCreditCardFor(Customer customer) {
+<span class="fc" id="L20">        Response responseToSend = null;</span>
+        try {
+<span class="pc bpc" id="L22" title="1 of 2 branches missed.">            if (creditCardService.createCreditCardFor(customer) != null)</span>
+<span class="fc" id="L23">                responseToSend = new Response(HttpStatus.OK, &quot;Card Created&quot;);</span>
+<span class="nc" id="L24">        } catch (InvalidCreditCardIdException e) {</span>
+<span class="nc" id="L25">            responseToSend = new Response(HttpStatus.ERROR_OCCURED, &quot;Error while creating card for customer&quot;);</span>
+<span class="fc" id="L26">        }</span>
+<span class="fc" id="L27">        return responseToSend;</span>
     }
 
     public CreditCard getCreditCardBy(long id) {
-<span class="fc" id="L26">        return creditCardService.getCreditCardBy(id);</span>
+<span class="fc" id="L31">        return creditCardService.getCreditCardBy(id);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

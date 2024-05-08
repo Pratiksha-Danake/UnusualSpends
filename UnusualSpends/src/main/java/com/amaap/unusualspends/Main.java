@@ -1,6 +1,6 @@
 package com.amaap.unusualspends;
 
-import com.amaap.unusualspends.controller.CreditCardCompanyController;
+import com.amaap.unusualspends.controller.UnusualSpendingAlertController;
 import com.amaap.unusualspends.controller.dto.Response;
 import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
@@ -10,6 +10,8 @@ import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionA
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategoryException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.domain.service.dto.SpendDto;
+import com.amaap.unusualspends.domain.service.exception.InvalidEmailBodyException;
+import com.amaap.unusualspends.domain.service.exception.InvalidEmailSubjectException;
 import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
 import com.amaap.unusualspends.service.CreditCardService;
 import com.amaap.unusualspends.service.CustomerService;
@@ -23,12 +25,12 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
-    public static void main(String[] args) throws InvalidCustomerException, CustomerAlreadyExistsException, InvalidCreditCardIdException, InvalidTransactionCategoryException, InvalidTransactionAmountException {
+    public static void main(String[] args) throws InvalidCustomerException, CustomerAlreadyExistsException, InvalidCreditCardIdException, InvalidTransactionCategoryException, InvalidTransactionAmountException, InvalidEmailSubjectException, InvalidEmailBodyException {
         Injector injector = Guice.createInjector(new AppModule());
         CustomerService customerService = injector.getInstance(CustomerService.class);
         CreditCardService creditCardService = injector.getInstance(CreditCardService.class);
         TransactionService transactionService = injector.getInstance(TransactionService.class);
-        CreditCardCompanyController creditCardCompanyController = injector.getInstance(CreditCardCompanyController.class);
+        UnusualSpendingAlertController unusualSpendingAlertController = injector.getInstance(UnusualSpendingAlertController.class);
 
         double thresholdPercentage = 20;
         Month currentMonth = LocalDate.now().getMonth();
@@ -46,8 +48,8 @@ public class Main {
         List<Transaction> currentMonthTransactions = transactionService.getTransactionsByMonth(currentMonth);
         List<Transaction> previousMonthTransactions = transactionService.getTransactionsByMonth(prevMonth);
 
-        Map<Long, List<SpendDto>> spendRecord = creditCardCompanyController.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
-        Response response = creditCardCompanyController.sendEmail(spendRecord);
+        Map<Long, List<SpendDto>> spendRecord = unusualSpendingAlertController.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
+        Response response = unusualSpendingAlertController.sendEmail(spendRecord);
         System.out.println(response.getMessage());
     }
 }

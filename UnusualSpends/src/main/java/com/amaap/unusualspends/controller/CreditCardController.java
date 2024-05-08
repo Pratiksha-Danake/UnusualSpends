@@ -16,10 +16,15 @@ public class CreditCardController {
         this.creditCardService = creditCardService;
     }
 
-    public Response createCreditCardFor(Customer customer) throws InvalidCreditCardIdException {
-        if (creditCardService.createCreditCardFor(customer) != null)
-            return new Response(HttpStatus.OK, "Card Created");
-        return new Response(HttpStatus.ERROR_OCCURED, "Error while creating card for customer");
+    public Response createCreditCardFor(Customer customer) {
+        Response responseToSend = null;
+        try {
+            if (creditCardService.createCreditCardFor(customer) != null)
+                responseToSend = new Response(HttpStatus.OK, "Card Created");
+        } catch (InvalidCreditCardIdException e) {
+            responseToSend = new Response(HttpStatus.ERROR_OCCURED, "Error while creating card for customer");
+        }
+        return responseToSend;
     }
 
     public CreditCard getCreditCardBy(long id) {

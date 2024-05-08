@@ -17,10 +17,17 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    public Response createCustomer(String customerName, String email) throws InvalidCustomerException, CustomerAlreadyExistsException {
-        if (customerService.createCustomerToAdd(customerName, email) != null)
-            return new Response(HttpStatus.OK, "Customer Created");
-        return new Response(HttpStatus.ERROR_OCCURED, "Error While Creating Customer");
+    public Response createCustomer(String customerName, String email) {
+        Response responseToSend = null;
+        try {
+            if (customerService.createCustomerToAdd(customerName, email) != null)
+                responseToSend = new Response(HttpStatus.OK, "Customer Created");
+        } catch (InvalidCustomerException e) {
+            responseToSend = new Response(HttpStatus.BAD_REQUEST, "Invalid Customer Data");
+        } catch (CustomerAlreadyExistsException e) {
+            responseToSend = new Response(HttpStatus.ERROR_OCCURED, "Error While Creating Customer");
+        }
+        return responseToSend;
     }
 
     public Customer findCustomerBy(int id) {

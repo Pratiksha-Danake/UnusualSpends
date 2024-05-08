@@ -18,10 +18,10 @@ import static com.amaap.unusualspends.domain.model.entity.validator.CustomerEmai
     public void sendEmail(String subject, String body, String email) throws InvalidCustomerEmailException, InvalidEmailBodyException, InvalidEmailSubjectException {
 <span class="pc bpc" id="L19" title="1 of 2 branches missed.">        if (!isValidEmail(email))</span>
 <span class="nc" id="L20">            throw new InvalidCustomerEmailException(email);</span>
-<span class="pc bpc" id="L21" title="2 of 4 branches missed.">        if (body == null || body.isEmpty())</span>
-<span class="nc" id="L22">            throw new InvalidEmailBodyException(&quot;Email body should not be empty..!&quot;);</span>
-<span class="pc bpc" id="L23" title="2 of 4 branches missed.">        if (subject == null || subject.isEmpty())</span>
-<span class="nc" id="L24">            throw new InvalidEmailSubjectException(&quot;Email without subject..!&quot;);</span>
+<span class="fc bfc" id="L21" title="All 4 branches covered.">        if (body == null || body.isEmpty())</span>
+<span class="fc" id="L22">            throw new InvalidEmailBodyException(&quot;Email body should not be empty..!&quot;);</span>
+<span class="fc bfc" id="L23" title="All 4 branches covered.">        if (subject == null || subject.isEmpty())</span>
+<span class="fc" id="L24">            throw new InvalidEmailSubjectException(&quot;Email without subject..!&quot;);</span>
 
 <span class="fc" id="L26">        String fromEmail = &quot;danakepratiksha1020@gmail.com&quot;;</span>
 

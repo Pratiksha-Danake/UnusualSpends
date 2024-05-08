@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="com.amaap.unusualspends.domain.service.EmailSenderTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2024-05-07T14:10:35" hostname="DESKTOP-GUO1275" time="0.642">
-  <properties/>
-  <testcase name="shouldThrowInvalidEmailSubjectExceptionIfEmailSubjectIsNull()" classname="com.amaap.unusualspends.domain.service.EmailSenderTest" time="0.627"/>
-  <testcase name="shouldThrowInvalidEmailSubjectExceptionIfEmailSubjectIsEmpty()" classname="com.amaap.unusualspends.domain.service.EmailSenderTest" time="0.012"/>
-  <system-out><![CDATA[]]></system-out>
-  <system-err><![CDATA[]]></system-err>
-</testsuite>

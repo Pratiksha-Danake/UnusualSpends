@@ -17,14 +17,21 @@ public class CustomerController {
 <span class="fc" id="L17">        this.customerService = customerService;</span>
 <span class="fc" id="L18">    }</span>
 
-    public Response createCustomer(String customerName, String email) throws InvalidCustomerException, CustomerAlreadyExistsException {
-<span class="pc bpc" id="L21" title="1 of 2 branches missed.">        if (customerService.createCustomerToAdd(customerName, email) != null)</span>
-<span class="fc" id="L22">            return new Response(HttpStatus.OK, &quot;Customer Created&quot;);</span>
-<span class="nc" id="L23">        return new Response(HttpStatus.ERROR_OCCURED, &quot;Error While Creating Customer&quot;);</span>
+    public Response createCustomer(String customerName, String email) {
+<span class="fc" id="L21">        Response responseToSend = null;</span>
+        try {
+<span class="pc bpc" id="L23" title="1 of 2 branches missed.">            if (customerService.createCustomerToAdd(customerName, email) != null)</span>
+<span class="fc" id="L24">                responseToSend = new Response(HttpStatus.OK, &quot;Customer Created&quot;);</span>
+<span class="nc" id="L25">        } catch (InvalidCustomerException e) {</span>
+<span class="nc" id="L26">            responseToSend = new Response(HttpStatus.BAD_REQUEST, &quot;Invalid Customer Data&quot;);</span>
+<span class="nc" id="L27">        } catch (CustomerAlreadyExistsException e) {</span>
+<span class="nc" id="L28">            responseToSend = new Response(HttpStatus.ERROR_OCCURED, &quot;Error While Creating Customer&quot;);</span>
+<span class="pc" id="L29">        }</span>
+<span class="fc" id="L30">        return responseToSend;</span>
     }
 
     public Customer findCustomerBy(int id) {
-<span class="fc" id="L27">        return customerService.findCustomerBy(id);</span>
+<span class="fc" id="L34">        return customerService.findCustomerBy(id);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

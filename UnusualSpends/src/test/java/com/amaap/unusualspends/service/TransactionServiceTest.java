@@ -47,7 +47,6 @@ public class TransactionServiceTest {
     @Test
     void shouldBeAbleToAddTransactionToDatabase() throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
         // arrange
-        long cardId = 1;
         LocalDate transactionOnDate = LocalDate.of(2024, Month.MAY, 1);
         Transaction transaction1 = Transaction.create(1, 1, Category.BOOKS, 100, transactionOnDate);
         Transaction transaction2 = Transaction.create(2, 1, Category.GROCERIES, 120, transactionOnDate);
@@ -65,7 +64,6 @@ public class TransactionServiceTest {
     @Test
     void shouldBeAbleToFilterTransactionByMonth() throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
         // arrange
-        long cardId = 1;
         Transaction transaction1 = Transaction.create(1, 1, Category.BOOKS, 100, LocalDate.of(2024, Month.MAY, 1));
         List<Transaction> expectedList = List.of(transaction1);
 

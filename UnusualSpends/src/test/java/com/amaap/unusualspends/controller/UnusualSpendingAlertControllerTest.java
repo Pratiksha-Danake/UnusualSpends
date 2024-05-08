@@ -14,6 +14,8 @@ import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionA
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategoryException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.domain.service.dto.SpendDto;
+import com.amaap.unusualspends.domain.service.exception.InvalidEmailBodyException;
+import com.amaap.unusualspends.domain.service.exception.InvalidEmailSubjectException;
 import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
 import com.amaap.unusualspends.service.CreditCardService;
 import com.amaap.unusualspends.service.CustomerService;
@@ -30,13 +32,11 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class CreditCardCompanyControllerTest {
+public class UnusualSpendingAlertControllerTest {
     TransactionService transactionService;
     CustomerService customerService;
-
     CreditCardService creditCardService;
-
-    CreditCardCompanyController creditCardCompanyController;
+    UnusualSpendingAlertController unusualSpendingAlertController;
 
     @BeforeEach
     void setUp() {
@@ -44,63 +44,58 @@ public class CreditCardCompanyControllerTest {
         transactionService = injector.getInstance(TransactionService.class);
         customerService = injector.getInstance(CustomerService.class);
         creditCardService = injector.getInstance(CreditCardService.class);
-        creditCardCompanyController = injector.getInstance(CreditCardCompanyController.class);
+        unusualSpendingAlertController = injector.getInstance(UnusualSpendingAlertController.class);
     }
 
     @Test
     void shouldBeAbleToFindUnusualSpendFromGivenTransactionData() throws InvalidCreditCardIdException, InvalidCustomerException, InvalidTransactionCategoryException, InvalidTransactionAmountException {
         // arrange
         Map<Long, List<SpendDto>> expectedCustomers = UnusualSpendCustomerBuilder.getUnusualSpendCustomers();
-        double thresholdPercentage = 20;
-
-        Month currentMonth = LocalDate.now().getMonth();
-        Month prevMonth = currentMonth.minus(1);
-
-        int currentYear = LocalDate.now().getYear();
-        int prevYear = currentMonth == Month.JANUARY ? currentYear - 1 : currentYear;
+        double thresholdPercentage = 30;
 
         // act
-        CreditCard creditCard = CreditCardBuilder.getCreditCard();
+        setUpTransactions();
 
-        transactionService.createTransaction(creditCard.getId(), Category.GROCERIES, 400, LocalDate.of(currentYear, currentMonth, 20));
-        transactionService.createTransaction(creditCard.getId(), Category.TRAVEL, 600, LocalDate.of(currentYear, currentMonth, 22));
-        transactionService.createTransaction(creditCard.getId(), Category.GROCERIES, 100, LocalDate.of(prevYear, prevMonth, 23));
-        transactionService.createTransaction(creditCard.getId(), Category.TRAVEL, 200, LocalDate.of(prevYear, prevMonth, 22));
-
-        List<Transaction> currentMonthTransactions = transactionService.getTransactionsByMonth(currentMonth);
-        List<Transaction> previousMonthTransactions = transactionService.getTransactionsByMonth(prevMonth);
-        Map<Long, List<SpendDto>> actualCustomers = creditCardCompanyController.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
+        List<Transaction> currentMonthTransactions = transactionService.getTransactionsByMonth(LocalDate.now().getMonth());
+        List<Transaction> previousMonthTransactions = transactionService.getTransactionsByMonth(LocalDate.now().getMonth().minus(1));
+        Map<Long, List<SpendDto>> actualCustomers = unusualSpendingAlertController.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
 
         // assert
         assertEquals(expectedCustomers, actualCustomers);
     }
 
     @Test
-    void shouldBeAbleToSendEmailRegardingUnusualSpendInCurrentMonth() throws InvalidCustomerException, CustomerAlreadyExistsException, InvalidCreditCardIdException, InvalidTransactionAmountException, InvalidTransactionCategoryException {
+    void shouldBeAbleToSendEmailRegardingUnusualSpendInCurrentMonth() throws InvalidCustomerException, CustomerAlreadyExistsException, InvalidCreditCardIdException, InvalidTransactionAmountException, InvalidTransactionCategoryException, InvalidEmailSubjectException, InvalidEmailBodyException {
         // arrange
         double thresholdPercentage = 20;
-        Month currentMonth = LocalDate.now().getMonth();
-        Month prevMonth = currentMonth.minus(1);
-        int currentYear = LocalDate.now().getYear();
-        int prevYear = currentMonth == Month.JANUARY ? currentYear - 1 : currentYear;
         Response expected = new Response(HttpStatus.OK, "Email Sent");
 
         // act
+        setUpTransactions();
+
         Customer customer = customerService.createCustomerToAdd("Pratiksha Danake", "pratikshadanake2001@gmial.com");
         creditCardService.createCreditCardFor(customer);
 
-        transactionService.createTransaction(1, Category.GROCERIES, 400, LocalDate.of(currentYear, currentMonth, 10));
-        transactionService.createTransaction(1, Category.TRAVEL, 600, LocalDate.of(currentYear, currentMonth, 12));
-        transactionService.createTransaction(1, Category.GROCERIES, 100, LocalDate.of(prevYear, prevMonth, 20));
-        transactionService.createTransaction(1, Category.TRAVEL, 200, LocalDate.of(prevYear, prevMonth, 13));
+        List<Transaction> currentMonthTransactions = transactionService.getTransactionsByMonth(LocalDate.now().getMonth());
+        List<Transaction> previousMonthTransactions = transactionService.getTransactionsByMonth(LocalDate.now().getMonth().minus(1));
 
-        List<Transaction> currentMonthTransactions = transactionService.getTransactionsByMonth(currentMonth);
-        List<Transaction> previousMonthTransactions = transactionService.getTransactionsByMonth(prevMonth);
-
-        Map<Long, List<SpendDto>> spendRecord = creditCardCompanyController.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
-        Response actual = creditCardCompanyController.sendEmail(spendRecord);
+        Map<Long, List<SpendDto>> spendRecord = unusualSpendingAlertController.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
+        Response actual = unusualSpendingAlertController.sendEmail(spendRecord);
 
         // assert
         assertEquals(expected, actual);
     }
+
+    private void setUpTransactions() throws InvalidCreditCardIdException, InvalidTransactionCategoryException, InvalidTransactionAmountException, InvalidCustomerException {
+        int currentYear = LocalDate.now().getYear();
+        int prevYear = LocalDate.now().getMonth() == Month.JANUARY ? currentYear - 1 : currentYear;
+
+        CreditCard creditCard = CreditCardBuilder.getCreditCard();
+
+        transactionService.createTransaction(creditCard.getId(), Category.SHOPPING, 500, LocalDate.of(currentYear, LocalDate.now().getMonth(), 13));
+        transactionService.createTransaction(creditCard.getId(), Category.TRAVEL, 900, LocalDate.of(currentYear, LocalDate.now().getMonth(), 24));
+        transactionService.createTransaction(creditCard.getId(), Category.SHOPPING, 200, LocalDate.of(prevYear, LocalDate.now().getMonth().minus(1), 24));
+        transactionService.createTransaction(creditCard.getId(), Category.TRAVEL, 500, LocalDate.of(prevYear, LocalDate.now().getMonth().minus(1), 13));
+    }
 }
+

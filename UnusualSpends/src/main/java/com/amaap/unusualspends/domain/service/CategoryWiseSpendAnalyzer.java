@@ -9,14 +9,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SpendAnalyzer {
-    Map<Long, List<SpendDto>> spendRecords = new HashMap<>();
+public class CategoryWiseSpendAnalyzer {
+    Map<Long, List<SpendDto>> categoryWiseSpendRecords = new HashMap<>();
 
     public Map<Long, List<SpendDto>> analyzeSpend(List<Transaction> currentMonthTransactions,
                                                   List<Transaction> previousMonthTransactions,
                                                   double thresholdPercentage) {
 
-        double criteria = 1 + (thresholdPercentage / 100);
+        double criteria = 1 + (thresholdPercentage * 0.01);
+
         for (Transaction currentTransaction : currentMonthTransactions) {
             for (Transaction previousTransaction : previousMonthTransactions) {
                 if (currentTransaction.getCategory() == previousTransaction.getCategory() &&
@@ -25,21 +26,21 @@ public class SpendAnalyzer {
 
                     long cardId = currentTransaction.getCardId();
                     Category category = currentTransaction.getCategory();
-                    double usualSpendAmount = previousTransaction.getAmountSpend();
-                    double unusualSpendAmount = currentTransaction.getAmountSpend() - usualSpendAmount;
-                    SpendDto spendRecord = new SpendDto(category, unusualSpendAmount, usualSpendAmount);
-                    List<SpendDto> spendRecordList;
-                    if (spendRecords.containsKey(cardId)) {
-                        spendRecordList = spendRecords.get(cardId);
+                    double usualAmountSpend = previousTransaction.getAmountSpend();
+                    double unusualAmountSpend = currentTransaction.getAmountSpend() - usualAmountSpend;
+                    SpendDto spendRecord = new SpendDto(category, usualAmountSpend, unusualAmountSpend);
+                    List<SpendDto> categoryWiseSpendList;
+                    if (categoryWiseSpendRecords.containsKey(cardId)) {
+                        categoryWiseSpendList = categoryWiseSpendRecords.get(cardId);
 
                     } else {
-                        spendRecordList = new ArrayList<>();
+                        categoryWiseSpendList = new ArrayList<>();
                     }
-                    spendRecordList.add(spendRecord);
-                    spendRecords.put(cardId, spendRecordList);
+                    categoryWiseSpendList.add(spendRecord);
+                    categoryWiseSpendRecords.put(cardId, categoryWiseSpendList);
                 }
             }
         }
-        return spendRecords;
+        return categoryWiseSpendRecords;
     }
 }

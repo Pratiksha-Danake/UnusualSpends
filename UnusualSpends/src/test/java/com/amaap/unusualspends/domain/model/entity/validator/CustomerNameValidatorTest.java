@@ -18,30 +18,28 @@ class CustomerNameValidatorTest {
     @Test
     void shouldAbleToReturnTrueIfCustomerNamePassedIsValid() {
         // arrange, act && assert
-        Assertions.assertTrue(CustomerNameValidator.isValidName("John Doe"));
-        Assertions.assertTrue(CustomerNameValidator.isValidName("Alice Smith"));
-        Assertions.assertTrue(CustomerNameValidator.isValidName("Robert Brown"));
-        Assertions.assertTrue(CustomerNameValidator.isValidName("Emily Johnson"));
-        Assertions.assertTrue(CustomerNameValidator.isValidName("David Lee"));
-        Assertions.assertTrue(CustomerNameValidator.isValidName("Samantha Whitehouse"));
+        Assertions.assertTrue(CustomerNameValidator.isValidName("Pratiksha dana"));
+        Assertions.assertTrue(CustomerNameValidator.isValidName("pratiksha Danake"));
+        Assertions.assertTrue(CustomerNameValidator.isValidName("Pratiksha Danake"));
+        Assertions.assertTrue(CustomerNameValidator.isValidName("pratiksha Dan"));
+        Assertions.assertTrue(CustomerNameValidator.isValidName("Pratiksha Danakeeeeeeee"));
     }
 
     @Test
     void shouldAbleToReturnFalseIfCustomerNamePassesIsInValid() {
         // arrange, act && assert
-        assertFalse(CustomerNameValidator.isValidName(""));
+        assertFalse(CustomerNameValidator.isValidName(" "));
+        assertFalse(CustomerNameValidator.isValidName("PD    "));
+        assertFalse(CustomerNameValidator.isValidName("   Pra  DA"));
+        assertFalse(CustomerNameValidator.isValidName("         PD"));
+        assertFalse(CustomerNameValidator.isValidName("Pratiksha"));
+        assertFalse(CustomerNameValidator.isValidName("Pratiksha D"));
+        assertFalse(CustomerNameValidator.isValidName("@Pratiksha Da"));
+        assertFalse(CustomerNameValidator.isValidName("Pratiksha$ Danake"));
+        assertFalse(CustomerNameValidator.isValidName("Pratiksha@ danake$$$$"));
+        assertFalse(CustomerNameValidator.isValidName("@%^^%CFWSDF $@Y$Y"));
         assertFalse(CustomerNameValidator.isValidName(null));
-        assertFalse(CustomerNameValidator.isValidName("BA"));
-        assertFalse(CustomerNameValidator.isValidName("   Ba  A"));
-        assertFalse(CustomerNameValidator.isValidName("Ba          "));
-        assertFalse(CustomerNameValidator.isValidName("Baburao"));
-        assertFalse(CustomerNameValidator.isValidName("Baburao A"));
-        assertFalse(CustomerNameValidator.isValidName("@Baburao Ap"));
-        assertFalse(CustomerNameValidator.isValidName("Babur$ Apte"));
-        assertFalse(CustomerNameValidator.isValidName("Baburao Apte%"));
-        assertFalse(CustomerNameValidator.isValidName("$%^* Apte%"));
         assertFalse(CustomerNameValidator.isValidName("4789Apte%"));
-        assertFalse(CustomerNameValidator.isValidName("9786789089"));
+        assertFalse(CustomerNameValidator.isValidName("35465465465"));
     }
-
 }

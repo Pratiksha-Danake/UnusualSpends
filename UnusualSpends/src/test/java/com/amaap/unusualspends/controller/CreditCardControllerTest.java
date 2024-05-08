@@ -24,7 +24,7 @@ public class CreditCardControllerTest {
     }
 
     @Test
-    void shouldBeAbleToReturnResponseAsOKIfAddsCreditCardDetailsSuccessfully() throws InvalidCustomerException, InvalidCreditCardIdException {
+    void shouldBeAbleToReturnResponseAsOKIfAddsCreditCardDetailsSuccessfully() throws InvalidCustomerException {
         // arrange
         Customer customer = Customer.create(1, "Pratiksha Danake", "pratiksha@gmail.com");
         Response expected = new Response(HttpStatus.OK, "Card Created");

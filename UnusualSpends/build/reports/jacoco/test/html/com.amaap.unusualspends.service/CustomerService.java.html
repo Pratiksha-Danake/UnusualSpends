@@ -18,12 +18,11 @@ public class CustomerService {
     public Customer createCustomerToAdd(String customerName, String email) throws InvalidCustomerException, CustomerAlreadyExistsException {
 <span class="fc" id="L19">        customerId++;</span>
 <span class="fc" id="L20">        Customer customer = Customer.create(customerId, customerName, email);</span>
-
-<span class="fc" id="L22">        return customerRepository.addCustomer(customer);</span>
+<span class="fc" id="L21">        return customerRepository.addCustomer(customer);</span>
     }
 
     public Customer findCustomerBy(int customerId) {
-<span class="fc" id="L26">        return customerRepository.findCustomerBy(customerId);</span>
+<span class="fc" id="L25">        return customerRepository.findCustomerBy(customerId);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

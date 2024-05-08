@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">UnusualSpend</a> &gt; <a href="index.source.html" class="el_package">com.amaap.unusualspends</a> &gt; <span class="el_source">Main.java</span></div><h1>Main.java</h1><pre class="source lang-java linenums">package com.amaap.unusualspends;
 
-import com.amaap.unusualspends.controller.CreditCardCompanyController;
+import com.amaap.unusualspends.controller.UnusualSpendingAlertController;
 import com.amaap.unusualspends.controller.dto.Response;
 import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
@@ -10,6 +10,8 @@ import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionA
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidTransactionCategoryException;
 import com.amaap.unusualspends.domain.model.valueobject.Category;
 import com.amaap.unusualspends.domain.service.dto.SpendDto;
+import com.amaap.unusualspends.domain.service.exception.InvalidEmailBodyException;
+import com.amaap.unusualspends.domain.service.exception.InvalidEmailSubjectException;
 import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
 import com.amaap.unusualspends.service.CreditCardService;
 import com.amaap.unusualspends.service.CustomerService;
@@ -22,33 +24,33 @@ import java.time.Month;
 import java.util.List;
 import java.util.Map;
 
-<span class="nc" id="L25">public class Main {</span>
-    public static void main(String[] args) throws InvalidCustomerException, CustomerAlreadyExistsException, InvalidCreditCardIdException, InvalidTransactionCategoryException, InvalidTransactionAmountException {
-<span class="nc" id="L27">        Injector injector = Guice.createInjector(new AppModule());</span>
-<span class="nc" id="L28">        CustomerService customerService = injector.getInstance(CustomerService.class);</span>
-<span class="nc" id="L29">        CreditCardService creditCardService = injector.getInstance(CreditCardService.class);</span>
-<span class="nc" id="L30">        TransactionService transactionService = injector.getInstance(TransactionService.class);</span>
-<span class="nc" id="L31">        CreditCardCompanyController creditCardCompanyController = injector.getInstance(CreditCardCompanyController.class);</span>
+<span class="nc" id="L27">public class Main {</span>
+    public static void main(String[] args) throws InvalidCustomerException, CustomerAlreadyExistsException, InvalidCreditCardIdException, InvalidTransactionCategoryException, InvalidTransactionAmountException, InvalidEmailSubjectException, InvalidEmailBodyException {
+<span class="nc" id="L29">        Injector injector = Guice.createInjector(new AppModule());</span>
+<span class="nc" id="L30">        CustomerService customerService = injector.getInstance(CustomerService.class);</span>
+<span class="nc" id="L31">        CreditCardService creditCardService = injector.getInstance(CreditCardService.class);</span>
+<span class="nc" id="L32">        TransactionService transactionService = injector.getInstance(TransactionService.class);</span>
+<span class="nc" id="L33">        UnusualSpendingAlertController unusualSpendingAlertController = injector.getInstance(UnusualSpendingAlertController.class);</span>
 
-<span class="nc" id="L33">        double thresholdPercentage = 20;</span>
-<span class="nc" id="L34">        Month currentMonth = LocalDate.now().getMonth();</span>
-<span class="nc" id="L35">        Month prevMonth = currentMonth.minus(1);</span>
-<span class="nc" id="L36">        int currentYear = LocalDate.now().getYear();</span>
-<span class="nc bnc" id="L37" title="All 2 branches missed.">        int prevYear = currentMonth == Month.JANUARY ? currentYear - 1 : currentYear;</span>
+<span class="nc" id="L35">        double thresholdPercentage = 20;</span>
+<span class="nc" id="L36">        Month currentMonth = LocalDate.now().getMonth();</span>
+<span class="nc" id="L37">        Month prevMonth = currentMonth.minus(1);</span>
+<span class="nc" id="L38">        int currentYear = LocalDate.now().getYear();</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        int prevYear = currentMonth == Month.JANUARY ? currentYear - 1 : currentYear;</span>
 
-<span class="nc" id="L39">        Customer customer = customerService.createCustomerToAdd(&quot;Pratiksha Danake&quot;, &quot;pratikshadanake2001@gmail.com&quot;);</span>
-<span class="nc" id="L40">        creditCardService.createCreditCardFor(customer);</span>
-<span class="nc" id="L41">        transactionService.createTransaction(1, Category.GROCERIES, 400, LocalDate.of(currentYear, currentMonth, 10));</span>
-<span class="nc" id="L42">        transactionService.createTransaction(1, Category.TRAVEL, 600, LocalDate.of(currentYear, currentMonth, 12));</span>
-<span class="nc" id="L43">        transactionService.createTransaction(1, Category.GROCERIES, 100, LocalDate.of(prevYear, prevMonth, 20));</span>
-<span class="nc" id="L44">        transactionService.createTransaction(1, Category.TRAVEL, 200, LocalDate.of(prevYear, prevMonth, 13));</span>
+<span class="nc" id="L41">        Customer customer = customerService.createCustomerToAdd(&quot;Pratiksha Danake&quot;, &quot;pratikshadanake2001@gmail.com&quot;);</span>
+<span class="nc" id="L42">        creditCardService.createCreditCardFor(customer);</span>
+<span class="nc" id="L43">        transactionService.createTransaction(1, Category.GROCERIES, 400, LocalDate.of(currentYear, currentMonth, 10));</span>
+<span class="nc" id="L44">        transactionService.createTransaction(1, Category.TRAVEL, 600, LocalDate.of(currentYear, currentMonth, 12));</span>
+<span class="nc" id="L45">        transactionService.createTransaction(1, Category.GROCERIES, 100, LocalDate.of(prevYear, prevMonth, 20));</span>
+<span class="nc" id="L46">        transactionService.createTransaction(1, Category.TRAVEL, 200, LocalDate.of(prevYear, prevMonth, 13));</span>
 
-<span class="nc" id="L46">        List&lt;Transaction&gt; currentMonthTransactions = transactionService.getTransactionsByMonth(currentMonth);</span>
-<span class="nc" id="L47">        List&lt;Transaction&gt; previousMonthTransactions = transactionService.getTransactionsByMonth(prevMonth);</span>
+<span class="nc" id="L48">        List&lt;Transaction&gt; currentMonthTransactions = transactionService.getTransactionsByMonth(currentMonth);</span>
+<span class="nc" id="L49">        List&lt;Transaction&gt; previousMonthTransactions = transactionService.getTransactionsByMonth(prevMonth);</span>
 
-<span class="nc" id="L49">        Map&lt;Long, List&lt;SpendDto&gt;&gt; spendRecord = creditCardCompanyController.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);</span>
-<span class="nc" id="L50">        Response response = creditCardCompanyController.sendEmail(spendRecord);</span>
-<span class="nc" id="L51">        System.out.println(response.getMessage());</span>
-<span class="nc" id="L52">    }</span>
+<span class="nc" id="L51">        Map&lt;Long, List&lt;SpendDto&gt;&gt; spendRecord = unusualSpendingAlertController.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);</span>
+<span class="nc" id="L52">        Response response = unusualSpendingAlertController.sendEmail(spendRecord);</span>
+<span class="nc" id="L53">        System.out.println(response.getMessage());</span>
+<span class="nc" id="L54">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

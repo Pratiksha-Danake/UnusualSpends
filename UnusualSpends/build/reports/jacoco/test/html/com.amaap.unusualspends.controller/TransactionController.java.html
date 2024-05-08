@@ -22,18 +22,25 @@ public class TransactionController {
 <span class="fc" id="L22">        this.transactionService = transactionService;</span>
 <span class="fc" id="L23">    }</span>
 
-    public Response createTransaction(long cardId, Category category, double amountSpend, LocalDate transactionDate) throws InvalidTransactionCategoryException, InvalidTransactionAmountException {
-<span class="pc bpc" id="L26" title="1 of 2 branches missed.">        if (transactionService.createTransaction(cardId, category, amountSpend, transactionDate) != null)</span>
-<span class="fc" id="L27">            return new Response(HttpStatus.OK, &quot;Transaction Created&quot;);</span>
-<span class="nc" id="L28">        return new Response(HttpStatus.ERROR_OCCURED, &quot;Error While Creating Transaction&quot;);</span>
+    public Response createTransaction(long cardId, Category category, double amountSpend, LocalDate transactionDate) {
+<span class="fc" id="L26">        Response responseToSend = null;</span>
+        try {
+<span class="pc bpc" id="L28" title="1 of 2 branches missed.">            if (transactionService.createTransaction(cardId, category, amountSpend, transactionDate) != null)</span>
+<span class="fc" id="L29">                responseToSend = new Response(HttpStatus.OK, &quot;Transaction Created&quot;);</span>
+<span class="fc" id="L30">        } catch (InvalidTransactionAmountException e) {</span>
+<span class="fc" id="L31">            responseToSend = new Response(HttpStatus.BAD_REQUEST, &quot;Invalid Transaction Amount&quot;);</span>
+<span class="fc" id="L32">        } catch (InvalidTransactionCategoryException e) {</span>
+<span class="fc" id="L33">            responseToSend = new Response(HttpStatus.BAD_REQUEST, &quot;Invalid Transaction Category&quot;);</span>
+<span class="fc" id="L34">        }</span>
+<span class="fc" id="L35">        return responseToSend;</span>
     }
 
     public List&lt;Transaction&gt; getAllTransactions() {
-<span class="fc" id="L32">        return transactionService.getAllTransactions();</span>
+<span class="fc" id="L39">        return transactionService.getAllTransactions();</span>
     }
 
     public List&lt;Transaction&gt; getTransactionsByMonth(Month month) {
-<span class="fc" id="L36">        return getAllTransactions().stream().filter(transaction -&gt; transaction.getTransactionDate().getMonth().equals(month)).collect(Collectors.toList());</span>
+<span class="fc" id="L43">        return getAllTransactions().stream().filter(transaction -&gt; transaction.getTransactionDate().getMonth().equals(month)).collect(Collectors.toList());</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

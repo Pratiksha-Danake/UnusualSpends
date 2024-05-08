@@ -5,7 +5,6 @@ import com.amaap.unusualspends.controller.dto.HttpStatus;
 import com.amaap.unusualspends.controller.dto.Response;
 import com.amaap.unusualspends.domain.model.entity.Customer;
 import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerException;
-import com.amaap.unusualspends.repository.db.exception.CustomerAlreadyExistsException;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +22,7 @@ public class CustomerControllerTest {
     }
 
     @Test
-    void shouldBeAbleToReturnResponseAsOKIfCreatesCustomerSuccessfully() throws InvalidCustomerException, CustomerAlreadyExistsException {
+    void shouldBeAbleToReturnResponseAsOKIfCreatesCustomerSuccessfully() {
         // arrange
         Response expected = new Response(HttpStatus.OK, "Customer Created");
         String customerName = "John Doe";
@@ -37,7 +36,21 @@ public class CustomerControllerTest {
     }
 
     @Test
-    void shouldBeAbleToFindCustomerById() throws InvalidCustomerException, CustomerAlreadyExistsException {
+    void shouldBeAbleToReturnResponseAsBadRequestIfCustomerDataIsInvalid() {
+        // arrange
+        Response expected = new Response(HttpStatus.BAD_REQUEST, "Invalid Customer Data");
+        String customerName = "John Do";
+        String email = "johndoe@gmail.com";
+
+        // act
+        Response actual = customerController.createCustomer(customerName, email);
+
+        // assert
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void shouldBeAbleToFindCustomerById() throws InvalidCustomerException {
         // arrange
         int id = 1;
         String name = "Pratiksha Danake";

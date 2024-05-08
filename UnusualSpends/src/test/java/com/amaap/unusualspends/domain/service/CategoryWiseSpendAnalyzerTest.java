@@ -25,24 +25,24 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class SpendAnalyzerTest {
+public class CategoryWiseSpendAnalyzerTest {
     CreditCardService creditCardService;
     TransactionService transactionService;
-    SpendAnalyzer spendAnalyzer;
+    CategoryWiseSpendAnalyzer categoryWiseSpendAnalyzer;
 
     @BeforeEach()
     void setUp() {
         Injector injector = Guice.createInjector(new AppModule());
         creditCardService = injector.getInstance(CreditCardService.class);
         transactionService = injector.getInstance(TransactionService.class);
-        spendAnalyzer = injector.getInstance(SpendAnalyzer.class);
+        categoryWiseSpendAnalyzer = injector.getInstance(CategoryWiseSpendAnalyzer.class);
     }
 
     @Test
     void shouldBeAbleToFindUnusualSpendFromTransactionsData() throws InvalidTransactionCategoryException, InvalidTransactionAmountException, InvalidCustomerException, InvalidCreditCardIdException {
         // arrange
         Map<Long, List<SpendDto>> expectedCustomers = UnusualSpendCustomerBuilder.getUnusualSpendCustomers();
-        double thresholdPercentage = 20;
+        double thresholdPercentage = 24;
 
         Month currentMonth = LocalDate.now().getMonth();
         Month prevMonth = currentMonth.minus(1);
@@ -52,14 +52,15 @@ public class SpendAnalyzerTest {
         // act
         CreditCard creditCard = CreditCardBuilder.getCreditCard();
 
-        transactionService.createTransaction(creditCard.getId(), Category.GROCERIES, 400, LocalDate.of(currentYear, currentMonth, 20));
-        transactionService.createTransaction(creditCard.getId(), Category.TRAVEL, 600, LocalDate.of(currentYear, currentMonth, 22));
-        transactionService.createTransaction(creditCard.getId(), Category.GROCERIES, 100, LocalDate.of(prevYear, prevMonth, 23));
-        transactionService.createTransaction(creditCard.getId(), Category.TRAVEL, 200, LocalDate.of(prevYear, prevMonth, 22));
+
+        transactionService.createTransaction(creditCard.getId(), Category.SHOPPING, 500, LocalDate.of(currentYear, currentMonth, 13));
+        transactionService.createTransaction(creditCard.getId(), Category.TRAVEL, 900, LocalDate.of(currentYear, currentMonth, 24));
+        transactionService.createTransaction(creditCard.getId(), Category.SHOPPING, 200, LocalDate.of(prevYear, prevMonth, 24));
+        transactionService.createTransaction(creditCard.getId(), Category.TRAVEL, 500, LocalDate.of(prevYear, prevMonth, 13));
 
         List<Transaction> currentMonthTransactions = transactionService.getTransactionsByMonth(currentMonth);
         List<Transaction> previousMonthTransactions = transactionService.getTransactionsByMonth(prevMonth);
-        Map<Long, List<SpendDto>> actualCustomers = spendAnalyzer.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
+        Map<Long, List<SpendDto>> actualCustomers = categoryWiseSpendAnalyzer.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);
 
         // assert
         assertEquals(expectedCustomers, actualCustomers);
