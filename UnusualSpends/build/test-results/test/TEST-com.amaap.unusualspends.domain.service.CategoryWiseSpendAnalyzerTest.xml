@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.amaap.unusualspends.domain.service.CategoryWiseSpendAnalyzerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-05-08T08:10:26" hostname="DESKTOP-GUO1275" time="0.007">
+  <properties/>
+  <testcase name="shouldBeAbleToFindUnusualSpendFromTransactionsData()" classname="com.amaap.unusualspends.domain.service.CategoryWiseSpendAnalyzerTest" time="0.007"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

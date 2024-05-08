@@ -33,21 +33,21 @@ public class UnusualSpendingAlertService {
     }
 
     public boolean sendEmail(Map&lt;Long, List&lt;SpendDto&gt;&gt; spendRecord) {
-<span class="fc bfc" id="L36" title="All 2 branches covered.">            for (Map.Entry&lt;Long, List&lt;SpendDto&gt;&gt; entry : spendRecord.entrySet()) {</span>
-<span class="fc" id="L37">                long cardId = entry.getKey();</span>
-<span class="fc" id="L38">                CreditCard creditCard = creditCardService.getCreditCardBy(cardId);</span>
-<span class="fc" id="L39">                Customer customer = creditCard.getCustomer();</span>
-<span class="fc" id="L40">                String email = customer.getEmail();</span>
-<span class="fc" id="L41">                String name = customer.getName();</span>
-<span class="fc" id="L42">                String subject = &quot;Regarding unusual spend for current month&quot;;</span>
-<span class="fc" id="L43">                List&lt;SpendDto&gt; unusualSpendRecords = entry.getValue();</span>
-<span class="fc" id="L44">                String body = emailAlertComposer.composeEmail(name, unusualSpendRecords);</span>
-                try {
-<span class="fc" id="L46">                    emailAlertSender.sendEmailToCustomer(subject, body, email);</span>
-<span class="nc" id="L47">                } catch (InvalidCustomerEmailException | InvalidEmailBodyException | InvalidEmailSubjectException e) {</span>
-<span class="nc" id="L48">                    return false;</span>
-<span class="fc" id="L49">                }</span>
-<span class="fc" id="L50">            }</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        for (Map.Entry&lt;Long, List&lt;SpendDto&gt;&gt; entry : spendRecord.entrySet()) {</span>
+<span class="fc" id="L37">            long cardId = entry.getKey();</span>
+<span class="fc" id="L38">            CreditCard creditCard = creditCardService.getCreditCardBy(cardId);</span>
+<span class="fc" id="L39">            Customer customer = creditCard.getCustomer();</span>
+<span class="fc" id="L40">            String email = customer.getEmail();</span>
+<span class="fc" id="L41">            String name = customer.getName();</span>
+<span class="fc" id="L42">            String subject = &quot;Regarding unusual spend for current month&quot;;</span>
+<span class="fc" id="L43">            List&lt;SpendDto&gt; unusualSpendRecords = entry.getValue();</span>
+<span class="fc" id="L44">            String body = emailAlertComposer.composeEmail(name, unusualSpendRecords);</span>
+            try {
+<span class="fc" id="L46">                emailAlertSender.sendEmailToCustomer(subject, body, email);</span>
+<span class="nc" id="L47">            } catch (InvalidCustomerEmailException | InvalidEmailBodyException | InvalidEmailSubjectException e) {</span>
+<span class="nc" id="L48">                return false;</span>
+<span class="fc" id="L49">            }</span>
+<span class="fc" id="L50">        }</span>
 <span class="fc" id="L51">        return true;</span>
     }
 }

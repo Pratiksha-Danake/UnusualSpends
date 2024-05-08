@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.amaap.unusualspends.domain.model.entity.validator.TransactionValidatorTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-05-08T08:10:26" hostname="DESKTOP-GUO1275" time="0.01">
+  <properties/>
+  <testcase name="shouldBeAbleToReturnFalseIfAmountSpendOnTransactionIsInvalid()" classname="com.amaap.unusualspends.domain.model.entity.validator.TransactionValidatorTest" time="0.001"/>
+  <testcase name="shouldBeAbleToReturnFalseIfCategoryIsInvalid()" classname="com.amaap.unusualspends.domain.model.entity.validator.TransactionValidatorTest" time="0.001"/>
+  <testcase name="shouldBeAbleToReturnTrueIfAmountSpendOnTransactionIsValid()" classname="com.amaap.unusualspends.domain.model.entity.validator.TransactionValidatorTest" time="0.001"/>
+  <testcase name="shouldBeAbleToCreateInstanceOfTransactionValidator()" classname="com.amaap.unusualspends.domain.model.entity.validator.TransactionValidatorTest" time="0.001"/>
+  <testcase name="shouldBeAbleToReturnTrueIfCategoryIsValid()" classname="com.amaap.unusualspends.domain.model.entity.validator.TransactionValidatorTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

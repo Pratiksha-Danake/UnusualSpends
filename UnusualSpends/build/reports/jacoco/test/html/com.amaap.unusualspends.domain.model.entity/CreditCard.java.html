@@ -31,14 +31,14 @@ public class CreditCard {
     @Override
     public boolean equals(Object o) {
 <span class="fc bfc" id="L33" title="All 2 branches covered.">        if (this == o) return true;</span>
-<span class="pc bpc" id="L34" title="2 of 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+<span class="fc bfc" id="L34" title="All 4 branches covered.">        if (o == null || getClass() != o.getClass()) return false;</span>
 <span class="fc" id="L35">        CreditCard that = (CreditCard) o;</span>
-<span class="pc bpc" id="L36" title="1 of 2 branches missed.">        return id == that.id;</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">        return id == that.id;</span>
     }
 
     @Override
     public int hashCode() {
-<span class="nc" id="L41">        return Objects.hash(id);</span>
+<span class="fc" id="L41">        return Objects.hash(id);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

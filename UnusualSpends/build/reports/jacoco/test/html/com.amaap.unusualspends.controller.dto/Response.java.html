@@ -12,20 +12,20 @@ public class Response {
 <span class="fc" id="L12">    }</span>
 
     public String getMessage() {
-<span class="nc" id="L15">        return message;</span>
+<span class="fc" id="L15">        return message;</span>
     }
 
     @Override
     public boolean equals(Object o) {
-<span class="pc bpc" id="L20" title="1 of 2 branches missed.">        if (this == o) return true;</span>
-<span class="pc bpc" id="L21" title="2 of 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        if (this == o) return true;</span>
+<span class="fc bfc" id="L21" title="All 4 branches covered.">        if (o == null || getClass() != o.getClass()) return false;</span>
 <span class="fc" id="L22">        Response response = (Response) o;</span>
-<span class="pc bpc" id="L23" title="2 of 4 branches missed.">        return httpStatus == response.httpStatus &amp;&amp; Objects.equals(message, response.message);</span>
+<span class="fc bfc" id="L23" title="All 4 branches covered.">        return httpStatus == response.httpStatus &amp;&amp; Objects.equals(message, response.message);</span>
     }
 
     @Override
     public int hashCode() {
-<span class="nc" id="L28">        return Objects.hash(httpStatus, message);</span>
+<span class="fc" id="L28">        return Objects.hash(httpStatus, message);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

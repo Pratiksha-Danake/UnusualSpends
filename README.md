@@ -1,5 +1,6 @@
 # Unusual Spends
 
+![Jacoco Test Coverage Report](TestCoveregeSnapshot.png)
 You work at a credit card company and as a value-add they want to start providing alerts to users when their spending in any particular category is higher than usual.
 
 - Compare the total amount paid for the current month, grouped by category with the previous month

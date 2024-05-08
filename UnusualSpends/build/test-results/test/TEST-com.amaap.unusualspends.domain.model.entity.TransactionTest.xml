@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.amaap.unusualspends.domain.model.entity.TransactionTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2024-05-08T08:10:26" hostname="DESKTOP-GUO1275" time="0.021">
+  <properties/>
+  <testcase name="shouldBeAbleToThrowInvalidTransactionAmountExceptionExceptionIfTransactionAmountIsInvalid()" classname="com.amaap.unusualspends.domain.model.entity.TransactionTest" time="0.003"/>
+  <testcase name="shouldBeAbleToReturnIdOfTheTransaction()" classname="com.amaap.unusualspends.domain.model.entity.TransactionTest" time="0.001"/>
+  <testcase name="shouldBeAbleToCreateTransactionWithDetails()" classname="com.amaap.unusualspends.domain.model.entity.TransactionTest" time="0.001"/>
+  <testcase name="shouldBeAbleToReturnFalseWhenComparesWithNull()" classname="com.amaap.unusualspends.domain.model.entity.TransactionTest" time="0.001"/>
+  <testcase name="shouldBeAbleToThrowInvalidCategoryExceptionIfTransactionCategoryIsNull()" classname="com.amaap.unusualspends.domain.model.entity.TransactionTest" time="0.002"/>
+  <testcase name="shouldBeAbleToReturnTrueWhenComparesSameInstance()" classname="com.amaap.unusualspends.domain.model.entity.TransactionTest" time="0.001"/>
+  <testcase name="shouldBeAbleToReturnSameHashCodeFor()" classname="com.amaap.unusualspends.domain.model.entity.TransactionTest" time="0.001"/>
+  <testcase name="shouldBeAbleToReturnTrueWhenComparesTwoInstancesWithDifferentFieldValues()" classname="com.amaap.unusualspends.domain.model.entity.TransactionTest" time="0.001"/>
+  <testcase name="shouldBeAbleToReturnTrueWhenComparesTwoInstancesWithSameFieldValues()" classname="com.amaap.unusualspends.domain.model.entity.TransactionTest" time="0.0"/>
+  <testcase name="shouldBeAbleToReturnFalseWhenComparesWithOtherClass()" classname="com.amaap.unusualspends.domain.model.entity.TransactionTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

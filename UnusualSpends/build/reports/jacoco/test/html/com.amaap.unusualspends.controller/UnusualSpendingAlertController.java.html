@@ -3,10 +3,7 @@
 import com.amaap.unusualspends.controller.dto.HttpStatus;
 import com.amaap.unusualspends.controller.dto.Response;
 import com.amaap.unusualspends.domain.model.entity.Transaction;
-import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerEmailException;
 import com.amaap.unusualspends.domain.service.dto.SpendDto;
-import com.amaap.unusualspends.domain.service.exception.InvalidEmailBodyException;
-import com.amaap.unusualspends.domain.service.exception.InvalidEmailSubjectException;
 import com.amaap.unusualspends.service.UnusualSpendingAlertService;
 import com.google.inject.Inject;
 
@@ -18,18 +15,18 @@ public class UnusualSpendingAlertController {
     private final UnusualSpendingAlertService unusualSpendingAlertService;
 
     @Inject
-<span class="fc" id="L21">    public UnusualSpendingAlertController(UnusualSpendingAlertService unusualSpendingAlertService) {</span>
-<span class="fc" id="L22">        this.unusualSpendingAlertService = unusualSpendingAlertService;</span>
-<span class="fc" id="L23">    }</span>
+<span class="fc" id="L18">    public UnusualSpendingAlertController(UnusualSpendingAlertService unusualSpendingAlertService) {</span>
+<span class="fc" id="L19">        this.unusualSpendingAlertService = unusualSpendingAlertService;</span>
+<span class="fc" id="L20">    }</span>
 
     public Map&lt;Long, List&lt;SpendDto&gt;&gt; analyzeSpend(List&lt;Transaction&gt; currentMonthTransactions, List&lt;Transaction&gt; previousMonthTransactions, double thresholdPercentage) {
-<span class="fc" id="L26">        return unusualSpendingAlertService.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);</span>
+<span class="fc" id="L23">        return unusualSpendingAlertService.analyzeSpend(currentMonthTransactions, previousMonthTransactions, thresholdPercentage);</span>
     }
 
-    public Response sendEmail(Map&lt;Long, List&lt;SpendDto&gt;&gt; spendRecord) throws InvalidEmailSubjectException, InvalidCustomerEmailException, InvalidEmailBodyException {
-<span class="pc bpc" id="L30" title="1 of 2 branches missed.">        if (unusualSpendingAlertService.sendEmail(spendRecord))</span>
-<span class="fc" id="L31">            return new Response(HttpStatus.OK, &quot;Email Sent&quot;);</span>
-<span class="nc" id="L32">        return new Response(HttpStatus.ERROR_OCCURED, &quot;Error While Sending Email&quot;);</span>
+    public Response sendEmail(Map&lt;Long, List&lt;SpendDto&gt;&gt; spendRecord) {
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">        if (unusualSpendingAlertService.sendEmail(spendRecord))</span>
+<span class="fc" id="L28">            return new Response(HttpStatus.OK, &quot;Email Sent&quot;);</span>
+<span class="nc" id="L29">        return new Response(HttpStatus.ERROR_OCCURED, &quot;Error While Sending Email&quot;);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

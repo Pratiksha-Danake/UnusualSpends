@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2024-05-08T08:10:26" hostname="DESKTOP-GUO1275" time="0.057">
+  <properties/>
+  <testcase name="shouldThrowCustomerAlreadyExistsExceptionIfCustomerWithSameDetailsFoundInDatabase()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.007"/>
+  <testcase name="shouldBeAbleToAddCreditCardIntoDatabase()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.005"/>
+  <testcase name="shouldBeAbleToFindCustomerById()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.005"/>
+  <testcase name="shouldBeAbleToReturnNullIfThereIsNoAnyTransactionAssociatedWithTheCreditCard()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.009"/>
+  <testcase name="shouldBeAbleToGetCreditCardById()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.005"/>
+  <testcase name="shouldBeAbleToReturnNullIfCustomerWithGivenIdIsNotPresent()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.004"/>
+  <testcase name="shouldBeAbleToReturnNullIfCreditCardForGivenIdIsNotPresent()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.004"/>
+  <testcase name="shouldBeAbleToAddCustomerIntoCustomerTable()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.004"/>
+  <testcase name="shouldBeAbleToAddTransactionDetailsToTheDatabase()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.004"/>
+  <testcase name="shouldBeAbleToGetAllTransactionsForGivenCreditCard()" classname="com.amaap.unusualspends.repository.db.impl.FakeInMemoryDatabaseTest" time="0.003"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

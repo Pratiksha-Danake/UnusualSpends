@@ -22,11 +22,11 @@ public class CustomerController {
         try {
 <span class="pc bpc" id="L23" title="1 of 2 branches missed.">            if (customerService.createCustomerToAdd(customerName, email) != null)</span>
 <span class="fc" id="L24">                responseToSend = new Response(HttpStatus.OK, &quot;Customer Created&quot;);</span>
-<span class="nc" id="L25">        } catch (InvalidCustomerException e) {</span>
-<span class="nc" id="L26">            responseToSend = new Response(HttpStatus.BAD_REQUEST, &quot;Invalid Customer Data&quot;);</span>
+<span class="fc" id="L25">        } catch (InvalidCustomerException e) {</span>
+<span class="fc" id="L26">            responseToSend = new Response(HttpStatus.BAD_REQUEST, &quot;Invalid Customer Data&quot;);</span>
 <span class="nc" id="L27">        } catch (CustomerAlreadyExistsException e) {</span>
 <span class="nc" id="L28">            responseToSend = new Response(HttpStatus.ERROR_OCCURED, &quot;Error While Creating Customer&quot;);</span>
-<span class="pc" id="L29">        }</span>
+<span class="fc" id="L29">        }</span>
 <span class="fc" id="L30">        return responseToSend;</span>
     }
 

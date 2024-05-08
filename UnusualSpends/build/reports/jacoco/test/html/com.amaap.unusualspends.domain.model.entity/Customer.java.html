@@ -48,7 +48,7 @@ public class Customer {
     @Override
     public boolean equals(Object o) {
 <span class="fc bfc" id="L50" title="All 2 branches covered.">        if (this == o) return true;</span>
-<span class="pc bpc" id="L51" title="2 of 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+<span class="fc bfc" id="L51" title="All 4 branches covered.">        if (o == null || getClass() != o.getClass()) return false;</span>
 <span class="fc" id="L52">        Customer customer = (Customer) o;</span>
 <span class="fc bfc" id="L53" title="All 6 branches covered.">        return id == customer.id &amp;&amp; Objects.equals(name, customer.name) &amp;&amp; Objects.equals(email, customer.email);</span>
     }

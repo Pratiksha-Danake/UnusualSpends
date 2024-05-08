@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.amaap.unusualspends.domain.model.entity.validator.CustomerEmailIdValidatorTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2024-05-08T08:10:26" hostname="DESKTOP-GUO1275" time="0.006">
+  <properties/>
+  <testcase name="shouldAbleToCreateInstanceOfCustomerEmailIdValidator()" classname="com.amaap.unusualspends.domain.model.entity.validator.CustomerEmailIdValidatorTest" time="0.001"/>
+  <testcase name="shouldBeAbleToReturnFalseForAllValidEmails()" classname="com.amaap.unusualspends.domain.model.entity.validator.CustomerEmailIdValidatorTest" time="0.001"/>
+  <testcase name="shouldBeAbleToReturnTrueForAllValidEmails()" classname="com.amaap.unusualspends.domain.model.entity.validator.CustomerEmailIdValidatorTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

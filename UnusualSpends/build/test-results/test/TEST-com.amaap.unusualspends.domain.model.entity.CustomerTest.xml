@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.amaap.unusualspends.domain.model.entity.CustomerTest" tests="18" skipped="0" failures="0" errors="0" timestamp="2024-05-08T08:10:26" hostname="DESKTOP-GUO1275" time="0.037">
+  <properties/>
+  <testcase name="shouldThrowInvalidCustomerNameExceptionWhenEmptyCustomerNamePassedIsEmpty()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.002"/>
+  <testcase name="shouldBeAbleToReturnTrueWhenTwoInstancesHaveDifferentEmail()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.0"/>
+  <testcase name="shouldThrowInvalidCustomerNameExceptionWhenNullCustomerNamePassedIsNull()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.001"/>
+  <testcase name="shouldThrowInvalidCustomerIdExceptionWhenCustomerIdPassedIsNegative()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.005"/>
+  <testcase name="shouldBeAbleToReturnTrueWhenTwoInstancesHaveDifferentName()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.001"/>
+  <testcase name="shouldThrowInvalidCustomerNameExceptionWhenCustomerNamePassedIsNotInCorrectFormat()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.001"/>
+  <testcase name="shouldBeAbleToReturnFalseWhenCustomerIdForTwoInstanceIsDifferent()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.002"/>
+  <testcase name="shouldBeAbleToReturnTrueForSameInstanceOfTheClass()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.0"/>
+  <testcase name="shouldBeAbleToReturnFalseWhenCompareWithNUll()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.001"/>
+  <testcase name="shouldThrowInvalidCustomerIdExceptionWhenCustomerIdPassedIsZero()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.001"/>
+  <testcase name="shouldBeAbleToReturnSameHashcodeForEqualInstancesOfCustomerClass()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.001"/>
+  <testcase name="shouldBeAbleToReturnTrueWhenTwoInstancesHaveDifferentId()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.002"/>
+  <testcase name="shouldBeAbleToReturnFalseWhenCustomerNameForTwoInstanceIsDifferent()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.001"/>
+  <testcase name="shouldBeAbleToReturnTrueWhenTwoInstancesWithSameAttributeValues()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.001"/>
+  <testcase name="shouldBeAbleToReturnFalseWhenCustomerEmailForTwoInstanceIsDifferent()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.0"/>
+  <testcase name="shouldBeAbleToReturnFalseWhenCompareWithOtherCalss()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.001"/>
+  <testcase name="shouldBeReturnTrueWhenComparisonIsBetweenSameInstance()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.001"/>
+  <testcase name="shouldThrowInvalidCustomerEmailExceptionWhenCustomerEmailPassedIsInvalid()" classname="com.amaap.unusualspends.domain.model.entity.CustomerTest" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.amaap.unusualspends.controller.TransactionControllerTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2024-05-08T08:10:19" hostname="DESKTOP-GUO1275" time="0.068">
+  <properties/>
+  <testcase name="shouldBeAbleToAddTransactionToDatabase()" classname="com.amaap.unusualspends.controller.TransactionControllerTest" time="0.015"/>
+  <testcase name="shouldBeAbleToFilterTransactionByMonth()" classname="com.amaap.unusualspends.controller.TransactionControllerTest" time="0.008"/>
+  <testcase name="shouldBeAbleToReturnResponseAsBadRequestIfTransactionCategoryIsNotValid()" classname="com.amaap.unusualspends.controller.TransactionControllerTest" time="0.007"/>
+  <testcase name="shouldBeAbleToReturnResponseAsBadRequestIfTransactionAmountIsNotValid()" classname="com.amaap.unusualspends.controller.TransactionControllerTest" time="0.016"/>
+  <testcase name="shouldBeAbleToReturnResponseAsOKIfCreatesTransactionSuccessfully()" classname="com.amaap.unusualspends.controller.TransactionControllerTest" time="0.016"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

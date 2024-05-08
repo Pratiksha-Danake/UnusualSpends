@@ -6,8 +6,7 @@ import com.amaap.unusualspends.domain.model.entity.exception.InvalidCustomerName
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class CustomerTest {
     @Test
@@ -98,5 +97,72 @@ public class CustomerTest {
         Customer customer1 = Customer.create(1, "John Does", "john@example.com");
         Customer customer2 = Customer.create(1, "John Does", "jane@example.com");
         assertNotEquals(customer1, customer2);
+    }
+
+    @Test
+    public void shouldBeAbleToReturnTrueForSameInstanceOfTheClass() throws InvalidCustomerIdException, InvalidCustomerNameException, InvalidCustomerEmailException {
+        // arrange
+        Customer customer = Customer.create(1, "John Does", "john@example.com");
+
+        // act && assert
+        assertTrue(customer.equals(customer));
+    }
+
+    @Test
+    public void shouldBeAbleToReturnFalseWhenCompareWithNUll() throws InvalidCustomerIdException, InvalidCustomerNameException, InvalidCustomerEmailException {
+        // arrange
+        Customer customer = Customer.create(1, "John Does", "john@example.com");
+
+        // act && assert
+        assertFalse(customer.equals(null));
+    }
+
+    @Test
+    public void shouldBeAbleToReturnFalseWhenCompareWithOtherCalss() throws InvalidCustomerIdException, InvalidCustomerNameException, InvalidCustomerEmailException {
+        // arrange
+        Customer customer = Customer.create(1, "John Does", "john@example.com");
+
+        // act && assert
+        assertFalse(customer.equals("String"));
+    }
+
+    @Test
+    public void shouldBeAbleToReturnTrueWhenTwoInstancesWithSameAttributeValues() throws InvalidCustomerIdException, InvalidCustomerNameException, InvalidCustomerEmailException {
+        // arrange
+        Customer customer1 = Customer.create(1, "John Doe", "john@example.com");
+        Customer customer2 = Customer.create(1, "John Doe", "john@example.com");
+
+        // act && assert
+        assertTrue(customer1.equals(customer2));
+    }
+
+    @Test
+    public void shouldBeAbleToReturnTrueWhenTwoInstancesHaveDifferentId() throws InvalidCustomerIdException, InvalidCustomerNameException, InvalidCustomerEmailException {
+        // arrange
+        Customer customer1 = Customer.create(1, "John Doe", "john@example.com");
+        Customer customer2 = Customer.create(2, "John Doe", "john@example.com");
+
+        // act && assert
+        assertFalse(customer1.equals(customer2));
+    }
+
+    @Test
+    public void shouldBeAbleToReturnTrueWhenTwoInstancesHaveDifferentName() throws InvalidCustomerIdException, InvalidCustomerNameException, InvalidCustomerEmailException {
+        // arrange
+        Customer customer1 = Customer.create(1, "John Doe", "john@example.com");
+        Customer customer2 = Customer.create(1, "Jane Doe", "john@example.com");
+
+        // act && assert
+        assertFalse(customer1.equals(customer2));
+    }
+
+    @Test
+    public void shouldBeAbleToReturnTrueWhenTwoInstancesHaveDifferentEmail() throws InvalidCustomerIdException, InvalidCustomerNameException, InvalidCustomerEmailException {
+        // arrange
+        Customer customer1 = Customer.create(1, "John Doe", "john@example.com");
+        Customer customer2 = Customer.create(1, "John Doe", "jane@example.com");
+
+        // act && assert
+        assertFalse(customer1.equals(customer2));
     }
 }
